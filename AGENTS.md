@@ -152,14 +152,14 @@ installed in the host tool.
 - Real install-and-trigger verification lives in
   `internal/manual-verification-checklist.md` (gitignored). The author
   ticks through every environment they have access to before declaring
-  v0 done; inaccessible environments use a `Deferred:` field with date
-  + reason.
+  the v1 release gate complete; inaccessible environments use a
+  `Deferred:` field with date + reason.
 - Tests protect contracts and supported behavior. Don't add tests that
   pin static strings or test third-party library internals.
 - Codex review (`scripts/codex-review.sh` running
   `codex review --uncommitted` plus `codex exec` on uncommitted spec/
-  plan content) is the v0 QA gate; every flag is resolved or recorded
-  with a justification before merge or tag.
+  plan content) is the pre-release Codex review-and-fix gate; every flag
+  is resolved or recorded with a justification before merge or tag.
 
 ## Documentation
 
@@ -202,9 +202,15 @@ installed in the host tool.
   4. Commit, tag (`git tag vX.Y.Z`), push the tag. Version-pinning users
      (notably OpenCode `#vX.Y.Z`) opt in deliberately.
 - Skill or manifest changes without a canon change skip step 1; do 2–4.
-- Bump policy: backwards-incompatible ref or skill behavior → minor
-  bump; clarifications and typos → patch bump; structural additions
-  (new ref, new skill, new manifest) → minor bump until v1.
+- Bump policy for v1.0+:
+  - Major bump (`v2.0.0+`): skill rename/removal, canonical-name
+    rename/removal, manifest-shape break, ref-structure break, or other
+    backwards-incompatible public behavior.
+  - Minor bump: backwards-compatible canon content change (more detail,
+    new alternative names, new detection signals) or additive public
+    surface.
+  - Patch bump: typos, clarifications, regex tightening, and other
+    behavior-preserving fixes.
 
 ## General rules
 
@@ -236,9 +242,10 @@ installed in the host tool.
    (`internal/manual-verification-checklist.md`) ticked through for
    every environment the author has access to. Inaccessible
    environments use `Deferred:` with date + reason.
-4. Codex review gate: `./scripts/codex-review.sh` (or equivalent
-   `codex exec` against the changed spec/plan) has been run; every
-   flagged item is resolved or recorded with a written justification.
+4. Pre-release Codex review-and-fix gate: `./scripts/codex-review.sh`
+   (or equivalent `codex exec` against the changed spec/plan) has been
+   run; every flagged item is resolved or recorded with a written
+   justification.
 5. Version-bump policy followed: `canon_version` bumped on any ref
    content change; plugin `version` synchronized across all manifests
    via `scripts/bump-version.sh`; new git tag pushed if a release.
