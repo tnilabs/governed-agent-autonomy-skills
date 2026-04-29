@@ -24,7 +24,7 @@ For every BLOCKER and MAJOR finding you identify: edit the affected file(s) inli
 
 For MINOR and NIT findings: fix inline if trivial (typos, missing fields, easy regex tightening); otherwise list them as deferred follow-ups in the final report with a clear suggested fix.
 
-Read all files under skills/, references/, scripts/, tests/, tests/smoke/, .claude-plugin/, .codex/, .codex-plugin/, .cursor-plugin/, .opencode/, plus package.json, gemini-extension.json, README.md, AGENTS.md, GEMINI.md.
+Read all files under skills/, references/, scripts/, tests/, tests/smoke/, .claude-plugin/, .codex/, .codex-plugin/, .cursor-plugin/, .opencode/, plus package.json, gemini-extension.json, README.md, CONTRIBUTING.md, AGENTS.md, GEMINI.md.
 
 Review criteria (do not skip any):
 1. Internal consistency between references/ and skills/ — every concept a skill cites must be defined in references/.
@@ -34,7 +34,7 @@ Review criteria (do not skip any):
 5. The assess and review skills enforce the synonym-aware matching rule (no "missing" finding without a recorded synonym-guided search; the literal phrase "recorded synonym-guided search" must appear in both bodies).
 6. Each synonym entry has **Functional signature:** + >=3 alternative names + >=3 detection-signal categories.
 7. No skill, reference, README, context file, install doc, or script instructs the agent to fetch from external repos beyond the documented install/update commands.
-8. patterns.md has one section per AMM level L1–L10; every source pattern ID from ../agentic-maturity-model/blueprints/README.md has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
+8. patterns.md has one section per AMM level L1–L10; every source AMM pattern ID has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
 9. controls.md uses the canonical 9 names exactly with the source-aligned activation matrix from ../agentic-maturity-model/controls/README.md.
 10. Skills do not chain to any other plugin (no superpowers:* or <plugin>:<skill> form anywhere in skill bodies).
 11. Bash test scripts under tests/ and tests/smoke/ are correct (regexes match what they claim, exit codes are not masked, all paths exist) and consistent with the repo test requirements.

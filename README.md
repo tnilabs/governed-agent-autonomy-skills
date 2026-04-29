@@ -6,7 +6,7 @@ AMM is a 10-level maturity model for production AI agents. It starts with unmana
 
 This repo packages that discipline as installable skills for coding agents. The skills make an agent ask for evidence, map controls, search across local naming differences, and produce assessment/design/implementation/review artifacts that an enterprise team can actually audit.
 
-The source AMM implementation and blueprint catalogue live in [`tnilabs/agentic-maturity-model`](https://github.com/tnilabs/agentic-maturity-model). This repo vendors a self-contained snapshot of the AMM levels, controls, pattern entries, synonyms, and detection guidance. Installed skills do not fetch from that repo at runtime.
+The source AMM implementation lives in [`tnilabs/agentic-maturity-model`](https://github.com/tnilabs/agentic-maturity-model). This repo vendors a self-contained snapshot of the AMM levels, controls, pattern entries, synonyms, and detection guidance. Installed skills do not fetch from that repo at runtime.
 
 ## What You Get
 
@@ -190,6 +190,8 @@ AMM controls accumulate by level. The skills track these nine categories:
 - OpenTelemetry Mapping
 - Value and Cost Management
 
+L1-L2 are still detectable even though no enterprise controls are active yet. `amm-assess` checks their baseline, process, and threat-model artifacts. L3 adds knowledge-grounding patterns and Data Governance. From L4 onward, the control surface becomes much more visible: review boundaries, evidence packs, adversarial labels, telemetry, and value metrics.
+
 ## Install From GitHub
 
 ### Claude Code
@@ -274,7 +276,7 @@ This is not a runtime, CLI, model integration, or framework. It does not execute
 
 ## Contributing
 
-See [`AGENTS.md`](AGENTS.md) for repo layout, validation rules, version policy, and coding-agent instructions.
+See [`CONTRIBUTING.md`](CONTRIBUTING.md) for validation, release, and contribution rules.
 
 ## License
 

@@ -24,6 +24,7 @@ Load all four shared reference files from the plugin root's `references/` direct
 
 - **No control or pattern may be marked absent without a recorded synonym-guided search** (≥3 detection signals checked, locations recorded).
 - **No pure AMM exit criterion may be marked absent without a recorded artifact search** (artifact sought, aliases checked, locations and result recorded).
+- L1-L2 are detectable even though no enterprise controls are active: use their baseline/process/threat-model pattern entries and exit criteria. L3 is detected through knowledge-grounding patterns plus Data Governance.
 - Self-claim is not evidence. Framework name is not evidence. Vocabulary match is not evidence. Vocabulary mismatch is not absence.
 
 ## Forbidden shortcuts

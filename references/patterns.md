@@ -5,7 +5,7 @@ last_reviewed: 2026-04-29
 
 # Pattern Entries per AMM Level
 
-This catalogue mirrors `../agentic-maturity-model/blueprints/README.md`.
+This index mirrors the source AMM implementation.
 Each AMM level has one H2 section. Each reusable source pattern has one H3
 entry with a functional signature, the enterprise controls it exercises, and
 the assertion a reviewer or implementer should prove.

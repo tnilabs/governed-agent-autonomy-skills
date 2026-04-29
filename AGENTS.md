@@ -29,7 +29,7 @@ installed in the host tool.
 | `skills/<skill-name>/SKILL.md` | One skill: frontmatter (`name`, `description`) + body. Five skills total, set is fixed. |
 | `references/amm-levels.md` | Canon of the 10 AMM levels (one H2 per level). |
 | `references/controls.md` | Canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
-| `references/patterns.md` | Source-aligned pattern catalogue per AMM level (one section per L1–L10; every pattern ID from `../agentic-maturity-model/blueprints/README.md` has functional signature, controls activated, and test asserts). |
+| `references/patterns.md` | Source-aligned pattern index per AMM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
 | `references/synonyms.md` | Synonym and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
@@ -40,7 +40,8 @@ installed in the host tool.
 | `package.json` | npm metadata, ESM (`type: "module"`), `main` points at the OpenCode plugin. |
 | `GEMINI.md` | Compact Gemini CLI host-context entrypoint. |
 | `AGENTS.md` | This file. Operational rules for AI coding agents working in this repo. |
-| `README.md` | Per-tool install matrix, refresh table, contributing pointers. |
+| `README.md` | Human install, usage, examples, and refresh guide. |
+| `CONTRIBUTING.md` | Human contribution, validation, and release guide. |
 | `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
 | `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, synonym-rule sentinel in assess+review, no external plugin chains. |
@@ -92,8 +93,8 @@ installed in the host tool.
   `Protocol Conformance`, `Incident Response`, `OpenTelemetry Mapping`,
   `Value and Cost Management`. Tests fail on any deviation.
 - `references/patterns.md` has one section per AMM level L1–L10. Every
-  source pattern ID from `../agentic-maturity-model/blueprints/README.md`
-  appears as a `### <pattern-id>` entry with `**Functional signature:**`,
+  source AMM pattern ID appears as a `### <pattern-id>` entry with
+  `**Functional signature:**`,
   `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
   substrate patterns; do not reintroduce `no v0 pattern family`.
 - `references/synonyms.md` has `## Controls` and `## Patterns` sections.

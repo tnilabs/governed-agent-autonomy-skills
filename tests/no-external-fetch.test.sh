@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Enforce the no-external-dependency stance: no skill, reference, README,
-# context file, install doc, or script instructs the agent to fetch from
-# an external repo or URL beyond a small allowlist of documented install
-# and update commands.
+# context file, contributor doc, install doc, or script instructs the
+# agent to fetch from an external repo or URL beyond a small allowlist of
+# documented install and update commands.
 set -euo pipefail
 fail=0
 
@@ -62,6 +62,7 @@ scan_dir skills
 scan_dir references
 scan_dir scripts
 scan_file AGENTS.md
+scan_file CONTRIBUTING.md
 scan_file GEMINI.md
 scan_file README.md
 scan_file .codex/INSTALL.md

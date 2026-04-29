@@ -5,12 +5,11 @@ last_reviewed: 2026-04-29
 
 # Agentic Maturity Model - Levels
 
-Ten capability levels for production-grade AI agents, aligned to
-`../agentic-maturity-model/blueprints/level_NN/README.md` and
-`../agentic-maturity-model/scenarios/support_ops/levels/README.md`. Each level
-adds one capability boundary and carries forward the same scenario,
-fixtures, contracts, controls, and lessons. Level claims are made on
-evidence: artifacts, controls, tests, telemetry, and replayable records.
+Ten capability levels for production-grade AI agents, aligned to the source
+AMM implementation and support-operations scenario. Each level adds one
+capability boundary and carries forward the same scenario, fixtures, contracts,
+controls, and lessons. Level claims are made on evidence: artifacts, controls,
+tests, telemetry, and replayable records.
 
 ## L1 - Unstructured AI use
 
