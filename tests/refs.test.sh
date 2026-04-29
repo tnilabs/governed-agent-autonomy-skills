@@ -79,7 +79,7 @@ canon_sort() {
 
 if [[ -f references/controls.md ]]; then
   for c in "${CONTROL_NAMES[@]}"; do
-    if ! grep -qF "## $c" references/controls.md; then
+    if ! grep -qxF "## $c" references/controls.md; then
       echo "controls.md missing canonical heading: '## $c'"; fail=1; continue
     fi
     section=$(awk -v hdr="## $c" 'index($0, hdr)==1 {found=1; next} found && /^## / {exit} found {print}' references/controls.md)
@@ -192,13 +192,13 @@ if [[ -f references/rosetta.md ]]; then
     fi
   done
   for c in "${CONTROL_NAMES[@]}"; do
-    if ! grep -qF "### $c" references/rosetta.md; then
+    if ! grep -qxF "### $c" references/rosetta.md; then
       echo "rosetta.md missing entry: '### $c'"; fail=1
     fi
   done
   for hdr in "${PATTERN_FAMILY_NAMES[@]}"; do
-    fam=$(printf '%s' "$hdr" | sed -E 's/^##[[:space:]]*//; s/^L[0-9]+[[:space:]]*[—-][[:space:]]*//')
-    if ! grep -qF "$fam" references/rosetta.md; then
+    fam=$(printf '%s' "$hdr" | sed -E 's/^##[[:space:]]*//')
+    if ! grep -qxF "### $fam" references/rosetta.md; then
       echo "rosetta.md missing pattern-family entry for '$fam' (from $hdr)"; fail=1
     fi
   done
