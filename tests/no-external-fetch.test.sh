@@ -14,13 +14,13 @@ HARD_FORBIDDEN_RE='WebFetch|web_fetch|(^|[[:space:]])curl([[:space:]]|$)|(^|[[:s
 URL_OR_GIT_FETCH_RE='https?://[^[:space:]]+|(^|[[:space:]])git[[:space:]]+(clone|pull|fetch|submodule)([[:space:]]|$)'
 
 ALLOWLIST_PATTERNS=(
-  '^[[:space:]]*git[[:space:]]+clone[[:space:]]+https://github\.com/sirmarkz/agentic-blueprints-skills\.git[[:space:]]+~/\.(codex|cursor)/'
-  'git[[:space:]]+clone[[:space:]]+https://github\.com/sirmarkz/agentic-blueprints-skills\.git[[:space:]]+"\$env'
+  '^[[:space:]]*git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-blueprints-skills\.git[[:space:]]+~/\.(codex|cursor)/'
+  'git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-blueprints-skills\.git[[:space:]]+"\$env'
   '^[[:space:]]*cd[[:space:]]+~/\.(codex|cursor)/agentic-blueprints-skills(-src)?[[:space:]]*&&[[:space:]]*git[[:space:]]+pull([[:space:]]|$)'
-  '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/sirmarkz/agentic-blueprints-skills([[:space:]]|$)'
-  '^[[:space:]]*"agentic-blueprints-skills@git\+https://github\.com/sirmarkz/agentic-blueprints-skills\.git'
-  '^[[:space:]]*https://github\.com/sirmarkz/agentic-blueprints-skills([./#v0-9]*)?[[:space:]]*$'
-  '\]\(https://github\.com/sirmarkz/agentic-blueprints-skills'
+  '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/tnilabs/agentic-blueprints-skills([[:space:]]|$)'
+  '^[[:space:]]*"agentic-blueprints-skills@git\+https://github\.com/tnilabs/agentic-blueprints-skills\.git'
+  '^[[:space:]]*https://github\.com/tnilabs/agentic-blueprints-skills([./#v0-9]*)?[[:space:]]*$'
+  '\]\(https://github\.com/tnilabs/agentic-blueprints-skills'
   '\[OpenCode\.ai\]\(https://opencode\.ai\)'
   '\]\(https://(opencode\.ai|cursor\.com|github\.com/openai/codex|google\.github\.io/adk-docs)'
 )

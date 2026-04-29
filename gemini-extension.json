@@ -1,0 +1,6 @@
+{
+  "name": "agentic-blueprints-skills",
+  "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review. Self-contained.",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}

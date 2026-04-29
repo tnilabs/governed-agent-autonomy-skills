@@ -1,0 +1,20 @@
+{
+  "name": "agentic-blueprints-skills",
+  "displayName": "Agentic Blueprints Skills",
+  "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review.",
+  "version": "1.0.0",
+  "author": {
+    "name": "TNI Labs"
+  },
+  "homepage": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "repository": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "license": "Apache-2.0 AND CC-BY-4.0",
+  "keywords": [
+    "amm",
+    "enterprise-agents",
+    "skills",
+    "design",
+    "review"
+  ],
+  "skills": "./skills/"
+}

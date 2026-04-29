@@ -1,0 +1,23 @@
+{
+  "name": "agentic-blueprints-skills",
+  "version": "1.0.0",
+  "type": "module",
+  "main": ".opencode/plugins/agentic-blueprints-skills.js",
+  "description": "Cross-tool coding-agent skills for assessing, designing, implementing, and reviewing enterprise agents against AMM-style discipline. Self-contained; no external deps.",
+  "license": "Apache-2.0 AND CC-BY-4.0",
+  "repository": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "homepage": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "author": "TNI Labs",
+  "keywords": [
+    "skills",
+    "amm",
+    "agentic-blueprints",
+    "enterprise-agents",
+    "claude-code",
+    "codex",
+    "cursor",
+    "gemini-cli",
+    "copilot-cli",
+    "opencode"
+  ]
+}

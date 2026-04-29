@@ -1,0 +1,38 @@
+{
+  "name": "agentic-blueprints-skills",
+  "version": "1.0.0",
+  "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review. Self-contained.",
+  "author": {
+    "name": "TNI Labs",
+    "url": "https://github.com/tnilabs/agentic-blueprints-skills"
+  },
+  "homepage": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "repository": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "license": "Apache-2.0 AND CC-BY-4.0",
+  "keywords": [
+    "amm",
+    "enterprise-agents",
+    "skills",
+    "design",
+    "review"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Agentic Blueprints Skills",
+    "shortDescription": "AMM-style design / implement / review for enterprise agents",
+    "longDescription": "Five skills routing coding agents through assessing AMM levels, designing enterprise agents, implementing AMM pattern families, and reviewing changes for control activation and evidence — with naming-agnostic recognition of existing systems.",
+    "developerName": "TNI Labs",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive",
+      "Read",
+      "Write"
+    ],
+    "defaultPrompt": [
+      "What AMM level is this agent at?",
+      "Design an enterprise agent for <use case>.",
+      "Review this PR for AMM compliance."
+    ],
+    "brandColor": "#1F6FEB"
+  }
+}
