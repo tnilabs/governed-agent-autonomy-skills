@@ -28,7 +28,7 @@ Integrate AMM pattern families into the *existing* user system, under the team's
 
 ## Output template
 
-```markdown
+````markdown
 # Implementation Plan: <pattern family>
 
 - Pattern family: <name from references/patterns.md>
@@ -52,7 +52,7 @@ Integrate AMM pattern families into the *existing* user system, under the team's
 
 ## Contract changes
 | Schema/header/log | Field | Old | New | Consumers updated |
-```
+````
 
 ## Inline TDD discipline
 
