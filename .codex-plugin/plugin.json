@@ -1,13 +1,13 @@
 {
-  "name": "agentic-blueprints-skills",
-  "version": "1.0.0",
+  "name": "agentic-maturity-model-skills",
+  "version": "2.0.0",
   "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review. Self-contained.",
   "author": {
     "name": "TNI Labs",
-    "url": "https://github.com/tnilabs/agentic-blueprints-skills"
+    "url": "https://github.com/tnilabs/agentic-maturity-model-skills"
   },
-  "homepage": "https://github.com/tnilabs/agentic-blueprints-skills",
-  "repository": "https://github.com/tnilabs/agentic-blueprints-skills",
+  "homepage": "https://github.com/tnilabs/agentic-maturity-model-skills",
+  "repository": "https://github.com/tnilabs/agentic-maturity-model-skills",
   "license": "Apache-2.0 AND CC-BY-4.0",
   "keywords": [
     "amm",
@@ -18,9 +18,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Agentic Blueprints Skills",
+    "displayName": "Agentic Maturity Model Skills",
     "shortDescription": "AMM-style design / implement / review for enterprise agents",
-    "longDescription": "Five skills routing coding agents through assessing AMM levels, designing enterprise agents, implementing AMM pattern families, and reviewing changes for control activation and evidence — with naming-agnostic recognition of existing systems.",
+    "longDescription": "Five skills routing coding agents through assessing AMM levels, designing enterprise agents, implementing source-aligned AMM pattern entries, and reviewing changes for control activation and evidence \u2014 with naming-agnostic recognition of existing systems.",
     "developerName": "TNI Labs",
     "category": "Coding",
     "capabilities": [

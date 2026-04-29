@@ -14,13 +14,14 @@ HARD_FORBIDDEN_RE='WebFetch|web_fetch|(^|[[:space:]])curl([[:space:]]|$)|(^|[[:s
 URL_OR_GIT_FETCH_RE='https?://[^[:space:]]+|(^|[[:space:]])git[[:space:]]+(clone|pull|fetch|submodule)([[:space:]]|$)'
 
 ALLOWLIST_PATTERNS=(
-  '^[[:space:]]*git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-blueprints-skills\.git[[:space:]]+~/\.(codex|cursor)/'
-  'git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-blueprints-skills\.git[[:space:]]+"\$env'
-  '^[[:space:]]*cd[[:space:]]+~/\.(codex|cursor)/agentic-blueprints-skills(-src)?[[:space:]]*&&[[:space:]]*git[[:space:]]+pull([[:space:]]|$)'
-  '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/tnilabs/agentic-blueprints-skills([[:space:]]|$)'
-  '^[[:space:]]*"agentic-blueprints-skills@git\+https://github\.com/tnilabs/agentic-blueprints-skills\.git'
-  '^[[:space:]]*https://github\.com/tnilabs/agentic-blueprints-skills([./#v0-9]*)?[[:space:]]*$'
-  '\]\(https://github\.com/tnilabs/agentic-blueprints-skills'
+  '^[[:space:]]*git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-maturity-model-skills\.git[[:space:]]+~/\.(codex|cursor)/'
+  'git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-maturity-model-skills\.git[[:space:]]+"\$env'
+  '^[[:space:]]*cd[[:space:]]+~/\.(codex|cursor)/agentic-maturity-model-skills(-src)?[[:space:]]*&&[[:space:]]*git[[:space:]]+pull([[:space:]]|$)'
+  '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/tnilabs/agentic-maturity-model-skills([[:space:]]|$)'
+  '^[[:space:]]*"agentic-maturity-model-skills@git\+https://github\.com/tnilabs/agentic-maturity-model-skills\.git'
+  '^[[:space:]]*https://github\.com/tnilabs/agentic-maturity-model-skills([./#v0-9]*)?[[:space:]]*$'
+  '\]\(https://github\.com/tnilabs/agentic-maturity-model-skills'
+  '\]\(https://github\.com/tnilabs/agentic-maturity-model\)'
   '\[OpenCode\.ai\]\(https://opencode\.ai\)'
   '\]\(https://(opencode\.ai|cursor\.com|github\.com/openai/codex|google\.github\.io/adk-docs)'
 )
@@ -67,7 +68,7 @@ scan_file README.md
 scan_file .codex/INSTALL.md
 scan_file .cursor-plugin/INSTALL.md
 scan_file .opencode/INSTALL.md
-scan_file .opencode/plugins/agentic-blueprints-skills.js
+scan_file .opencode/plugins/agentic-maturity-model-skills.js
 
 [[ $fail -eq 0 ]] && echo "no-external-fetch.test.sh: OK"
 exit $fail

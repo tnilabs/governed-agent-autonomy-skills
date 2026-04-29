@@ -1,11 +1,11 @@
 ---
 name: implementing-amm-patterns
-description: Use when the task is to apply an AMM pattern family to a codebase, implement an AMM-level capability such as L5 read-only tools or L6 approved writes, or refactor existing code to satisfy AMM exit criteria
+description: Use when the task is to apply an AMM pattern entry to a codebase, implement an AMM-level capability such as L5 read-only tools or L6 approved writes, or refactor existing code to satisfy AMM exit criteria
 ---
 
 # Implementing AMM Patterns
 
-Integrate AMM pattern families into the *existing* user system, under the team's existing names. Land the functional-signature test before code.
+Integrate AMM pattern entries into the *existing* user system, under the team's existing names. Land the functional-signature test before code.
 
 ## Inputs
 
@@ -13,12 +13,12 @@ Integrate AMM pattern families into the *existing* user system, under the team's
 
 ## Process
 
-1. Locate the pattern family in `references/patterns.md`. Note its functional signature, the controls it activates, and the test that asserts the signature.
+1. Locate the pattern entry in `references/patterns.md`. Note its functional signature, the controls it activates, and the test that asserts the signature.
 2. Survey the user's codebase via `references/rosetta.md`. Search detection signals to find any existing equivalent capability under a different name. Record what you found and where.
 3. If equivalent exists: integrate / strengthen it under the existing names. Do not rename or duplicate.
 4. If not: design the smallest addition that satisfies the functional signature; integrate at the natural seam in the existing architecture.
 5. Write the functional-signature test first. Run it; it should fail. Implement minimally to pass. Add edge-case tests.
-6. Produce an implementation plan using the **Output template** below.
+6. Use the **Output template** as the work record. If the user requested implementation, make the edits and run tests before final; do not stop at a plan.
 
 ## Hard rules
 
@@ -29,9 +29,9 @@ Integrate AMM pattern families into the *existing* user system, under the team's
 ## Output template
 
 ````markdown
-# Implementation Plan: <pattern family>
+# Implementation Record: <pattern entry>
 
-- Pattern family: <name from references/patterns.md>
+- Pattern entry: <pattern-id from references/patterns.md>
 - Canon versions: patterns v<x>, rosetta v<x>, controls v<x>
 - User-team mapping: <user existing name> ↔ <canonical>
 

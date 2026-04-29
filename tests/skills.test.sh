@@ -7,7 +7,7 @@ fail=0
 
 GATE_BUDGET=200
 SIB_BUDGET=500
-EXPECTED_SET="assessing-amm-level designing-enterprise-agent implementing-amm-patterns reviewing-enterprise-agent using-agentic-blueprints"
+EXPECTED_SET="assessing-amm-level designing-enterprise-agent implementing-amm-patterns reviewing-enterprise-agent using-agentic-maturity-model"
 ROSETTA_SENTINEL="recorded rosetta-driven search"
 
 if [[ ! -d skills ]]; then echo "skills/ missing"; exit 1; fi
@@ -53,7 +53,7 @@ for d in skills/*/; do
   body=$(awk 'BEGIN{c=0} /^---$/{c++; next} c>=2{print}' "$f")
   words=$(printf '%s' "$body" | wc -w)
   budget=$SIB_BUDGET
-  [[ "$name" == "using-agentic-blueprints" ]] && budget=$GATE_BUDGET
+  [[ "$name" == "using-agentic-maturity-model" ]] && budget=$GATE_BUDGET
   if [[ $words -gt $budget ]]; then
     echo "WORD COUNT $words > $budget: $f"; fail=1
   fi
@@ -69,7 +69,7 @@ for d in skills/*/; do
   body_only=$(awk 'BEGIN{c=0} /^---$/{c++; next} c>=2{print}' "$f")
 
   # No qualified plugin chains in skill bodies (catches superpowers:tdd,
-  # @org/plugin:x, agentic-blueprints-skills:assess, etc.)
+  # @org/plugin:x, agentic-maturity-model-skills:assess, etc.)
   if printf '%s' "$body_only" | grep -qE '(^|[[:space:]])(@[a-z0-9_-]+/)?[a-z][a-z0-9-]*:[a-z][a-z0-9-]*'; then
     echo "QUALIFIED PLUGIN CHAIN in $f body (skills must use bare skill names)"
     fail=1

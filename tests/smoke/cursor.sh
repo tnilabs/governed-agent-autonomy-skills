@@ -8,7 +8,7 @@ fi
 fail=0
 [[ -f .cursor-plugin/plugin.json ]] || { echo "cursor.sh: .cursor-plugin/plugin.json missing"; fail=1; }
 [[ -f .cursor-plugin/INSTALL.md ]] || { echo "cursor.sh: .cursor-plugin/INSTALL.md missing"; fail=1; }
-[[ -f skills/using-agentic-blueprints/SKILL.md ]] || { echo "cursor.sh: gateway SKILL.md missing"; fail=1; }
+[[ -f skills/using-agentic-maturity-model/SKILL.md ]] || { echo "cursor.sh: gateway SKILL.md missing"; fail=1; }
 if [[ -f .cursor-plugin/plugin.json ]]; then
   jq empty .cursor-plugin/plugin.json || { echo "cursor.sh: .cursor-plugin/plugin.json invalid JSON"; fail=1; }
 fi

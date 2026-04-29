@@ -14,8 +14,8 @@ Evidence-first classification. The lowest level whose exit criteria are unmet se
 ## Process
 
 1. For each level L1→L10: read its exit criteria and the controls activated at that level (from the matrix in `references/controls.md`).
-2. For each control AND each pattern family at the level: resolve to its functional signature via `references/rosetta.md` and search the user's codebase by detection signals (file/dir patterns, dep names, log keywords, schema fields).
-3. For each AMM exit criterion that is not a control or pattern family: search for the named artifact under any local name (docs, configs, tests, schemas, telemetry, evidence outputs).
+2. For each control AND each pattern entry at the level: resolve to its functional signature via `references/rosetta.md` and search the user's codebase by detection signals (file/dir patterns, dep names, log keywords, schema fields).
+3. For each AMM exit criterion that is not a control or pattern entry: search for the named artifact under any local name (docs, configs, tests, schemas, telemetry, evidence outputs).
 4. Record every search performed (what was looked for, where, what was found) — even when the answer is "found".
 5. Classify: observed level = max L such that all criteria for L1..L are satisfied.
 6. Produce the report using the **Output template** below.

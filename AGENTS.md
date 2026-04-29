@@ -6,7 +6,7 @@ narrative — if you need the human onboarding doc, see
 
 ## What this repo is
 
-`agentic-blueprints-skills`, a self-contained, cross-tool skills plugin
+`agentic-maturity-model-skills`, a self-contained, cross-tool skills plugin
 for coding agents. It enforces AMM-style discipline (assess / design /
 implement / review) for enterprise agents. The plugin ships:
 
@@ -29,19 +29,19 @@ installed in the host tool.
 | `skills/<skill-name>/SKILL.md` | One skill: frontmatter (`name`, `description`) + body. Five skills total, set is fixed. |
 | `references/amm-levels.md` | Canon of the 10 AMM levels (one H2 per level). |
 | `references/controls.md` | Canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
-| `references/patterns.md` | Pattern families per AMM level (one section per L1–L10; L3, L4, L5, L6, L7, L8, L9, L10 ship functional-signature blocks; L1 and L2 carry a `no v0 pattern family` line). |
-| `references/rosetta.md` | Naming-agnostic recognition guide; one entry per control category and per pattern family. |
+| `references/patterns.md` | Source-aligned pattern catalogue per AMM level (one section per L1–L10; every pattern ID from `../agentic-maturity-model/blueprints/README.md` has functional signature, controls activated, and test asserts). |
+| `references/rosetta.md` | Naming-agnostic recognition guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink into `~/.agents/skills/`). |
 | `.codex-plugin/plugin.json` | Codex App marketplace manifest, with full `interface` block. |
 | `.cursor-plugin/plugin.json` | Cursor plugin manifest. |
-| `.opencode/INSTALL.md` + `.opencode/plugins/agentic-blueprints-skills.js` | OpenCode install instructions + minimal plugin (registers the bundled `skills/` via the `config` hook). |
+| `.opencode/INSTALL.md` + `.opencode/plugins/agentic-maturity-model-skills.js` | OpenCode install instructions + minimal plugin (registers the bundled `skills/` via the `config` hook). |
 | `gemini-extension.json` | Gemini CLI extension manifest (`contextFileName: "GEMINI.md"`). |
 | `package.json` | npm metadata, ESM (`type: "module"`), `main` points at the OpenCode plugin. |
 | `CLAUDE.md`, `GEMINI.md` | Compact host-context entrypoints. Identical content modulo H1. |
 | `AGENTS.md` | This file. Operational rules for AI coding agents working in this repo. |
 | `README.md` | Per-tool install matrix, refresh table, contributing pointers. |
-| `scripts/` | `codex-review.sh` (local QA gate), `bump-version.sh` (synchronized manifest version bumps). |
+| `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
 | `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, rosetta-rule sentinel in assess+review, no external plugin chains. |
 | `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, rosetta cross-check against patterns.md. |
@@ -52,7 +52,7 @@ installed in the host tool.
 
 ## Skills
 
-- The set of skills under `skills/` is exactly `{using-agentic-blueprints,
+- The set of skills under `skills/` is exactly `{using-agentic-maturity-model,
   assessing-amm-level, designing-enterprise-agent,
   implementing-amm-patterns, reviewing-enterprise-agent}`. Adding,
   renaming, or removing a skill is a deliberate scope change.
@@ -68,7 +68,7 @@ installed in the host tool.
   `superpowers:<skill-name>` references, no `<plugin>:<skill>` form
   anywhere in skill bodies.
 - Inside this plugin, skills do NOT chain to each other. The gateway
-  (`using-agentic-blueprints`) announces a sibling skill in the literal
+  (`using-agentic-maturity-model`) announces a sibling skill in the literal
   form ``Using `<sibling-skill>` to <purpose>``; the host's native skill
   resolution loads the sibling. Use bare skill directory names in the
   gateway's routing table.
@@ -92,13 +92,14 @@ installed in the host tool.
   `Credential and Delegated Access`, `Data Governance`,
   `Protocol Conformance`, `Incident Response`, `OpenTelemetry Mapping`,
   `Value and Cost Management`. Tests fail on any deviation.
-- `references/patterns.md` has one section per AMM level L1–L10. Levels
-  3, 4, 5, 6, 7, 8, 9, 10 carry a functional-signature block (literal
-  `**Functional signature:**` field). Levels 1 and 2 carry a
-  `no v0 pattern family — <reason>` line.
+- `references/patterns.md` has one section per AMM level L1–L10. Every
+  source pattern ID from `../agentic-maturity-model/blueprints/README.md`
+  appears as a `### <pattern-id>` entry with `**Functional signature:**`,
+  `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
+  substrate patterns; do not reintroduce `no v0 pattern family`.
 - `references/rosetta.md` has `## Controls` and `## Patterns` sections.
-  Every control (nine) and every pattern family (eight in v0) gets a
-  `### <Canonical Name>` entry with `**Functional signature:**`,
+  Every control (nine) and every pattern entry gets a
+  `### <Canonical Name or pattern-id>` entry with `**Functional signature:**`,
   `**Alternative names:**` (≥3), and `**Detection signals:**` with at
   least three signal categories.
 - Refs are versioned together with the plugin. Any change to a ref
@@ -117,9 +118,9 @@ installed in the host tool.
 - The Codex CLI is served by `.codex/INSTALL.md` (manual symlink into
   `~/.agents/skills/`), not by the App manifest.
 - `package.json` MUST have `"type": "module"` and
-  `"main": ".opencode/plugins/agentic-blueprints-skills.js"`. The
+  `"main": ".opencode/plugins/agentic-maturity-model-skills.js"`. The
   OpenCode plugin file MUST export a named async plugin function
-  (`AgenticBlueprintsSkillsPlugin`) returning an object with a `config`
+  (`AgenticMaturityModelSkillsPlugin`) returning an object with a `config`
   async hook that pushes the bundled `skills/` absolute path into
   `config.skills.paths`. No symlinks. No prompt injection. No
   system-message hook.
@@ -156,10 +157,8 @@ installed in the host tool.
   `Deferred:` field with date + reason.
 - Tests protect contracts and supported behavior. Don't add tests that
   pin static strings or test third-party library internals.
-- Codex review (`scripts/codex-review.sh` running
-  `codex review --uncommitted` plus `codex exec` on uncommitted spec/
-  plan content) is the pre-release Codex review-and-fix gate; every flag
-  is resolved or recorded with a justification before merge or tag.
+- `scripts/codex-review.sh` is an optional local review helper, not a
+  required release gate.
 
 ## Documentation
 
@@ -183,7 +182,7 @@ installed in the host tool.
   Fail fast on missing prerequisites.
 - JSON manifests are minimal and conform to their tool's documented
   schema.
-- The OpenCode plugin (`.opencode/plugins/agentic-blueprints-skills.js`)
+- The OpenCode plugin (`.opencode/plugins/agentic-maturity-model-skills.js`)
   is ESM and stays minimal — register skills, nothing else.
 - Files scoped to one responsibility; split files that start mixing
   concerns.
@@ -197,8 +196,7 @@ installed in the host tool.
      version uniformly across `package.json`, `.claude-plugin/plugin.json`,
      `.claude-plugin/marketplace.json`, `.codex-plugin/plugin.json`,
      `.cursor-plugin/plugin.json`, `gemini-extension.json`.
-  3. Run `tests/*.test.sh` and `scripts/codex-review.sh`; resolve every
-     flag.
+  3. Run `tests/*.test.sh`.
   4. Commit, tag (`git tag vX.Y.Z`), push the tag. Version-pinning users
      (notably OpenCode `#vX.Y.Z`) opt in deliberately.
 - Skill or manifest changes without a canon change skip step 1; do 2–4.
@@ -242,13 +240,9 @@ installed in the host tool.
    (`internal/manual-verification-checklist.md`) ticked through for
    every environment the author has access to. Inaccessible
    environments use `Deferred:` with date + reason.
-4. Pre-release Codex review-and-fix gate: `./scripts/codex-review.sh`
-   (or equivalent `codex exec` against the changed spec/plan) has been
-   run; every flagged item is resolved or recorded with a written
-   justification.
-5. Version-bump policy followed: `canon_version` bumped on any ref
+4. Version-bump policy followed: `canon_version` bumped on any ref
    content change; plugin `version` synchronized across all manifests
    via `scripts/bump-version.sh`; new git tag pushed if a release.
-6. Doc updates: README install matrix, refresh table, and any affected
+5. Doc updates: README install matrix, refresh table, and any affected
    manifest excerpts updated to match the change.
-7. `git status` clean except for tracked plugin files.
+6. `git status` clean except for tracked plugin files.

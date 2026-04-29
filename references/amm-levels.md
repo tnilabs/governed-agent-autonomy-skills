@@ -1,127 +1,224 @@
 ---
-canon_version: 1.0.0
+canon_version: 1.1.0
 last_reviewed: 2026-04-29
 ---
 
-# Agentic Maturity Model — Levels
+# Agentic Maturity Model - Levels
 
-Ten capability levels for production-grade AI agents. Each level adds one capability boundary; later levels carry forward all controls activated at earlier levels — controls accumulate. Level claims are made on evidence (artifacts, controls, tests, telemetry), not vibes.
+Ten capability levels for production-grade AI agents, aligned to
+`../agentic-maturity-model/blueprints/level_NN/README.md` and
+`../agentic-maturity-model/scenarios/support_ops/levels/README.md`. Each level
+adds one capability boundary and carries forward the same scenario,
+fixtures, contracts, controls, and lessons. Level claims are made on
+evidence: artifacts, controls, tests, telemetry, and replayable records.
 
-## L1 — Unstructured AI use
+## L1 - Unstructured AI use
 
-**Intent.** Ad-hoc model use. Whoever needs help types into a chat, copies useful output back into their work. No documented workflow, no shared playbook, no audit, no defined success criteria.
-
-**Exit criteria.**
-- A *failure-case catalog* exists: real user-visible incidents from unstructured use, captured as test fixtures.
-- A baseline measurement of cost-of-doing-nothing or cost-of-current-state is recorded.
-- The team has a written intent statement of what they would manage if they moved past L1.
-
-**Common confusion.** L1 is not "no AI use" — it is *unmanaged* use. If a team has documented when to use AI, what to share, and how to capture failures, they are already at L2.
-
-## L2 — Process definition
-
-**Intent.** The work is documented as a human workflow. Policies, templates, decision criteria, and validation steps are authored as documents. Humans execute the work; the AI may assist but does not own a step.
+**Intent.** The current manual or unmanaged AI baseline is made visible.
+People may paste work into generic LLMs, but there is no governed assistant,
+tool access, approval, audit, or policy gate.
 
 **Exit criteria.**
-- A workflow document names every step, owner, and decision point.
-- Policies (for sharing data, escalation, retention) are recorded and discoverable.
-- Validation rules and templates are versioned alongside the workflow.
-- The team has run the workflow end-to-end on at least one representative case.
+- Baseline cases record manual time, sources checked, handoffs, outcomes,
+  failures, risks, and unmanaged prompt examples.
+- Failure categories are typed enough for later levels to map, measure, and
+  close them.
+- Adversarial-shaped failures are tagged distinctly so L2 can turn them into
+  threat-model surfaces.
+- Nothing is presented as improved; L1 is measurement, not remediation.
 
-**Common confusion.** L2 is not "we wrote a Notion page once." Policies and templates must be the actual artifacts in use, and the workflow must be the one humans run today.
+**Common confusion.** L1 is not "no AI use." It is unmanaged use with enough
+measurement that later improvement cannot move the denominator.
 
-## L3 — Knowledge grounding
+## L2 - Process definition
 
-**Intent.** Local retrieval grounds model responses in a bounded, curated knowledge surface. Citations are first-class — every claim a model emits points back to an indexed span. Retrieval quality is evaluated.
-
-**Exit criteria.**
-- A local RAG corpus is curated, indexed, and versioned.
-- Every model response that cites the corpus carries `(span_id, source_uri, citation_offset)` tuples verifiable against the index.
-- A retrieval-evaluation harness measures recall, precision, and citation accuracy on a held-out set.
-- Out-of-scope queries return a *don't know* response, not a hallucination.
-
-**Common confusion.** L3 is not "we use embeddings somewhere." If the model can answer without citing a span, or citations don't resolve to real corpus content, the system has not crossed L3.
-
-## L4 — Human-guided assistance
-
-**Intent.** The model produces drafts (replies, triage, notes, checklists) that traverse a review state machine before reaching customers or downstream systems. Humans own every output that ships.
+**Intent.** The human process becomes explicit before automation: workflow
+stages, owners, policies, templates, validation checks, L1-failure mappings,
+and threat-model surfaces.
 
 **Exit criteria.**
-- A review state machine is implemented: `draft → reviewed → published`. Every published artifact has a non-empty review record (`reviewer_id`, `decision`, `timestamp`, `diff`).
-- Confidence and citations are surfaced to the reviewer alongside the draft.
-- The reviewer is a human principal — not another model — and that is enforced in the record schema.
-- A pre-merge guard prevents publishing artifacts with missing review records.
+- Workflow stages have owners, inputs, outputs, handoffs, and exit criteria.
+- Policy rules attach to stages instead of floating as prose.
+- Every L1 failure maps to the stage or policy intended to catch it.
+- A typed threat model names later agent attack surfaces, actors,
+  motivations, mitigations, and out-of-scope boundaries.
+- Humans have run the documented workflow on representative cases.
 
-**Common confusion.** L4 is not "a human looks at it sometimes." If there is no record, no schema, and no enforcement, the system is at L3 with manual oversight, not L4.
+**Common confusion.** L2 is still not automated. It is the explicit substrate
+that later knowledge, prompts, tools, approvals, and agents inherit.
 
-## L5 — Read-only tools
+## L3 - Knowledge grounding
 
-**Intent.** The agent calls scoped read-only tools through a registered surface. Every call is audited. Sensitive data is redacted at the boundary before it reaches the model.
-
-**Exit criteria.**
-- A tool registry enumerates every callable read tool; the agent cannot call anything off-registry.
-- Every tool call produces an audit row: `tool_call_id`, `actor`, `args_hash`, `result_hash`, `ts`. The schema validates.
-- Boundary redaction is applied to tool results before the model sees them; redaction is configured per data classification.
-- A negative test exists for an unregistered tool name (call must refuse).
-
-**Common confusion.** L5 is not "the agent has tools." If a tool can mutate state, the system has crossed into L6 territory and is missing the L6 controls. If audit rows are inconsistent or redaction is opt-in, it isn't L5.
-
-## L6 — Approved write actions
-
-**Intent.** The agent can mutate state, but every write goes through human approval, carries an idempotency key, and records a rollback token. Nothing irreversible happens without sign-off.
+**Intent.** L2 process material becomes AI-ready retrieval material. L3 stops
+at retrieval: stable sources, metadata, coverage links, retrieval API, golden
+evals, candidate eval promotion, and provenance attestation.
 
 **Exit criteria.**
-- Two-step write: agent proposes a write; human approver records `request_id`, `approver_id`, `idempotency_key`, `rollback_token`. The write only executes after approval.
-- Rollback is *tested*, not just declared — the rollback procedure has been exercised against the system the write touched.
-- Idempotency keys prevent duplicate writes from a retry; this is verified by replay tests.
-- An incident-response runbook exists and names who to page when an approved write goes wrong.
+- Every retrievable document has stable evidence ID, owner, source type,
+  sensitivity label, review status, and provenance status.
+- Coverage links tie evidence IDs back to baseline cases, failure labels,
+  workflow stages, and policies.
+- Golden retrieval evals prove required evidence is retrievable for
+  representative questions.
+- Observed-query signals remain candidate-only until a human eval owner
+  promotes them.
+- Retrieval results preserve classification and provenance metadata.
 
-**Common confusion.** L6 is not "we have a confirm dialog." If approver identity is not recorded, or the rollback path doesn't actually roll back, the system is at L5 with optimistic writes, not L6.
+**Common confusion.** L3 is not a governed assistant and does not answer
+cases. It builds the retrieval contract L4 consumes.
 
-## L7 — Goal-directed execution
+## L4 - Human-guided assistance
 
-**Intent.** The agent plans toward signed, persistent goals. Runtime predicates evaluate between every step to detect drift, untyped stops, or violations. Memory writes are validated against schema.
-
-**Exit criteria.**
-- Goals are signed at submission; the signature is verified before each step.
-- Runtime predicates run between steps and produce predicate-evaluation records (passed, failed, reason).
-- Memory writes are typed and validated; an invalid memory shape stops the run.
-- Typed stop conditions cover normal completion, predicate failure, budget exhaustion, and operator revocation.
-
-**Common confusion.** L7 is not "we use a planner library." Signatures, predicates, and memory validation are the boundary — not the choice of orchestration framework.
-
-## L8 — Coordinated agents
-
-**Intent.** Multiple agents collaborate via deterministic routing and signed agent cards. Handoffs are typed contracts, not free-form prose.
+**Intent.** The first governed assistant uses L3 retrieval to draft work
+artifacts from cited evidence and stops at human review. No send action, tool
+writes, approval authority, memory, or autonomous closure is allowed.
 
 **Exit criteria.**
-- Each participating agent has a signed agent card declaring its capabilities, contracts, and credentials.
-- Routing is deterministic — a given input produces the same target agent every time, given the same routing rules.
-- Each handoff records `from_agent`, `to_agent`, `contract_id`, `payload_hash`, and validates the payload against the named contract schema.
-- Untyped handoffs are refused at the boundary.
+- Per case, the assistant produces triage, customer-safe response draft,
+  internal note, validation checklist, and run record.
+- Every output records `pending_review`; side effects remain disabled.
+- Prompt context uses explicit trust frames for system, customer, retrieved
+  evidence, and tool output.
+- Customer-visible output passes a typed safety/leak check before acceptance.
+- Adversarial input and retrieved-evidence matches produce
+  `InjectionDetection` records and lower-trust framing.
 
-**Common confusion.** L8 is not "we have multiple agents calling each other." Signed cards, deterministic routing, and typed contracts are the boundary — not the count of agents in the system.
+**Common confusion.** L4 is an assistant, not an agent that decides or
+publishes. If customer output ships without human review, the system is not
+L4-compliant.
 
-## L9 — Policy-gated autonomy
+## L5 - Read-only tools
 
-**Intent.** The agent runs autonomously within explicit eligibility gates, SLO budgets, and runtime revocation. Out-of-policy work stops; revocation is honored within bounded latency.
-
-**Exit criteria.**
-- Every autonomous run starts with an eligibility decision (allowed / denied / partial) recorded with the reason.
-- An SLO budget tracks burn (cost, latency, error rate) and pauses or denies further work when burned.
-- Runtime revocation is honored: when an operator pulls authority, in-flight steps stop within a bounded window.
-- A dead-letter queue captures denied or revoked work for human review.
-
-**Common confusion.** L9 is not "we can pause it." If revocation latency is unbounded, or eligibility is implicit, the system is at L8 with operator overrides, not L9.
-
-## L10 — Governed improvement
-
-**Intent.** Changes to the agent's models, policies, or prompts are governed: signed proposals, multi-party reviewer signoff, adversarial release gates. Improvement does not silently weaken the system.
+**Intent.** The assistant gains scoped read-only operational context through
+typed tools. It can look but cannot change anything. Tools are audited,
+redacted, sanitized, protocol-conformant, and still feed the L4 review
+boundary.
 
 **Exit criteria.**
-- Every candidate change carries a signed proposal (`proposal_signature`) bound to the diff.
-- Reviewer signoff is multi-party; signatures are recorded and verifiable.
-- An adversarial release gate runs before promotion and must pass — adversarial evals plus regression on prior failure cases.
-- A rollback record names what to roll back to and how, in case the new artifact regresses post-promotion.
+- Read tools have typed manifests with input schema, output schema,
+  `permission_scope`, and read-only `side_effect_class`.
+- Each run gets a scoped read grant; out-of-scope calls are refused.
+- Every read call emits an audit record, including actor, scope, status,
+  protocol/native surface, and redacted output.
+- Tool output is sanitized before model context; raw output remains audit
+  only.
+- MCP or other protocol exposure is derived from the internal manifest and
+  fails closed on drift.
+- Framework-native tool adapters pass conformance against the shared engine.
 
-**Common confusion.** L10 is not "we run evals." If proposals are unsigned, reviewers are unrecorded, or adversarial gates are advisory, the system is at L9 with model rotation, not L10.
+**Common confusion.** L5 is not autonomous tool choice and not write access.
+The runtime refuses write-capable manifests at this level.
+
+## L6 - Approved write actions
+
+**Intent.** One specific pre-approved write per case may execute. The model
+recommends; the runtime assembles the executable action, verifies approval
+binding, issues a one-shot lease, enforces idempotency, records rollback
+metadata, and blocks unsafe customer-visible writes.
+
+**Exit criteria.**
+- Runtime-owned action assembly determines `tool_id` and arguments from typed
+  sources; model recommendations are review evidence, not executable
+  authority.
+- Every executed write has a signed approval record bound to the exact action
+  by hash, a one-shot credential lease, an idempotency key, a `ToolAction`,
+  and a `RollbackPlan`.
+- Signature verification runs before binding checks where signed approvals
+  are configured.
+- Replays return the prior `ToolAction` without mutating state again.
+- Customer-visible writes run the safety block before approval resolution.
+
+**Common confusion.** L6 does not introduce unattended policy autonomy. The
+gate checks durable approval and exact binding; L9 is where policy replaces
+routine human approval.
+
+## L7 - Goal-directed execution
+
+**Intent.** One producing agent owns end-to-end completion of one eligible
+case package within a signed goal. The model loop proposes next steps; the
+runtime decides allowed actions, completion, stop reasons, escalation, budget,
+and memory validity.
+
+**Exit criteria.**
+- Goals are signed at creation with immutable scope, allowed tools, budgets,
+  expiry, required outputs, and success criteria.
+- Completion checks use runtime-owned predicate registry entries, not model
+  self-report.
+- Closed typed stop reasons cover success, uncertainty, policy risk,
+  validation failure, tool failure, no progress, budget exhaustion, and
+  escalation.
+- Multi-dimensional retry/budget caps are enforced.
+- Memory writes pass the seven-stage validator; the model reads redacted
+  tenant-scoped content only.
+- Write actions still flow through L6 approval.
+
+**Common confusion.** L7 is the first task-owning agent, but it is not
+multi-agent coordination, routine unattended autonomy, or self-improvement.
+
+## L8 - Coordinated agents
+
+**Intent.** Specialized agents coordinate through deterministic runtime-owned
+routing, signed agent cards, typed handoff envelopes, load-bearing validator
+veto, and durable orchestration state.
+
+**Exit criteria.**
+- Roles are separated: orchestration, triage, research, resolution,
+  communication, validation, and escalation are distinct agents or workflow
+  nodes with contracts.
+- Every agent has a signed card declaring identity, version, owner, risk tier,
+  allowed tools, allowed peers, scopes, eval status, and lifecycle state.
+- Routing plan, handoff envelope, payload hash, expiry, and single-use
+  consumption are validated before cross-agent work.
+- Validator decisions bind to the exact artifact reviewed; veto/revise/
+  escalate decisions are not advisory.
+- Checkpoints persist orchestration state, tool calls, approval state, and
+  idempotency so resume does not duplicate side effects.
+
+**Common confusion.** L8 is not "multiple prompts with personas." The runtime
+owns route, peer identity, typed handoffs, validator authority, and durable
+resume.
+
+## L9 - Policy-gated autonomy
+
+**Intent.** Eligible low-risk work can run without routine human approval.
+Deterministic policy, signed eligibility, SLO/cost budgets, dynamic
+revocation, global pause, dead-letter handling, and adversarial corpus gates
+bound the autonomy.
+
+**Exit criteria.**
+- Every autonomous run starts with a signed eligibility decision and every
+  allow criterion must pass.
+- High-risk, ambiguous, or policy-sensitive work escalates with evidence.
+- Global pause is human-operated; workers read it during execution and halt
+  within a bounded window.
+- Dead-lettered cases remain inspectable, replayable, and tenant-isolated.
+- SLO, cost, retry, and latency budgets are tracked and enforced.
+- Dynamic credential revocation is honored before write boundaries.
+- Adversarial corpus freshness and threat-class coverage are startup gates.
+
+**Common confusion.** L9 does not let the agent choose eligibility,
+self-unpause, skip write-boundary rechecks, or run without typed halts.
+
+## L10 - Governed improvement
+
+**Intent.** Operational signals become governed improvements. The system may
+propose changes, but production-impacting changes require signed proposals,
+human review, regression tests, release gates, and adversarial per-class
+robustness checks.
+
+**Exit criteria.**
+- Improvement proposals are PR-shaped artifacts with source run IDs, signal
+  fingerprint, problem statement, affected assets, typed diff, regression
+  tests, expected metric improvement, and risk assessment.
+- Proposals, reviews, waivers, release decisions, promoted tests, and
+  transitions are signed separately with payload-digest binding.
+- Human review is mandatory before acceptance.
+- Release gate compares per-threat-class candidate scores against signed
+  baselines; aggregate gains cannot hide adversarial regressions.
+- Failed gates block release; recovery is revise, withdraw, or typed waiver
+  only where the dimension is waivable.
+- Memory cannot become an ungoverned feedback channel.
+
+**Common confusion.** L10 is not silent self-modification or "we run evals."
+It is governed engineering practice with evidence, signatures, tests, human
+review, and adversarial release gates.

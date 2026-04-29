@@ -1,4 +1,4 @@
-# Installing agentic-blueprints-skills for Codex CLI / App
+# Installing agentic-maturity-model-skills for Codex CLI / App
 
 Codex CLI and Codex App both discover skills from `~/.agents/skills/`. Clone this repo and symlink the bundled `skills/` directory.
 
@@ -10,9 +10,9 @@ Codex CLI and Codex App both discover skills from `~/.agents/skills/`. Clone thi
 ## Installation (Linux / macOS)
 
 ```bash
-git clone https://github.com/tnilabs/agentic-blueprints-skills.git ~/.codex/agentic-blueprints-skills
+git clone https://github.com/tnilabs/agentic-maturity-model-skills.git ~/.codex/agentic-maturity-model-skills
 mkdir -p ~/.agents/skills
-ln -s ~/.codex/agentic-blueprints-skills/skills ~/.agents/skills/agentic-blueprints-skills
+ln -s ~/.codex/agentic-maturity-model-skills/skills ~/.agents/skills/agentic-maturity-model-skills
 ```
 
 Restart Codex CLI (and Codex App, if installed). Skills are discovered automatically through native skill-tool resolution.
@@ -20,15 +20,15 @@ Restart Codex CLI (and Codex App, if installed). Skills are discovered automatic
 ## Installation (Windows PowerShell)
 
 ```powershell
-git clone https://github.com/tnilabs/agentic-blueprints-skills.git "$env:USERPROFILE\.codex\agentic-blueprints-skills"
+git clone https://github.com/tnilabs/agentic-maturity-model-skills.git "$env:USERPROFILE\.codex\agentic-maturity-model-skills"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.agents\skills"
-cmd /c mklink /J "$env:USERPROFILE\.agents\skills\agentic-blueprints-skills" "$env:USERPROFILE\.codex\agentic-blueprints-skills\skills"
+cmd /c mklink /J "$env:USERPROFILE\.agents\skills\agentic-maturity-model-skills" "$env:USERPROFILE\.codex\agentic-maturity-model-skills\skills"
 ```
 
 ## Verify
 
 ```bash
-ls -la ~/.agents/skills/agentic-blueprints-skills
+ls -la ~/.agents/skills/agentic-maturity-model-skills
 ```
 
 Expect a symlink (or junction on Windows) into the cloned repo's `skills/`. In Codex, ask: "What AMM level is this agent at?" — the gateway should announce `Using \`assessing-amm-level\` to <purpose>` and the assess skill should load.
@@ -36,7 +36,7 @@ Expect a symlink (or junction on Windows) into the cloned repo's `skills/`. In C
 ## Updating
 
 ```bash
-cd ~/.codex/agentic-blueprints-skills && git pull
+cd ~/.codex/agentic-maturity-model-skills && git pull
 ```
 
 Skills update through the symlink on next Codex restart.
@@ -44,7 +44,7 @@ Skills update through the symlink on next Codex restart.
 ## Uninstalling
 
 ```bash
-rm ~/.agents/skills/agentic-blueprints-skills
+rm ~/.agents/skills/agentic-maturity-model-skills
 ```
 
-Optionally delete the clone: `rm -rf ~/.codex/agentic-blueprints-skills`.
+Optionally delete the clone: `rm -rf ~/.codex/agentic-maturity-model-skills`.

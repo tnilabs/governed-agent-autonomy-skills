@@ -1,5 +1,5 @@
 /**
- * agentic-blueprints-skills plugin for OpenCode.ai
+ * agentic-maturity-model-skills plugin for OpenCode.ai
  *
  * Registers the bundled skills/ directory so OpenCode's native skill tool
  * discovers the five SKILL.md files. No runtime behavior beyond registration.
@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const skillsDir = path.resolve(__dirname, "..", "..", "skills");
 
-export const AgenticBlueprintsSkillsPlugin = async ({ client, directory }) => {
+export const AgenticMaturityModelSkillsPlugin = async ({ client, directory }) => {
   return {
     config: async (config) => {
       config.skills = config.skills || {};
@@ -22,4 +22,4 @@ export const AgenticBlueprintsSkillsPlugin = async ({ client, directory }) => {
   };
 };
 
-export default AgenticBlueprintsSkillsPlugin;
+export default AgenticMaturityModelSkillsPlugin;

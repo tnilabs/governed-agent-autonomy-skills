@@ -1,4 +1,4 @@
-# Installing agentic-blueprints-skills for OpenCode
+# Installing agentic-maturity-model-skills for OpenCode
 
 ## Prerequisites
 
@@ -11,21 +11,21 @@ Add to the `plugin` array in your `opencode.json` (global or project-level):
 ```json
 {
   "plugin": [
-    "agentic-blueprints-skills@git+https://github.com/tnilabs/agentic-blueprints-skills.git"
+    "agentic-maturity-model-skills@git+https://github.com/tnilabs/agentic-maturity-model-skills.git"
   ]
 }
 ```
 
 Restart OpenCode. The plugin auto-installs and registers all skills.
 
-Verify with: "Use the skill tool to list skills" — you should see `agentic-blueprints-skills/using-agentic-blueprints` and four siblings.
+Verify with: "Use the skill tool to list skills" — you should see `agentic-maturity-model-skills/using-agentic-maturity-model` and four siblings.
 
 ## Pinning a version
 
 ```json
 {
   "plugin": [
-    "agentic-blueprints-skills@git+https://github.com/tnilabs/agentic-blueprints-skills.git#v1.0.0"
+    "agentic-maturity-model-skills@git+https://github.com/tnilabs/agentic-maturity-model-skills.git#v2.0.0"
   ]
 }
 ```
@@ -35,7 +35,7 @@ Verify with: "Use the skill tool to list skills" — you should see `agentic-blu
 Use OpenCode's native `skill` tool:
 
 ```
-use skill tool to load agentic-blueprints-skills/using-agentic-blueprints
+use skill tool to load agentic-maturity-model-skills/using-agentic-maturity-model
 ```
 
 ## Updating
@@ -44,17 +44,17 @@ OpenCode pulls the configured plugin source on restart. To pin a specific versio
 
 ## Troubleshooting
 
-- **Plugin not loading:** `opencode run --print-logs "hello" 2>&1 | grep -i agentic-blueprints`
+- **Plugin not loading:** `opencode run --print-logs "hello" 2>&1 | grep -i agentic-maturity`
 - **Skills not found:** use the `skill` tool to list discovered skills.
 
 ## Manual fallback if the `config` hook isn't called by your OpenCode build
 
-A small set of OpenCode builds may not honor the plugin `config` hook at startup. If `use skill tool to list skills` does not show `agentic-blueprints-skills/using-agentic-blueprints` after a clean restart, add the `skills.paths` entry yourself in `opencode.json` (alongside the `plugin` array):
+A small set of OpenCode builds may not honor the plugin `config` hook at startup. If `use skill tool to list skills` does not show `agentic-maturity-model-skills/using-agentic-maturity-model` after a clean restart, add the `skills.paths` entry yourself in `opencode.json` (alongside the `plugin` array):
 
 ```json
 {
   "plugin": [
-    "agentic-blueprints-skills@git+https://github.com/tnilabs/agentic-blueprints-skills.git"
+    "agentic-maturity-model-skills@git+https://github.com/tnilabs/agentic-maturity-model-skills.git"
   ],
   "skills": {
     "paths": [

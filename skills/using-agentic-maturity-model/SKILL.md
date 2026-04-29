@@ -1,9 +1,9 @@
 ---
-name: using-agentic-blueprints
+name: using-agentic-maturity-model
 description: Use when a task mentions AMM, Agentic Maturity Model, AMM levels, agentic maturity, enterprise agent design, enterprise agent review, agent governance, or agent compliance assessment
 ---
 
-# Using Agentic Blueprints Skills
+# Using Agentic Maturity Model Skills
 
 This is the gateway. AMM-relevant work routes through one of four sibling skills. The gateway picks one and announces the choice in the literal form ``Using `<sibling-skill>` to <purpose>``; the host's native skill resolution loads the chosen sibling.
 

@@ -14,16 +14,16 @@ Verify AMM level claims against artifacts using rosetta-driven search for contro
 ## Process
 
 1. Read the change set and any AMM-level claim in the PR description / design brief.
-2. Pull the level's exit criteria from `references/amm-levels.md`, the required controls from `references/controls.md`, and the required pattern families from `references/patterns.md`.
-3. For each control AND each pattern family, run a rosetta-driven search of the codebase via `references/rosetta.md`. Record what was searched, where, and what was found.
-4. For each AMM exit criterion that is not a control or pattern family, run an artifact search for the named criterion under local names. Record terms, locations, and result.
+2. Build the checklist for L1 through the claimed level inclusive: exit criteria from `references/amm-levels.md`, controls whose `Activated at AMM levels` line includes the claimed level, and pattern entries introduced at L1 through the claimed level.
+3. For each control AND each pattern entry, run a rosetta-driven search of the codebase via `references/rosetta.md`. Record what was searched, where, and what was found.
+4. For each AMM exit criterion that is not a control or pattern entry, run an artifact search for the named criterion under local names. Record terms, locations, and result.
 5. Verify each integrated pattern has a passing functional-signature test (per the implement skill's rule).
 6. Verify threat-model deltas, audit/observability mapping, and any evidence-pack outputs.
 7. Produce the review report using the **Output template** below.
 
 ## Hard rule
 
-Controls and pattern families use a **recorded rosetta-driven search**: load the rosetta entry, search at least three detection signals, and record searches and locations. Pure AMM exit criteria use a **recorded artifact search**: search for the named exit-criterion artifact under local names, then record terms, locations, and result. A missing/not-satisfied finding without the applicable recorded search is invalid output.
+Controls and pattern entries use a **recorded rosetta-driven search**: load the rosetta entry, search at least three detection signals, and record searches and locations. Pure AMM exit criteria use a **recorded artifact search**: search for the named exit-criterion artifact under local names, then record terms, locations, and result. A missing/not-satisfied finding without the applicable recorded search is invalid output.
 
 ## Forbidden shortcuts
 
@@ -44,7 +44,7 @@ Controls and pattern families use a **recorded rosetta-driven search**: load the
 | AMM canonical | User-team name | Location | Evidence | Verdict |
 
 ## Pattern integration
-| Pattern family | Functional-sig test | Verdict |
+| Pattern entry | Functional-sig test | Verdict |
 
 ## Missing / not-satisfied findings
 - <finding> — searched signals/artifacts: <list>; locations: <files>; suggested fix: <text>

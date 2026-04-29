@@ -20,14 +20,52 @@ CONTROL_NAMES=(
 # Canonical control-to-AMM-level activation matrix (v1).
 declare -A EXPECTED_ACTIVATIONS=(
   ["Adversarial Awareness"]="L4 L5 L6 L7 L8 L9 L10"
-  ["Agent Control Tower"]="L6 L7 L8 L9 L10"
+  ["Agent Control Tower"]="L7 L8 L9 L10"
   ["Compliance Evidence Pack"]="L4 L5 L6 L7 L8 L9 L10"
   ["Credential and Delegated Access"]="L5 L6 L7 L8 L9 L10"
-  ["Data Governance"]="L2 L3 L4 L5 L6 L7 L8 L9 L10"
-  ["Protocol Conformance"]="L3 L4 L5 L6 L7 L8 L9 L10"
+  ["Data Governance"]="L3 L4 L5 L6 L7 L8 L9 L10"
+  ["Protocol Conformance"]="L5 L6 L7 L8 L9 L10"
   ["Incident Response"]="L6 L7 L8 L9 L10"
-  ["OpenTelemetry Mapping"]="L5 L6 L7 L8 L9 L10"
-  ["Value and Cost Management"]="L6 L7 L8 L9 L10"
+  ["OpenTelemetry Mapping"]="L4 L5 L6 L7 L8 L9 L10"
+  ["Value and Cost Management"]="L4 L5 L6 L7 L8 L9 L10"
+)
+
+PATTERN_IDS=(
+  "L1-baseline-failure-cataloguing"
+  "L2-process-as-substrate"
+  "L2-threat-model-as-substrate"
+  "L3-knowledge-coverage-map"
+  "L3-golden-retrieval-evals"
+  "L3-provenance-attested-source"
+  "L4-pending-review-boundary"
+  "L4-provenance-framed-prompt-assembly"
+  "L4-customer-safe-output-check"
+  "L4-adversarial-input-labeling"
+  "L5-typed-tool-manifest-with-scope"
+  "L5-scoped-grant-per-run"
+  "L5-read-tool-audit-redaction"
+  "L5-mcp-conformance-derived-from-manifest"
+  "L5-tool-output-sanitization"
+  "L5-native-tool-conformance"
+  "L6-model-recommends-runtime-assembles"
+  "L6-approval-binding-hash"
+  "L6-one-shot-credential-lease"
+  "L6-idempotent-write-replay"
+  "L6-rollback-metadata-on-every-write"
+  "L6-signed-approval-record"
+  "L6-customer-safety-block-gate"
+  "L7-signed-goal-with-immutable-scope"
+  "L7-success-criteria-predicate-registry"
+  "L7-task-agent-stop-reasons"
+  "L7-memory-write-validation"
+  "L8-signed-a2a-card"
+  "L8-validator-veto-handoff"
+  "L8-durable-orchestration-state"
+  "L9-policy-eligibility-gate"
+  "L9-global-pause-and-dead-letter"
+  "L9-continuous-adversarial-eval-corpus"
+  "L10-evidence-backed-improvement-proposal"
+  "L10-adversarial-release-gate"
 )
 
 # POSIX-safe separator for L<n> headings: whitespace, end-of-line, or dash.
@@ -104,12 +142,11 @@ if [[ -f references/controls.md ]]; then
   fi
 fi
 
-# 5. patterns.md: exactly 10 H2 sections, one per L1..L10. Required-family
-# levels (L3-L10) MUST have a **Functional signature:** block. L1, L2 MUST
-# carry "no v0 pattern family" and MUST NOT have a functional signature.
-PATTERNS_REQUIRE_FAMILY=(3 4 5 6 7 8 9 10)
-PATTERNS_REQUIRE_NO_V0=(1 2)
-PATTERN_FAMILY_NAMES=()
+# 5. patterns.md: exactly 10 H2 sections, one per L1..L10. Every source
+# pattern from ../agentic-maturity-model must be represented as a `###` entry with
+# a functional signature, controls activated, and test asserts. L1/L2 are
+# substrate patterns, not "no pattern" placeholders.
+PATTERN_ENTRY_NAMES=()
 if [[ -f references/patterns.md ]]; then
   pcount=$(grep -cE "^## L([1-9]|10)${LSEP}" references/patterns.md || true)
   if [[ "$pcount" != "10" ]]; then
@@ -124,66 +161,42 @@ if [[ -f references/patterns.md ]]; then
       in_sec && /^## / { exit }
       in_sec { print }
     ' references/patterns.md)
-    has_sig=0; printf '%s' "$body" | grep -qE '\*\*Functional signature:\*\*' && has_sig=1
-    has_no=0;  printf '%s' "$body" | grep -qiE 'no v0 pattern family' && has_no=1
-    if [[ "$has_sig" == "0" && "$has_no" == "0" ]]; then
-      echo "patterns.md L${n} section has neither '**Functional signature:**' nor 'no v0 pattern family'"; fail=1
+    if printf '%s' "$body" | grep -qiE 'no v0 pattern family'; then
+      echo "patterns.md L${n} still uses obsolete 'no v0 pattern family' placeholder"; fail=1
     fi
-    if printf ' %s ' "${PATTERNS_REQUIRE_FAMILY[*]}" | grep -q " ${n} "; then
-      if [[ "$has_sig" == "0" ]]; then
-        echo "patterns.md L${n} is in the required-family set but lacks a **Functional signature:** block"; fail=1
-      fi
+  done
+
+  for pattern_id in "${PATTERN_IDS[@]}"; do
+    if ! grep -qxF "### $pattern_id" references/patterns.md; then
+      echo "patterns.md missing source pattern entry: '### $pattern_id'"; fail=1; continue
     fi
-    if printf ' %s ' "${PATTERNS_REQUIRE_NO_V0[*]}" | grep -q " ${n} "; then
-      if [[ "$has_sig" == "1" ]]; then
-        echo "patterns.md L${n} must be a 'no v0 pattern family' entry; functional signature is not allowed in v0"; fail=1
+    body=$(awk -v hdr="### $pattern_id" 'index($0, hdr)==1 {found=1; next} found && /^### / {exit} found && /^## / {exit} found {print}' references/patterns.md)
+    for label in "Functional signature" "Controls activated" "Test asserts"; do
+      if ! printf '%s\n' "$body" | grep -qE "^[*-][[:space:]]*\\*\\*${label}:?\\*\\*"; then
+        echo "patterns.md '$pattern_id' missing '**${label}:**' line"; fail=1
       fi
-      if [[ "$has_no" == "0" ]]; then
-        echo "patterns.md L${n} must contain the literal phrase 'no v0 pattern family'"; fail=1
-      fi
-    fi
-    if [[ "$has_sig" == "1" ]]; then
-      hdr=$(awk -v n="$n" -v sep="$LSEP" '$0 ~ ("^## .*L" n sep) {print; exit}' references/patterns.md)
-      PATTERN_FAMILY_NAMES+=("$hdr")
-      controls_present=$(printf '%s\n' "$body" | grep -cE '^[*-][[:space:]]*\*\*Controls activated:?\*\*' || true)
-      tests_present=$(printf '%s\n' "$body" | grep -cE '^[*-][[:space:]]*\*\*Test asserts:?\*\*' || true)
-      if [[ "$controls_present" == "0" ]]; then
-        echo "patterns.md L${n} missing '**Controls activated:**' line"; fail=1
-      fi
-      if [[ "$tests_present" == "0" ]]; then
-        echo "patterns.md L${n} missing '**Test asserts:**' line"; fail=1
-      fi
-      controls_text=$(printf '%s\n' "$body" | sed -nE 's/^[*-][[:space:]]*\*\*Controls activated:?\*\*[[:space:]]*//p' | head -1)
-      tests_text=$(printf '%s\n' "$body" | sed -nE 's/^[*-][[:space:]]*\*\*Test asserts:?\*\*[[:space:]]*//p' | head -1)
-      if [[ "$controls_present" != "0" && -z "${controls_text// }" ]]; then
-        echo "patterns.md L${n} '**Controls activated:**' is empty"; fail=1
-      fi
-      if [[ "$tests_present" != "0" && -z "${tests_text// }" ]]; then
-        echo "patterns.md L${n} '**Test asserts:**' is empty"; fail=1
-      fi
-      # Validate: every name listed under **Controls activated:** in this
-      # section must be one of the nine canonical control names.
-      controls_line=$(printf '%s\n' "$body" | sed -nE 's/^[*-][[:space:]]*\*\*Controls activated:?\*\*[[:space:]]*//p' | head -1)
-      if [[ -n "$controls_line" ]]; then
-        IFS=',' read -ra activated <<< "$controls_line"
-        for c in "${activated[@]}"; do
-          name=$(printf '%s' "$c" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')
-          [[ -z "$name" ]] && continue
-          ok=0
-          for canon in "${CONTROL_NAMES[@]}"; do
-            if [[ "$name" == "$canon" ]]; then ok=1; break; fi
-          done
-          if [[ "$ok" != "1" ]]; then
-            echo "patterns.md L${n} **Controls activated:** has non-canonical name '$name'"; fail=1
-          fi
+    done
+    controls_line=$(printf '%s\n' "$body" | sed -nE 's/^[*-][[:space:]]*\*\*Controls activated:?\*\*[[:space:]]*//p' | head -1)
+    if [[ -n "$controls_line" ]]; then
+      IFS=',' read -ra activated <<< "$controls_line"
+      for c in "${activated[@]}"; do
+        name=$(printf '%s' "$c" | sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//')
+        [[ -z "$name" || "$name" == "None" ]] && continue
+        ok=0
+        for canon in "${CONTROL_NAMES[@]}"; do
+          if [[ "$name" == "$canon" ]]; then ok=1; break; fi
         done
-      fi
+        if [[ "$ok" != "1" ]]; then
+          echo "patterns.md '$pattern_id' **Controls activated:** has non-canonical name '$name'"; fail=1
+        fi
+      done
     fi
+    PATTERN_ENTRY_NAMES+=("$pattern_id")
   done
 fi
 
 # 6. rosetta.md: ## Controls + ## Patterns; every control covered;
-# every pattern family from patterns.md covered; every entry has
+# every pattern entry from patterns.md covered; every entry has
 # Functional signature, >=3 alt names, >=3 detection-signal categories.
 if [[ -f references/rosetta.md ]]; then
   for s in Controls Patterns; do
@@ -196,10 +209,9 @@ if [[ -f references/rosetta.md ]]; then
       echo "rosetta.md missing entry: '### $c'"; fail=1
     fi
   done
-  for hdr in "${PATTERN_FAMILY_NAMES[@]}"; do
-    fam=$(printf '%s' "$hdr" | sed -E 's/^##[[:space:]]*//')
+  for fam in "${PATTERN_ENTRY_NAMES[@]}"; do
     if ! grep -qxF "### $fam" references/rosetta.md; then
-      echo "rosetta.md missing pattern-family entry for '$fam' (from $hdr)"; fail=1
+      echo "rosetta.md missing pattern entry for '$fam'"; fail=1
     fi
   done
   awk '
