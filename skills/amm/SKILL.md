@@ -24,4 +24,4 @@ Do not produce assessment, design, implementation, or review output without firs
 
 ## Canon
 
-Canonical AMM, control, pattern, and synonym-map material lives in the plugin root's `references/` directory, sibling to `skills/` (`../../references/` from this file in the source tree). Siblings load those files on demand. The plugin does not fetch from external sources.
+Canonical AMM, control, pattern, and synonym-map material lives in each focused skill's bundled `references/` directory. Root `references/` files are kept in sync for humans and tests. The plugin does not fetch from external sources.

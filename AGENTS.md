@@ -27,10 +27,11 @@ installed in the host tool.
 | Path | Owns |
 | --- | --- |
 | `skills/<skill-name>/SKILL.md` | One skill: frontmatter (`name`, `description`) + body. Five skills total, set is fixed. |
-| `references/amm-levels.md` | Canon of the 10 AMM levels (one H2 per level). |
-| `references/controls.md` | Canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
-| `references/patterns.md` | Source-aligned pattern index per AMM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
-| `references/synonyms.md` | Synonym and detection-signal guide; one entry per control category and per pattern entry. |
+| `skills/<focused-skill>/references/*.md` | Skill-local copies of AMM canon for installed-plugin sandboxes; must match root `references/*.md` byte-for-byte. |
+| `references/amm-levels.md` | Root canon of the 10 AMM levels (one H2 per level). |
+| `references/controls.md` | Root canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
+| `references/patterns.md` | Root source-aligned pattern index per AMM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
+| `references/synonyms.md` | Root synonym and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
 | `.codex-plugin/plugin.json` | Codex App marketplace manifest, with full `interface` block. |
@@ -80,6 +81,10 @@ installed in the host tool.
 - Skills carry their own output templates inline (assessment report
   shape, design brief shape, implementation plan shape, review report
   shape). References hold canon; skills hold output shape.
+- Focused skills bundle local copies of `references/*.md` because some
+  installed-plugin hosts allow the skill body but deny reads outside the
+  skill directory. Root `references/*.md` remain the canonical source;
+  `tests/refs.test.sh` rejects drift between root and skill-local copies.
 
 ## References (canon)
 

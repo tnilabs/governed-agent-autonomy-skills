@@ -257,6 +257,8 @@ The skills consult four shipped canon files:
 - [`references/patterns.md`](references/patterns.md): source-aligned AMM pattern entries by level.
 - [`references/synonyms.md`](references/synonyms.md): alternative names and detection signals for controls and patterns.
 
+Focused skills also include local copies of those reference files so installed-plugin hosts can read the canon even when they restrict access outside a skill directory. Tests enforce that the copies match the root references exactly.
+
 Assessment and review skills must record their searches. A missing-control finding is invalid unless the agent searched synonym and detection signals, then records where it looked. This is the main value of the plugin: it turns "I don't see it" into auditable evidence.
 
 ## Refresh

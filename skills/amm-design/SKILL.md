@@ -9,7 +9,7 @@ Turn an idea into an AMM-scoped design brief. The brief commits to a target leve
 
 ## Inputs
 
-Load the shared reference files from the plugin root's `references/` directory (`../../references/` from this file in the source tree): `amm-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the brief.
+Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the brief.
 
 ## Process
 

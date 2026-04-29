@@ -9,7 +9,7 @@ Integrate AMM pattern entries into the *existing* user system, under the team's 
 
 ## Inputs
 
-Load the shared reference files from the plugin root's `references/` directory (`../../references/` from this file in the source tree): `patterns.md`, `controls.md`, `synonyms.md`. Cite their `canon_version` in the implementation plan.
+Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `synonyms.md`. Cite their `canon_version` in the implementation plan.
 
 ## Process
 

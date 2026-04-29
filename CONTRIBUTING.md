@@ -5,7 +5,8 @@ This repo ships skills and reference canon for coding agents. Keep changes small
 ## Public Surface
 
 - `skills/`: exactly five skill directories: `amm`, `amm-assess`, `amm-design`, `amm-implement`, `amm-review`.
-- `references/`: AMM canon loaded by the skills.
+- `references/`: root AMM canon.
+- `skills/<focused-skill>/references/`: copies of root canon used by hosts that sandbox skill resources.
 - Tool packaging: `.claude-plugin/`, `.codex/`, `.codex-plugin/`, `.cursor-plugin/`, `.opencode/`, `gemini-extension.json`, and `package.json`.
 - `README.md`: human install and usage guide.
 - `AGENTS.md`: operational rules for coding agents working in this repo.
@@ -41,6 +42,7 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 - `references/controls.md` keeps exactly 9 canonical control sections and the activation matrix.
 - `references/patterns.md` keeps one section per AMM level and one entry per source AMM pattern ID.
 - `references/synonyms.md` keeps entries for every control and pattern, with functional signature, alternative names, and detection signals.
+- The focused skill reference copies must match root `references/*.md` exactly.
 
 Changing reference meaning requires a version bump and fresh validation. Wording-only fixes may stay in the current canon version when they do not change behavior.
 

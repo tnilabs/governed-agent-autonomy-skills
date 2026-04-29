@@ -95,6 +95,21 @@ for f in references/amm-levels.md references/controls.md references/patterns.md 
   fi
 done
 
+# 2b. Focused skills carry local reference copies for installed-plugin
+#     sandboxes. They must stay byte-for-byte aligned with the root canon.
+for skill in amm-assess amm-design amm-implement amm-review; do
+  for ref in amm-levels.md controls.md patterns.md synonyms.md; do
+    copy="skills/${skill}/references/${ref}"
+    root="references/${ref}"
+    if [[ ! -f "$copy" ]]; then
+      echo "MISSING skill-local reference: $copy"; fail=1; continue
+    fi
+    if ! cmp -s "$root" "$copy"; then
+      echo "DRIFT: $copy differs from $root"; fail=1
+    fi
+  done
+done
+
 # 3. amm-levels.md: exactly 10 H2 sections matching ^## L<n>(<sep>|$).
 if [[ -f references/amm-levels.md ]]; then
   count=$(grep -cE "^## L([1-9]|10)${LSEP}" references/amm-levels.md || true)
