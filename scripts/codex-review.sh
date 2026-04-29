@@ -31,8 +31,8 @@ Review criteria (do not skip any):
 2. Skill descriptions follow "Use when…" trigger-only convention with no workflow summary.
 3. Plugin manifests are syntactically correct and reference real files (Codex interface block + capabilities=[Interactive,Read,Write], OpenCode package.json type/main, Cursor skills path with no agents/commands/hooks, Gemini contextFileName=GEMINI.md, Claude marketplace plugins[].source).
 4. Cross-tool installation paths in README match each tool actual mechanism (Claude Code local marketplace, Codex CLI/App symlink, Cursor symlink, OpenCode opencode.json, Gemini extensions install, Copilot marketplace).
-5. The assess and review skills enforce the synonym-aware matching rule (no "missing" finding without a recorded synonym-guided search; the literal phrase "recorded synonym-guided search" must appear in both bodies).
-6. Each synonym entry has **Functional signature:** + >=3 alternative names + >=3 detection-signal categories.
+5. The assess and review skills enforce the conceptual-equivalence rule (no "missing" finding without a recorded conceptual-equivalence search; the literal phrase "recorded conceptual-equivalence search" must appear in both bodies).
+6. Each synonym entry has **Functional signature:** + >=3 alternative names + >=4 detection-signal categories, including conceptual equivalents.
 7. No skill, reference, README, context file, install doc, or script instructs the agent to fetch from external repos beyond the documented install/update commands.
 8. patterns.md has one section per AMM level L1–L10; every source AMM pattern ID has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
 9. controls.md uses the canonical 9 names exactly with the source-aligned activation matrix from ../agentic-maturity-model/controls/README.md.

@@ -1,5 +1,5 @@
 ---
-canon_version: 1.1.0
+canon_version: 1.2.0
 last_reviewed: 2026-04-29
 ---
 

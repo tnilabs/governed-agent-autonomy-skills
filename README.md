@@ -13,8 +13,8 @@ The source AMM implementation lives in [`tnilabs/agentic-maturity-model`](https:
 - Evidence-first AMM assessment: classify the actual level from repo artifacts, not self-claims.
 - Enterprise design briefs: turn an agent idea into a target-level plan with controls, evidence, and failure modes.
 - Implementation planning: apply AMM pattern entries such as L5 read-only tools, L6 approved writes, or L8 coordinated agents.
-- Review discipline: verify PRs, evidence packs, and level claims using synonym-guided searches.
-- Synonym-aware matching: do not miss a control just because a team calls it something else.
+- Review discipline: verify PRs, evidence packs, and level claims using conceptual-equivalence searches.
+- Conceptual matching: do not miss a control just because a team names or structures it differently.
 - Self-contained canon: AMM levels, 9 enterprise controls, all source-aligned pattern entries, and detection signals ship in this repo.
 
 ## Skills
@@ -46,7 +46,7 @@ Use AMM to plan L5 read-only tool access for this codebase. Do not edit files ye
 ```
 
 ```text
-Review this PR for AMM L6 compliance. List every synonym-guided search you performed before marking anything missing.
+Review this PR for AMM L6 compliance. List every conceptual-equivalence search you performed before marking anything missing.
 ```
 
 ```text
@@ -106,10 +106,10 @@ use skill tool to load agentic-maturity-model-skills/amm
 
 | Skill | Output |
 | --- | --- |
-| `amm-assess` | AMM assessment with observed level, confidence, evidence per level, blockers, and control gaps. |
+| `amm-assess` | AMM assessment with observed level, full L1-L10 evidence, lowest failing boundary, partial higher-level evidence, and control gaps. |
 | `amm-design` | Target-level design brief with active controls, pattern entries, evidence to produce, failure modes, and open questions. |
 | `amm-implement` | Implementation plan with files to inspect/change, tests to add, controls activated, and verification gates. |
-| `amm-review` | Review report with pass/fail findings, synonym-guided searches performed, control/pattern verdicts, and merge blockers. |
+| `amm-review` | Review report with pass/fail findings, conceptual-equivalence searches performed, control/pattern verdicts, and merge blockers. |
 
 ## Sample Output Shapes
 
@@ -118,7 +118,7 @@ use skill tool to load agentic-maturity-model-skills/amm
 ```markdown
 # AMM Assessment
 
-- Canon versions: amm-levels v1.1.0, controls v1.1.0, patterns v1.1.0, synonyms v1.1.0
+- Canon versions: amm-levels v1.2.0, controls v1.2.0, patterns v1.2.0, synonyms v1.2.0
 - Claimed level: unstated
 - Observed level: L2
 - Confidence: medium - workflow artifacts exist, but no L3 retrieval evidence was found
@@ -131,10 +131,16 @@ use skill tool to load agentic-maturity-model-skills/amm
 - Exit criterion: workflow stages have owners and policies; verdict: satisfied; locations: process/workflow.yaml
 
 ### L3 - Knowledge grounding
-- Exit criterion: evidence IDs and retrieval evals; verdict: missing; signals searched: evidence_id, retrieval-evals, knowledge-index; locations: no matches
+- Exit criterion: evidence IDs and retrieval evals; verdict: missing; searched: evidence_id, retrieval-evals, knowledge-index, equivalent corpus gates; locations: no matches
 
-## Blockers to next level
+### L5 - Read-only tools
+- Pattern: scoped read grants; verdict: partial; searched: issue_read_grant, lease broker, delegated read access, equivalent per-run authority; locations: src/auth/grants.ts
+
+## Lowest failing boundary
 - L3 knowledge grounding - add reviewed knowledge index, coverage map, and golden retrieval evals
+
+## Partial higher-level evidence
+- L5 scoped grants exist, but L3/L4 are incomplete, so they do not raise the observed level
 ```
 
 `amm-design` produces a target-level design brief:
@@ -190,7 +196,7 @@ AMM controls accumulate by level. The skills track these nine categories:
 - OpenTelemetry Mapping
 - Value and Cost Management
 
-L1-L2 are still detectable even though no enterprise controls are active yet. `amm-assess` checks their baseline, process, and threat-model artifacts. L3 adds knowledge-grounding patterns and Data Governance. From L4 onward, the control surface becomes much more visible: review boundaries, evidence packs, adversarial labels, telemetry, and value metrics.
+L1-L3 are preparation evidence, not reliable runtime maturity detection. `amm-assess` can report baseline, process, threat-model, and knowledge-grounding artifacts when they exist, but many real repos will not keep process docs or RAG corpus contents in-tree. That is a valid evidence gap, not an assessment failure. The reliable assessment range starts at L4, where review boundaries, evidence packs, adversarial labels, telemetry, and control surfaces become observable. The observed level stays at the highest fully evidenced prefix, while later artifacts are still captured as partial higher-level evidence.
 
 ## Install From GitHub
 
@@ -255,11 +261,20 @@ The skills consult four shipped canon files:
 - [`references/amm-levels.md`](references/amm-levels.md): the 10 AMM levels and exit criteria.
 - [`references/controls.md`](references/controls.md): 9 enterprise control categories and activation matrix.
 - [`references/patterns.md`](references/patterns.md): source-aligned AMM pattern entries by level.
-- [`references/synonyms.md`](references/synonyms.md): alternative names and detection signals for controls and patterns.
+- [`references/synonyms.md`](references/synonyms.md): alternative names, conceptual-equivalence rules, and detection signals for controls and patterns.
 
 Focused skills also include local copies of those reference files so installed-plugin hosts can read the canon even when they restrict access outside a skill directory. Tests enforce that the copies match the root references exactly.
 
-Assessment and review skills must record their searches. A missing-control finding is invalid unless the agent searched synonym and detection signals, then records where it looked. This is the main value of the plugin: it turns "I don't see it" into auditable evidence.
+Assessment and review skills must record their searches. A missing-control finding is invalid unless the agent checked functional meaning, detection signals, local structures, and locations. This is the main value of the plugin: it turns "I don't see it" into auditable evidence.
+
+For headless Claude Code validation, plugin skill references may need the plugin cache added as a readable directory:
+
+```bash
+claude -p "Use amm-assess to classify this repo" \
+  --settings ~/.claude/settings.json \
+  --add-dir ~/.claude/plugins/cache \
+  --allowedTools Read,Glob,Grep
+```
 
 ## Refresh
 

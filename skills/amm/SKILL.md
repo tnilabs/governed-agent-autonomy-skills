@@ -20,7 +20,7 @@ Pick the sibling whose trigger best fits the user's intent. Use the bare directo
 
 ## Hard rule
 
-Do not produce assessment, design, implementation, or review output without first invoking the matching sibling. The discipline (synonym-guided matching, control activation map, exit criteria, output templates) lives in the siblings; the gateway routes only.
+Do not produce assessment, design, implementation, or review output without first invoking the matching sibling. The discipline (conceptual-equivalence matching, control activation map, exit criteria, output templates) lives in the siblings; the gateway routes only.
 
 ## Canon
 

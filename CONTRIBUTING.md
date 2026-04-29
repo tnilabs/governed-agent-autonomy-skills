@@ -33,7 +33,7 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 - Descriptions start with `Use when` and describe trigger conditions only.
 - Skill bodies stay concise: gateway under 200 words; each sibling under 500 words.
 - Skills do not chain to other plugins.
-- `amm-assess` and `amm-review` must enforce recorded synonym-guided search before marking any control or pattern missing.
+- `amm-assess` and `amm-review` must enforce recorded conceptual-equivalence search before marking any control or pattern missing.
 
 ## Reference Rules
 
@@ -41,7 +41,7 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 - `references/amm-levels.md` keeps exactly 10 AMM level sections.
 - `references/controls.md` keeps exactly 9 canonical control sections and the activation matrix.
 - `references/patterns.md` keeps one section per AMM level and one entry per source AMM pattern ID.
-- `references/synonyms.md` keeps entries for every control and pattern, with functional signature, alternative names, and detection signals.
+- `references/synonyms.md` keeps entries for every control and pattern, with functional signature, alternative names, conceptual-equivalence guidance, and detection signals.
 - The focused skill reference copies must match root `references/*.md` exactly.
 
 Changing reference meaning requires a version bump and fresh validation. Wording-only fixes may stay in the current canon version when they do not change behavior.

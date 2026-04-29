@@ -5,7 +5,7 @@ description: Use when the task asks "what AMM level are we at?", to assess an ex
 
 # Assessing AMM Level
 
-Evidence-first classification. The lowest level whose exit criteria are unmet sets the observed level.
+Evidence-first full-spectrum L1-L10 scan. The observed level is the highest fully satisfied prefix before the lowest failing boundary. The report still records partial higher-level evidence found after that boundary.
 
 ## Inputs
 
@@ -13,18 +13,19 @@ Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `
 
 ## Process
 
-1. For each level L1→L10: read its exit criteria and the controls activated at that level (from the matrix in `references/controls.md`).
-2. For each control AND each pattern entry at the level: resolve to its functional signature via `synonyms.md` and search the user's codebase by detection signals (file/dir patterns, dep names, log keywords, schema fields).
-3. For each AMM exit criterion that is not a control or pattern entry: search for the named artifact under any local name (docs, configs, tests, schemas, telemetry, evidence outputs).
-4. Record every search performed (what was looked for, where, what was found) — even when the answer is "found".
-5. Classify: observed level = max L such that all criteria for L1..L are satisfied.
-6. Produce the report using the **Output template** below.
+1. For every level L1→L10, read exit criteria, activated controls, and pattern entries.
+2. For each control/pattern, run a recorded conceptual-equivalence search: compare functional signature, evidence produced, failure prevented, runtime boundary, and detection signals. Different names, files, services, or structures can satisfy the AMM item if they carry the same meaning.
+3. For pure exit criteria, search for equivalent artifacts under local names (docs, configs, schemas, telemetry, tests, evidence outputs, external-store contracts).
+4. Record searches, locations, found evidence, and equivalence rationale.
+5. Mark each criterion `satisfied`, `partial`, `missing`, or `not_applicable`. Do not stop at the first gap; continue through L10.
+6. Classify: observed level = highest L where all criteria for L1..L are satisfied. The first `partial`/`missing` item is the lowest failing boundary. Later satisfied/partial items are partial higher-level evidence, not the observed level.
+7. Produce the report using the **Output template** below.
 
 ## Hard rules
 
-- **No control or pattern may be marked absent without a recorded synonym-guided search** (≥3 detection signals checked, locations recorded).
-- **No pure AMM exit criterion may be marked absent without a recorded artifact search** (artifact sought, aliases checked, locations and result recorded).
-- L1-L2 are detectable even though no enterprise controls are active: use their baseline/process/threat-model pattern entries and exit criteria. L3 is detected through knowledge-grounding patterns plus Data Governance.
+- No control/pattern may be marked absent without a recorded conceptual-equivalence search: functional signature checked, at least four signal categories searched, and locations recorded.
+- No pure exit criterion may be marked absent without a recorded artifact search: artifact sought, aliases checked, locations recorded, and result stated.
+- L1-L3 are preparation evidence, not reliable runtime maturity detection. Reliable runtime assessment starts at L4, where review boundaries and control surfaces become observable. Still report L1-L3 artifacts or gaps when present.
 - Self-claim is not evidence. Framework name is not evidence. Vocabulary match is not evidence. Vocabulary mismatch is not absence.
 
 ## Forbidden shortcuts
@@ -42,23 +43,27 @@ Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `
 - Canon versions: amm-levels v<x>, controls v<x>, patterns v<x>, synonyms v<x>
 - Claimed level: L<n> (or "unstated")
 - Observed level: L<n>
+- Assessment band note: L1-L3 are preparation evidence; reliable runtime assessment starts at L4.
 - Confidence: high | medium | low (with reason)
 
-## Terminology mapping
-| User-team name | AMM canonical |
+## Terminology and conceptual mapping
+| User-team structure/name | AMM canonical item | Equivalence reason |
 | --- | --- |
 
 ## Evidence per level
 ### L<n> — <name>
-- Exit criterion: <text>; verdict: satisfied | partial | missing; signals/artifacts searched: <list>; locations: <files>
+- Criterion/control/pattern: <text>; verdict: satisfied | partial | missing | not_applicable; searched: <list>; locations: <files>; rationale: <text>
 
-## Blockers to next level
-- <criterion> — <what's missing> — <suggested smallest fix>
+## Lowest failing boundary
+- <level/criterion> — <partial or missing reason> — <smallest fix>
+
+## Partial higher-level evidence
+- <level/item> — <evidence found> — <why it does not raise observed level>
 
 ## Control gaps
-| Control (canonical) | User name | Status | Synonym signals searched | Verdict |
+| Control (canonical) | User structure/name | Status | Conceptual-equivalence search | Verdict |
 ```
 
 ## Inline gate
 
-Before declaring the assessment complete, re-check that every "missing"/"not satisfied" finding has the applicable recorded synonym-guided search or recorded artifact search. If any is missing, re-do the search and update the report.
+Before declaring the assessment complete, re-check that every `partial`, `missing`, or `not satisfied` finding has the applicable recorded conceptual-equivalence or artifact search. If any is missing, re-do the search and update the report.

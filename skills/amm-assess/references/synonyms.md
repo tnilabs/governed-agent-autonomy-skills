@@ -1,5 +1,5 @@
 ---
-canon_version: 1.1.0
+canon_version: 1.2.0
 last_reviewed: 2026-04-29
 ---
 
@@ -11,90 +11,110 @@ names. A user system has the capability if it produces the evidence and
 prevents the failure under any local naming.
 
 Every entry has a functional signature, at least three alternative names, and
-at least three detection-signal categories.
+at least four detection-signal categories, including conceptual equivalents.
+
+## Conceptual Equivalence Rules
+
+Use synonyms as clues, not as a string-matching checklist. A user system
+satisfies a control or pattern when its local structure has the same functional
+meaning: it produces the same evidence, blocks the same failure mode, and
+enforces the same runtime boundary. Different file names, schema names,
+service boundaries, framework primitives, or workflow shapes can be equivalent.
+Mark evidence `partial` when only some parts of the functional signature exist.
+Record the local name or structure, the AMM item it maps to, and the reason the
+mapping is equivalent or not.
 
 ## Controls
 
 ### Adversarial Awareness
 
 - **Functional signature:** hostile input, substrate tampering, poisoning, and adversarial-regression defenses - produces detection, provenance, verification, red-team, and eval records - prevents silent compromise.
-- **Alternative names:** prompt guard, jailbreak detector, prompt firewall, security middleware, adversarial eval gate, red-team corpus
+- **Alternative names:** prompt guard, jailbreak detector, prompt firewall, security middleware, adversarial eval gate, red-team corpus, safety classifier, input trust boundary, attack replay suite, substrate integrity check
 - **Detection signals:**
   - Files/dirs: `adversarial/`, `guards/`, `security/`, `threat_model`, `red_team`, `eval_corpus`
   - Schemas/deps: `injection-detection`, `security-finding`, `adversarial-eval-corpus`, signing libraries
   - Code/log shapes: `InjectionDetection`, `SecurityFinding`, `signature_invalid`, `adversarial_eval_passed`, `prompt_blocked`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Agent Control Tower
 
 - **Functional signature:** agent inventory, lifecycle, health, owner, pause, revocation, and release state - produces registry and operator records - prevents shadow agents and missing kill switches.
-- **Alternative names:** agent registry, control plane, ops dashboard, admin console, agent fleet, lifecycle registry
+- **Alternative names:** agent registry, control plane, ops dashboard, admin console, agent fleet, lifecycle registry, operator console, agent inventory, autonomy control plane, runtime pause panel
 - **Detection signals:**
   - Files/dirs: `agent_registry/`, `control_plane/`, `ops/`, `admin/`, `lifecycle/`
   - Schemas/deps: `agent-card`, `routing-plan`, `halt-record`, `global-pause-flag`
   - Code/log shapes: `AgentCard`, `agent_registered`, `agent_paused`, `risk_tier`, `lifecycle_state`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Compliance Evidence Pack
 
 - **Functional signature:** self-contained bundle of run, review, eval, audit, approval, rollback, handoff, eligibility, and release evidence - produces defensible audit artifacts - prevents audit-by-memory.
-- **Alternative names:** evidence bundle, audit pack, attestation pack, compliance report, audit export, run dossier
+- **Alternative names:** evidence bundle, audit pack, attestation pack, compliance report, audit export, run dossier, assurance packet, evidence dossier, examiner packet, control evidence export
 - **Detection signals:**
   - Files/dirs: `evidence/`, `compliance/`, `audit_export/`, `attestations/`, `reports/`
   - Schemas/deps: `run-record`, `human-review-record`, `approval-record`, `release-decision`
   - Code/log shapes: `enterprise_evidence`, `control_summary`, `evidence_id`, `attestation_signature`, `release_bundle`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Credential and Delegated Access
 
 - **Functional signature:** scoped grants, one-shot leases, delegation chains, principal binding, and revocation - produces authority records - prevents blanket credentials and wrong-principal action.
-- **Alternative names:** scoped credentials, delegated auth, identity broker, on-behalf-of, lease broker, RBAC
+- **Alternative names:** scoped credentials, delegated auth, identity broker, on-behalf-of, lease broker, RBAC, temporary authority, principal-bound token, capability grant, action lease
 - **Detection signals:**
   - Files/dirs: `access/`, `auth/`, `iam/`, `leases/`, `delegation/`, `principals/`
   - Schemas/deps: `credential-lease`, `credential-revocation-event`, `approval-record`, `casbin`, `oso`
   - Code/log shapes: `CredentialLease`, `issue_read_grant`, `lease_consumed`, `actor`, `principal`, `revoked`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Data Governance
 
 - **Functional signature:** classification, provenance, redaction, retention, residency, tenant isolation, and memory policy - produces data-handling records - prevents leakage and unbounded data retention.
-- **Alternative names:** data classification, DLP, privacy guard, PII redaction, retention policy, data residency
+- **Alternative names:** data classification, DLP, privacy guard, PII redaction, retention policy, data residency, source trust metadata, tenant isolation, corpus governance, memory governance
 - **Detection signals:**
   - Files/dirs: `data_governance/`, `privacy/`, `redaction/`, `dlp/`, `memory/`, `knowledge-index`
   - Schemas/deps: `provenance-attestation`, `memory-record`, `redaction`, `presidio`, `scrubadub`
   - Code/log shapes: `classification`, `sensitivity`, `redacted_output`, `retention`, `tenant_id`, `pii_redacted`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Protocol Conformance
 
 - **Functional signature:** protocol surfaces are derived from runtime contracts and fail closed on drift - produces conformance and rejection records - prevents adapters lying about capabilities.
-- **Alternative names:** schema conformance, MCP validator, A2A conformance, contract testing, adapter validation, protocol guard
+- **Alternative names:** schema conformance, MCP validator, A2A conformance, contract testing, adapter validation, protocol guard, surface parity, manifest-derived API, protocol drift gate, adapter contract
 - **Detection signals:**
   - Files/dirs: `protocol_conformance/`, `mcp/`, `a2a/`, `schemas/`, `contracts/`, `adapters/`
   - Schemas/deps: `tool-action`, `agent-card`, `handoff-envelope`, `jsonschema`, `openapi`
   - Code/log shapes: `tools/list`, `validate_against_schema`, `contract_violation`, `requires_approval`, `side_effect_class`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Incident Response
 
 - **Functional signature:** failures are detected, paused, replayed, rolled back, compensated, dead-lettered, and converted into tests - produces containment and recovery evidence - prevents recurrence and unrecoverable side effects.
-- **Alternative names:** incident management, runbook, rollback, dead letter queue, kill switch, postmortem
+- **Alternative names:** incident management, runbook, rollback, dead letter queue, kill switch, postmortem, containment workflow, replay harness, compensation plan, recovery ledger
 - **Detection signals:**
   - Files/dirs: `incident/`, `rollback/`, `dead_letter/`, `runbooks/`, `postmortems/`, `replay/`
   - Schemas/deps: `rollback-plan`, `dead-lettered-case`, `global-pause-flag`, `halt-record`
   - Code/log shapes: `RollbackPlan`, `ToolAction`, `global_pause`, `dead_letter_added`, `replay_started`, `postmortem`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### OpenTelemetry Mapping
 
 - **Functional signature:** agent records map to portable OTel traces, metrics, and logs - produces span attributes and correlation IDs - prevents custom event islands.
-- **Alternative names:** OTel mapping, tracing, observability, distributed tracing, telemetry pipeline, span mapper
+- **Alternative names:** OTel mapping, tracing, observability, distributed tracing, telemetry pipeline, span mapper, run correlation, trace bridge, metric export, GenAI span mapping
 - **Detection signals:**
   - Files/dirs: `telemetry/`, `otel/`, `tracing/`, `observability/`, `metrics/`
   - Schemas/deps: `trace-record`, `run-record`, `opentelemetry-api`, `opentelemetry-sdk`
   - Code/log shapes: `trace_id`, `span_id`, `correlation_id`, `agent.run_id`, `agent.tool_call_id`, `release_trace_records`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### Value and Cost Management
 
 - **Functional signature:** cost, latency, budget, retry, outcome, SLO, and value deltas are measured against the business baseline - produces cost/value records - prevents spend and outcome drift.
-- **Alternative names:** finops, cost tracking, budget guard, value metrics, unit economics, SLO budget
+- **Alternative names:** finops, cost tracking, budget guard, value metrics, unit economics, SLO budget, spend guardrail, latency budget, outcome ledger, ROI evidence
 - **Detection signals:**
   - Files/dirs: `cost/`, `budget/`, `slo/`, `value/`, `finops/`, `metrics/`
   - Schemas/deps: `cost-record`, `slo-band`, `goal-record`, `resolution-package`
   - Code/log shapes: `budget_exhausted`, `slo_burn`, `cost_usd`, `value_metric_rollup`, `retry_budget`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ## Patterns
 
@@ -106,6 +126,7 @@ at least three detection-signal categories.
   - Files/dirs: `baseline_cases/`, `level_01/`, `prompts/`, `baseline-report`
   - Schemas/deps: baseline case fixtures, risk labels, failure labels
   - Code/log shapes: `failure_category`, `manual_time`, `handoffs`, `adversarial_failure_modes`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L2-process-as-substrate
 
@@ -115,6 +136,7 @@ at least three detection-signal categories.
   - Files/dirs: `human_process/`, `workflow.yaml`, `policies.yaml`, `templates/`, `level-01-baseline-to-process`
   - Schemas/deps: process report fixtures, policy rule IDs, stage schemas
   - Code/log shapes: `stage_id`, `owner`, `exit_criteria`, `policy_id`, `baseline_failure_process_links`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L2-threat-model-as-substrate
 
@@ -124,6 +146,7 @@ at least three detection-signal categories.
   - Files/dirs: `threat-model.yaml`, `threat_model`, `security/`, `level_02/`
   - Schemas/deps: `threat-model.schema`, actors, mitigations, surface IDs
   - Code/log shapes: `surface_id`, `actor`, `motivation`, `mitigations`, `out_of_scope`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L3-knowledge-coverage-map
 
@@ -133,6 +156,7 @@ at least three detection-signal categories.
   - Files/dirs: `knowledge-coverage`, `knowledge_base/`, `knowledge-index`, `level_03/evals`
   - Schemas/deps: coverage fixtures, evidence IDs, retrieval eval definitions
   - Code/log shapes: `evidence_id`, `case_id`, `failure_label`, `stage_id`, `policy_id`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L3-golden-retrieval-evals
 
@@ -142,6 +166,7 @@ at least three detection-signal categories.
   - Files/dirs: `retrieval-evals`, `retrieval-signals`, `evals/`, `level_03/`
   - Schemas/deps: eval fixtures, promoted/candidate status, reviewer fields
   - Code/log shapes: `golden`, `observed_query`, `candidate`, `promoted`, `reviewed_by`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L3-provenance-attested-source
 
@@ -151,6 +176,7 @@ at least three detection-signal categories.
   - Files/dirs: `provenance`, `knowledge-index`, `asset_documents`, `knowledge_indexer`
   - Schemas/deps: `provenance-attestation`, content digest, issuer, signature
   - Code/log shapes: `verification_status`, `review_status`, `sensitivity`, `source_id`, `content_digest`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-pending-review-boundary
 
@@ -160,6 +186,7 @@ at least three detection-signal categories.
   - Files/dirs: `review/`, `human_review`, `level_04`, `assistant_output`
   - Schemas/deps: `human-review-record`, `run-record`, review status enums
   - Code/log shapes: `pending_review`, `side_effects_allowed=false`, `review_status`, `HumanReviewRecord`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-provenance-framed-prompt-assembly
 
@@ -169,6 +196,7 @@ at least three detection-signal categories.
   - Files/dirs: `framing`, `prompt_assembly`, `adversarial`, `level_04`
   - Schemas/deps: provenance records, prompt providers, source metadata
   - Code/log shapes: `[system]`, `[customer message]`, `[retrieved evidence`, `verified=`, `source_frame`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-customer-safe-output-check
 
@@ -178,6 +206,7 @@ at least three detection-signal categories.
   - Files/dirs: `data/`, `validation`, `customer_safe`, `assistant_output`
   - Schemas/deps: validation report, leak terms, customer response schema
   - Code/log shapes: `ValidationReport`, `customer_visible`, `leak_terms`, `blocks_acceptance`, `internal_marker`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-adversarial-input-labeling
 
@@ -187,6 +216,7 @@ at least three detection-signal categories.
   - Files/dirs: `adversarial/detection`, `patterns/v1`, `injection`, `level_04`
   - Schemas/deps: `injection-detection`, pattern library, detector version
   - Code/log shapes: `InjectionDetection`, `action=label`, `source_frame`, `instruction_override`, `pattern_id`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L5-typed-tool-manifest-with-scope
 
@@ -196,6 +226,7 @@ at least three detection-signal categories.
   - Files/dirs: `tools/read-tools`, `tool_registry`, `manifests`, `level_05/tools`
   - Schemas/deps: tool action schemas, input/output schemas, protocol conformance
   - Code/log shapes: `permission_scope`, `side_effect_class`, `read_only`, `input_schema`, `output_schema`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L5-scoped-grant-per-run
 
@@ -205,6 +236,7 @@ at least three detection-signal categories.
   - Files/dirs: `access/`, `leases`, `tool_registry`, `level_05`
   - Schemas/deps: grant records, audit records, identity broker
   - Code/log shapes: `issue_read_grant`, `scope`, `run_id`, `grant_id`, `outside_grant`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L5-read-tool-audit-redaction
 
@@ -214,6 +246,7 @@ at least three detection-signal categories.
   - Files/dirs: `tool_registry`, `audit`, `redaction`, `level_05`
   - Schemas/deps: `audit-record`, redaction policies, data governance helpers
   - Code/log shapes: `AuditRecord`, `redacted_output`, `actor`, `args_hash`, `result_hash`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L5-mcp-conformance-derived-from-manifest
 
@@ -223,6 +256,7 @@ at least three detection-signal categories.
   - Files/dirs: `mcp_adapter`, `protocol_conformance`, `level_05_server`, `mcp/`
   - Schemas/deps: MCP tool schemas, manifest schemas, conformance tests
   - Code/log shapes: `tools/list`, `tools/call`, `mcp_exposure_status`, `manifest`, `conformance`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L5-tool-output-sanitization
 
@@ -232,6 +266,7 @@ at least three detection-signal categories.
   - Files/dirs: `sanitization`, `tool-output`, `adversarial`, `level_05/examples`
   - Schemas/deps: injection detection records, sanitizer utilities
   - Code/log shapes: `control_character`, `instruction_override`, `sanitized_payload`, `raw_output`, `redacted_output`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L5-native-tool-conformance
 
@@ -241,6 +276,7 @@ at least three detection-signal categories.
   - Files/dirs: `implementations/*/level_05`, `framework_tracks`, `tool_registry`
   - Schemas/deps: provider matrix, framework conformance tests, audit records
   - Code/log shapes: `native_tool`, `framework`, `conformance`, `audit_record`, `shared_engine`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-model-recommends-runtime-assembles
 
@@ -250,6 +286,7 @@ at least three detection-signal categories.
   - Files/dirs: `level_06`, `native_runtime`, `write-tools`, `action_templates`
   - Schemas/deps: tool action schema, approval schema, ticket/action fixtures
   - Code/log shapes: `proposed_action`, `runtime_assembled`, `model_recommendation`, `arguments_digest`, `divergence`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-approval-binding-hash
 
@@ -259,6 +296,7 @@ at least three detection-signal categories.
   - Files/dirs: `approvals`, `level_06/inputs`, `approval-binding`, `native_runtime`
   - Schemas/deps: `approval-record`, canonical JSON, hash utilities
   - Code/log shapes: `binding`, `binding_hash`, `gate_status`, `approval_consumed`, `arguments_digest`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-one-shot-credential-lease
 
@@ -268,6 +306,7 @@ at least three detection-signal categories.
   - Files/dirs: `access/leases`, `credential-lease`, `writes`, `level_06`
   - Schemas/deps: `credential-lease`, lease store, write registry
   - Code/log shapes: `CredentialLease`, `lease_id`, `consumed_at`, `action_id`, `idempotency_key`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-idempotent-write-replay
 
@@ -277,6 +316,7 @@ at least three detection-signal categories.
   - Files/dirs: `idempotency`, `writes`, `incident`, `level_06/examples`
   - Schemas/deps: `tool-action`, idempotency store, rollback plan
   - Code/log shapes: `idempotency_key`, `prior_tool_action`, `replay`, `already_executed`, `no_new_mutation`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-rollback-metadata-on-every-write
 
@@ -286,6 +326,7 @@ at least three detection-signal categories.
   - Files/dirs: `rollback`, `incident`, `writes`, `level_06`
   - Schemas/deps: `rollback-plan`, `tool-action`, incident helpers
   - Code/log shapes: `RollbackPlan`, `correction_path`, `reverse`, `compensate`, `append_only_correction`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-signed-approval-record
 
@@ -295,6 +336,7 @@ at least three detection-signal categories.
   - Files/dirs: `signing`, `adversarial_keys`, `approvals`, `level_06`
   - Schemas/deps: Ed25519 signing, key registry, approval records
   - Code/log shapes: `signature_invalid`, `key_id`, `canonical_json`, `rotated`, `revoked`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L6-customer-safety-block-gate
 
@@ -304,6 +346,7 @@ at least three detection-signal categories.
   - Files/dirs: `customer_safety`, `data`, `level_06`, `approval_gate`
   - Schemas/deps: validation reports, data governance checks, approval records
   - Code/log shapes: `customer_safety_block`, `customer_visible`, `safety_check`, `short_circuit`, `leak_terms`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L7-signed-goal-with-immutable-scope
 
@@ -313,6 +356,7 @@ at least three detection-signal categories.
   - Files/dirs: `goals`, `level_07/inputs`, `goal-record`, `signed_goals`
   - Schemas/deps: `goal-record`, signing utilities, key registry
   - Code/log shapes: `Goal`, `signature`, `allowed_tool_scopes`, `expires_at`, `scope_modified`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L7-success-criteria-predicate-registry
 
@@ -322,6 +366,7 @@ at least three detection-signal categories.
   - Files/dirs: `predicates`, `goals/predicates`, `success_criteria`, `level_07`
   - Schemas/deps: goal records, predicate definitions, runtime evidence
   - Code/log shapes: `predicate_id`, `eval_predicate`, `goal_complete`, `runtime_evidence`, `DECLARE_DONE`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L7-task-agent-stop-reasons
 
@@ -331,6 +376,7 @@ at least three detection-signal categories.
   - Files/dirs: `stop_reasons`, `budget`, `progress`, `escalation`, `level_07`
   - Schemas/deps: `halt-record`, `resolution-package`, budget helpers
   - Code/log shapes: `StopReason`, `budget_exhausted`, `no_progress`, `tool_failure`, `classify_escalation`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L7-memory-write-validation
 
@@ -340,6 +386,7 @@ at least three detection-signal categories.
   - Files/dirs: `memory`, `validators`, `memory-record`, `level_07/examples`
   - Schemas/deps: `memory-record`, PII detector, retention policy
   - Code/log shapes: `MemoryRecord`, `content_redacted`, `source_frame`, `tenant_id`, `retention`, `persistent`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L8-signed-a2a-card
 
@@ -349,6 +396,7 @@ at least three detection-signal categories.
   - Files/dirs: `agent_cards`, `agents`, `level_08/inputs`, `a2a`
   - Schemas/deps: `agent-card`, signing helpers, security findings
   - Code/log shapes: `AgentCard`, `card_verification`, `capabilities`, `allowed_peers`, `SecurityFinding`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L8-validator-veto-handoff
 
@@ -358,6 +406,7 @@ at least three detection-signal categories.
   - Files/dirs: `validator`, `handoff`, `validation-decision`, `level_08`
   - Schemas/deps: `validation-decision`, `handoff-envelope`, artifact hash
   - Code/log shapes: `validator_veto`, `ValidationDecision`, `payload_hash`, `artifact_hash`, `revise_or_escalate`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L8-durable-orchestration-state
 
@@ -367,6 +416,7 @@ at least three detection-signal categories.
   - Files/dirs: `checkpoint`, `orchestrator`, `sqlite_checkpoint`, `level_08/examples`
   - Schemas/deps: `orchestration-checkpoint`, durable store, idempotency keys
   - Code/log shapes: `OrchestrationCheckpoint`, `resume`, `checkpoint_id`, `tool_calls`, `approval_state`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L9-policy-eligibility-gate
 
@@ -376,6 +426,7 @@ at least three detection-signal categories.
   - Files/dirs: `policy`, `eligibility`, `level_09/inputs`, `worker`
   - Schemas/deps: `eligibility-schema`, `eligibility-decision`, policy signing
   - Code/log shapes: `EligibilityDecision`, `allowed=false`, `auto_escalate`, `allow_criteria`, `policy_attestation`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L9-global-pause-and-dead-letter
 
@@ -385,6 +436,7 @@ at least three detection-signal categories.
   - Files/dirs: `global_pause`, `dead_letter`, `policy/queue`, `level_09/examples`
   - Schemas/deps: `global-pause-flag`, `dead-lettered-case`, queue lease
   - Code/log shapes: `GlobalPauseFlag`, `DeadLetteredCase`, `paused`, `dead_letter_added`, `queue_lease`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L9-continuous-adversarial-eval-corpus
 
@@ -394,6 +446,7 @@ at least three detection-signal categories.
   - Files/dirs: `adversarial_corpus`, `red_team`, `level_09/examples`, `policy`
   - Schemas/deps: `adversarial-eval-corpus`, `red-team-finding`, eval results
   - Code/log shapes: `corpus_freshness`, `required_threat_classes`, `startup_gate`, `red_team_finding`, `coverage_missing`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L10-evidence-backed-improvement-proposal
 
@@ -403,6 +456,7 @@ at least three detection-signal categories.
   - Files/dirs: `proposals`, `level_10/inputs`, `improvement-proposal`, `change_control`
   - Schemas/deps: `improvement-proposal`, `proposal-review`, `proposal-waiver`
   - Code/log shapes: `source_run_ids`, `regression_tests`, `proposal_signature`, `reviewer_signoff`, `payload_digest`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L10-adversarial-release-gate
 
@@ -412,3 +466,4 @@ at least three detection-signal categories.
   - Files/dirs: `release_gate`, `adversarial_evals`, `candidate-release`, `level_10/examples`
   - Schemas/deps: `candidate-release`, `eval-baseline`, `release-decision`, parity tests
   - Code/log shapes: `per_class`, `baseline_signature`, `release_gate_inconsistent`, `waivable=false`, `promotion_blocked`
+  - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ

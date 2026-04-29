@@ -35,7 +35,7 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 - Canon versions: patterns v<x>, synonyms v<x>, controls v<x>
 - User-team mapping: <user existing name> ↔ <canonical>
 
-## Existing capability survey (synonym-guided)
+## Existing capability survey (conceptual-equivalence)
 | Detection signal | Searched in | Found / not found |
 
 ## File touch list

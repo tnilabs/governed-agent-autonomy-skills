@@ -31,7 +31,7 @@ installed in the host tool.
 | `references/amm-levels.md` | Root canon of the 10 AMM levels (one H2 per level). |
 | `references/controls.md` | Root canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
 | `references/patterns.md` | Root source-aligned pattern index per AMM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
-| `references/synonyms.md` | Root synonym and detection-signal guide; one entry per control category and per pattern entry. |
+| `references/synonyms.md` | Root synonym, conceptual-equivalence, and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
 | `.codex-plugin/plugin.json` | Codex App marketplace manifest, with full `interface` block. |
@@ -45,8 +45,8 @@ installed in the host tool.
 | `CONTRIBUTING.md` | Human contribution, validation, and release guide. |
 | `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
-| `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, synonym-rule sentinel in assess+review, no external plugin chains. |
-| `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, synonym cross-check against patterns.md. |
+| `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, conceptual-equivalence sentinel in assess+review, no external plugin chains. |
+| `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, synonym/concept cross-check against patterns.md. |
 | `tests/no-external-fetch.test.sh` | Forbids fetch instructions in skills, refs, scripts, README, host-context files, install docs (allowlist for documented install URLs only). |
 | `tests/smoke/<tool>.sh` | Per-tool artifact-sanity scripts. Skip-with-message when the tool isn't installed. |
 | `internal/` | Gitignored. Design memos, sourcing notes, manual verification checklist, codex-review outputs. Not part of the public surface. |
@@ -61,8 +61,9 @@ installed in the host tool.
   and `description` (starts with "Use when…", trigger-only, no workflow
   summary, no first-person, no process steps). Total frontmatter ≤1024
   chars.
-- Body is ≤200 words for the gateway, ≤500 words for siblings. Word
-  count is enforced by `tests/skills.test.sh`.
+- Body is ≤200 words for the gateway, ≤650 words for `amm-assess`, and
+  ≤500 words for other siblings. Word count is enforced by
+  `tests/skills.test.sh`.
 - Skills do NOT chain to other plugins. If a skill needs TDD, file-touch
   planning, request-for-review, or verification-before-completion
   discipline, that discipline is stated inline in the skill body. No
@@ -73,11 +74,11 @@ installed in the host tool.
   form ``Using `<sibling-skill>` to <purpose>``; the host's native skill
   resolution loads the sibling. Use bare skill directory names in the
   gateway's routing table.
-- Synonym-aware matching is a hard rule for the assess and review
+- Conceptual-equivalence matching is a hard rule for the assess and review
   skills. Their bodies MUST contain the literal sentinel
-  `recorded synonym-guided search`. A finding marked "missing" / "not
-  satisfied" without a list of detection signals searched and locations
-  is invalid output.
+  `recorded conceptual-equivalence search`. A finding marked "missing" /
+  "not satisfied" without functional-signature comparison, detection
+  signals searched, and locations is invalid output.
 - Skills carry their own output templates inline (assessment report
   shape, design brief shape, implementation plan shape, review report
   shape). References hold canon; skills hold output shape.
@@ -102,11 +103,12 @@ installed in the host tool.
   `**Functional signature:**`,
   `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
   substrate patterns; do not reintroduce `no v0 pattern family`.
-- `references/synonyms.md` has `## Controls` and `## Patterns` sections.
+- `references/synonyms.md` has `## Conceptual Equivalence Rules`,
+  `## Controls`, and `## Patterns` sections.
   Every control (nine) and every pattern entry gets a
   `### <Canonical Name or pattern-id>` entry with `**Functional signature:**`,
   `**Alternative names:**` (≥3), and `**Detection signals:**` with at
-  least three signal categories.
+  least four signal categories, including `Conceptual equivalents:`.
 - Refs are versioned together with the plugin. Any change to a ref
   file's canon meaning bumps `canon_version` and `last_reviewed`.
 
@@ -174,7 +176,7 @@ installed in the host tool.
   causes Claude to follow the description instead of the body, per
   upstream skills documentation we have learned from). Triggering
   conditions only.
-- Context entrypoints inline the synonym-aware matching rule because
+- Context entrypoints inline the conceptual-equivalence matching rule because
   `docs/` and `internal/` are gitignored and not shipped — do not
   reference paths users won't have.
 - The default tone in skills, README, and context files is plain,

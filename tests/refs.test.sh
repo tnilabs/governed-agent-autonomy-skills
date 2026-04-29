@@ -212,13 +212,17 @@ fi
 
 # 6. synonyms.md: ## Controls + ## Patterns; every control covered;
 # every pattern entry from patterns.md covered; every entry has
-# Functional signature, >=3 alt names, >=3 detection-signal categories.
+# Functional signature, >=3 alt names, >=4 detection-signal categories,
+# including conceptual-equivalence guidance.
 if [[ -f references/synonyms.md ]]; then
   for s in Controls Patterns; do
     if ! grep -q "^## $s$" references/synonyms.md; then
       echo "synonyms.md missing top-level section '## $s'"; fail=1
     fi
   done
+  if ! grep -q '^## Conceptual Equivalence Rules$' references/synonyms.md; then
+    echo "synonyms.md missing '## Conceptual Equivalence Rules'"; fail=1
+  fi
   for c in "${CONTROL_NAMES[@]}"; do
     if ! grep -qxF "### $c" references/synonyms.md; then
       echo "synonyms.md missing entry: '### $c'"; fail=1
@@ -234,11 +238,12 @@ if [[ -f references/synonyms.md ]]; then
       if (entry == "") return
       if (!has_sig) { printf("synonyms.md entry \"%s\" missing **Functional signature:**\n", entry); bad=1 }
       if (alts < 3) { printf("synonyms.md entry \"%s\" has alt count %d (need >=3)\n", entry, alts); bad=1 }
-      if (sigs < 3) { printf("synonyms.md entry \"%s\" has detection-signal categories %d (need >=3)\n", entry, sigs); bad=1 }
+      if (sigs < 4) { printf("synonyms.md entry \"%s\" has detection-signal categories %d (need >=4)\n", entry, sigs); bad=1 }
+      if (!has_concept) { printf("synonyms.md entry \"%s\" missing conceptual-equivalence signal\n", entry); bad=1 }
     }
     /^### / {
       flush()
-      entry = substr($0, 5); alts=0; sigs=0; in_sig=0; has_sig=0; next
+      entry = substr($0, 5); alts=0; sigs=0; in_sig=0; has_sig=0; has_concept=0; next
     }
     /\*\*Functional signature:\*\*/ { has_sig=1; in_sig=0; next }
     /\*\*Alternative names:\*\*/ {
@@ -246,7 +251,11 @@ if [[ -f references/synonyms.md ]]; then
       n=split(line, a, /,/); alts=n; in_sig=0; next
     }
     /\*\*Detection signals:\*\*/ { in_sig=1; next }
-    in_sig && /^[[:space:]]+-/ { sigs++; next }
+    in_sig && /^[[:space:]]+-/ {
+      sigs++;
+      if ($0 ~ /Conceptual equivalents:/) has_concept=1
+      next
+    }
     /^## / { flush(); entry=""; in_sig=0 }
     END { flush(); exit bad }
   ' references/synonyms.md || fail=1
