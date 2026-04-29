@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 # Validate the exact set of skills, their frontmatter shape, word budgets,
-# the rosetta hard-rule sentinel in assess + review, and forbid external
+# the synonym hard-rule sentinel in assess + review, and forbid external
 # plugin chains in skill bodies.
 set -euo pipefail
 fail=0
 
 GATE_BUDGET=200
 SIB_BUDGET=500
-EXPECTED_SET="assessing-amm-level designing-enterprise-agent implementing-amm-patterns reviewing-enterprise-agent using-agentic-maturity-model"
-ROSETTA_SENTINEL="recorded rosetta-driven search"
+EXPECTED_SET="amm amm-assess amm-design amm-implement amm-review"
+SYNONYM_SENTINEL="recorded synonym-guided search"
 
 if [[ ! -d skills ]]; then echo "skills/ missing"; exit 1; fi
 
@@ -53,15 +53,15 @@ for d in skills/*/; do
   body=$(awk 'BEGIN{c=0} /^---$/{c++; next} c>=2{print}' "$f")
   words=$(printf '%s' "$body" | wc -w)
   budget=$SIB_BUDGET
-  [[ "$name" == "using-agentic-maturity-model" ]] && budget=$GATE_BUDGET
+  [[ "$name" == "amm" ]] && budget=$GATE_BUDGET
   if [[ $words -gt $budget ]]; then
     echo "WORD COUNT $words > $budget: $f"; fail=1
   fi
 
-  # Sentinel check: assess + review skills must contain the rosetta hard-rule.
-  if [[ "$name" == "assessing-amm-level" || "$name" == "reviewing-enterprise-agent" ]]; then
-    if ! grep -qF "$ROSETTA_SENTINEL" "$f"; then
-      echo "SENTINEL MISSING ('$ROSETTA_SENTINEL') in $f"; fail=1
+  # Sentinel check: assess + review skills must contain the synonym hard-rule.
+  if [[ "$name" == "amm-assess" || "$name" == "amm-review" ]]; then
+    if ! grep -qF "$SYNONYM_SENTINEL" "$f"; then
+      echo "SENTINEL MISSING ('$SYNONYM_SENTINEL') in $f"; fail=1
     fi
   fi
 

@@ -30,21 +30,21 @@ installed in the host tool.
 | `references/amm-levels.md` | Canon of the 10 AMM levels (one H2 per level). |
 | `references/controls.md` | Canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
 | `references/patterns.md` | Source-aligned pattern catalogue per AMM level (one section per L1–L10; every pattern ID from `../agentic-maturity-model/blueprints/README.md` has functional signature, controls activated, and test asserts). |
-| `references/rosetta.md` | Naming-agnostic recognition guide; one entry per control category and per pattern entry. |
+| `references/synonyms.md` | Synonym and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
-| `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink into `~/.agents/skills/`). |
+| `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
 | `.codex-plugin/plugin.json` | Codex App marketplace manifest, with full `interface` block. |
 | `.cursor-plugin/plugin.json` | Cursor plugin manifest. |
 | `.opencode/INSTALL.md` + `.opencode/plugins/agentic-maturity-model-skills.js` | OpenCode install instructions + minimal plugin (registers the bundled `skills/` via the `config` hook). |
 | `gemini-extension.json` | Gemini CLI extension manifest (`contextFileName: "GEMINI.md"`). |
 | `package.json` | npm metadata, ESM (`type: "module"`), `main` points at the OpenCode plugin. |
-| `CLAUDE.md`, `GEMINI.md` | Compact host-context entrypoints. Identical content modulo H1. |
+| `GEMINI.md` | Compact Gemini CLI host-context entrypoint. |
 | `AGENTS.md` | This file. Operational rules for AI coding agents working in this repo. |
 | `README.md` | Per-tool install matrix, refresh table, contributing pointers. |
 | `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
-| `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, rosetta-rule sentinel in assess+review, no external plugin chains. |
-| `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, rosetta cross-check against patterns.md. |
+| `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, synonym-rule sentinel in assess+review, no external plugin chains. |
+| `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, synonym cross-check against patterns.md. |
 | `tests/no-external-fetch.test.sh` | Forbids fetch instructions in skills, refs, scripts, README, host-context files, install docs (allowlist for documented install URLs only). |
 | `tests/smoke/<tool>.sh` | Per-tool artifact-sanity scripts. Skip-with-message when the tool isn't installed. |
 | `internal/` | Gitignored. Design memos, sourcing notes, manual verification checklist, codex-review outputs. Not part of the public surface. |
@@ -52,10 +52,9 @@ installed in the host tool.
 
 ## Skills
 
-- The set of skills under `skills/` is exactly `{using-agentic-maturity-model,
-  assessing-amm-level, designing-enterprise-agent,
-  implementing-amm-patterns, reviewing-enterprise-agent}`. Adding,
-  renaming, or removing a skill is a deliberate scope change.
+- The set of skills under `skills/` is exactly `{amm, amm-assess,
+  amm-design, amm-implement, amm-review}`. Adding, renaming, or
+  removing a skill is a deliberate scope change.
 - Frontmatter has two required fields: `name` (matches the directory)
   and `description` (starts with "Use when…", trigger-only, no workflow
   summary, no first-person, no process steps). Total frontmatter ≤1024
@@ -68,13 +67,13 @@ installed in the host tool.
   `superpowers:<skill-name>` references, no `<plugin>:<skill>` form
   anywhere in skill bodies.
 - Inside this plugin, skills do NOT chain to each other. The gateway
-  (`using-agentic-maturity-model`) announces a sibling skill in the literal
+  (`amm`) announces a sibling skill in the literal
   form ``Using `<sibling-skill>` to <purpose>``; the host's native skill
   resolution loads the sibling. Use bare skill directory names in the
   gateway's routing table.
-- Recognition-across-naming is a hard rule for the assess and review
+- Synonym-aware matching is a hard rule for the assess and review
   skills. Their bodies MUST contain the literal sentinel
-  `recorded rosetta-driven search`. A finding marked "missing" / "not
+  `recorded synonym-guided search`. A finding marked "missing" / "not
   satisfied" without a list of detection signals searched and locations
   is invalid output.
 - Skills carry their own output templates inline (assessment report
@@ -97,7 +96,7 @@ installed in the host tool.
   appears as a `### <pattern-id>` entry with `**Functional signature:**`,
   `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
   substrate patterns; do not reintroduce `no v0 pattern family`.
-- `references/rosetta.md` has `## Controls` and `## Patterns` sections.
+- `references/synonyms.md` has `## Controls` and `## Patterns` sections.
   Every control (nine) and every pattern entry gets a
   `### <Canonical Name or pattern-id>` entry with `**Functional signature:**`,
   `**Alternative names:**` (≥3), and `**Detection signals:**` with at
@@ -115,8 +114,8 @@ installed in the host tool.
   `defaultPrompt`, `brandColor`). `capabilities` includes `Interactive`,
   `Read`, `Write` because the implementation skill guides write
   changes; do not under-declare.
-- The Codex CLI is served by `.codex/INSTALL.md` (manual symlink into
-  `~/.agents/skills/`), not by the App manifest.
+- The Codex CLI is served by `.codex/INSTALL.md` (manual symlinks into
+  `$CODEX_HOME/skills`), not by the App manifest.
 - `package.json` MUST have `"type": "module"` and
   `"main": ".opencode/plugins/agentic-maturity-model-skills.js"`. The
   OpenCode plugin file MUST export a named async plugin function
@@ -169,9 +168,9 @@ installed in the host tool.
   causes Claude to follow the description instead of the body, per
   upstream skills documentation we have learned from). Triggering
   conditions only.
-- Context entrypoints (`CLAUDE.md`, `GEMINI.md`) inline the
-  recognition-across-naming rule because `docs/` and `internal/` are
-  gitignored and not shipped — do not reference paths users won't have.
+- Context entrypoints inline the synonym-aware matching rule because
+  `docs/` and `internal/` are gitignored and not shipped — do not
+  reference paths users won't have.
 - The default tone in skills, README, and context files is plain,
   technical, and direct. No marketing voice. No emojis unless asked.
 - Commands in install instructions must be verified to work.

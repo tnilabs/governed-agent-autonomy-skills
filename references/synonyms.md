@@ -3,7 +3,7 @@ canon_version: 1.1.0
 last_reviewed: 2026-04-29
 ---
 
-# Rosetta - Naming-Agnostic Recognition
+# Synonyms and Detection Signals
 
 Assess and review skills consult this file before claiming a control or
 pattern is missing. Controls and patterns are functional categories, not

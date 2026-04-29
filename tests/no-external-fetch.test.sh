@@ -61,7 +61,6 @@ scan_dir() {
 scan_dir skills
 scan_dir references
 scan_dir scripts
-scan_file CLAUDE.md
 scan_file AGENTS.md
 scan_file GEMINI.md
 scan_file README.md

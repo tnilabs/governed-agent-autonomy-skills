@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Verify reference content shape: frontmatter, level/control coverage,
-# pattern coverage, rosetta entry shape, and skill→ref cross-links.
+# pattern coverage, synonym entry shape, and skill→ref cross-links.
 set -euo pipefail
 fail=0
 
@@ -84,7 +84,7 @@ fi
 
 # 2. Reference frontmatter check — fields must appear inside the first
 #    `---`-delimited frontmatter block, not anywhere in the file body.
-for f in references/amm-levels.md references/controls.md references/patterns.md references/rosetta.md; do
+for f in references/amm-levels.md references/controls.md references/patterns.md references/synonyms.md; do
   if [[ ! -f "$f" ]]; then echo "MISSING: $f"; fail=1; continue; fi
   fm=$(awk 'BEGIN{c=0} /^---$/{c++; if (c==2) exit; next} c==1{print}' "$f")
   if ! printf '%s\n' "$fm" | grep -q '^canon_version:'; then
@@ -195,31 +195,31 @@ if [[ -f references/patterns.md ]]; then
   done
 fi
 
-# 6. rosetta.md: ## Controls + ## Patterns; every control covered;
+# 6. synonyms.md: ## Controls + ## Patterns; every control covered;
 # every pattern entry from patterns.md covered; every entry has
 # Functional signature, >=3 alt names, >=3 detection-signal categories.
-if [[ -f references/rosetta.md ]]; then
+if [[ -f references/synonyms.md ]]; then
   for s in Controls Patterns; do
-    if ! grep -q "^## $s$" references/rosetta.md; then
-      echo "rosetta.md missing top-level section '## $s'"; fail=1
+    if ! grep -q "^## $s$" references/synonyms.md; then
+      echo "synonyms.md missing top-level section '## $s'"; fail=1
     fi
   done
   for c in "${CONTROL_NAMES[@]}"; do
-    if ! grep -qxF "### $c" references/rosetta.md; then
-      echo "rosetta.md missing entry: '### $c'"; fail=1
+    if ! grep -qxF "### $c" references/synonyms.md; then
+      echo "synonyms.md missing entry: '### $c'"; fail=1
     fi
   done
   for fam in "${PATTERN_ENTRY_NAMES[@]}"; do
-    if ! grep -qxF "### $fam" references/rosetta.md; then
-      echo "rosetta.md missing pattern entry for '$fam'"; fail=1
+    if ! grep -qxF "### $fam" references/synonyms.md; then
+      echo "synonyms.md missing pattern entry for '$fam'"; fail=1
     fi
   done
   awk '
     function flush() {
       if (entry == "") return
-      if (!has_sig) { printf("rosetta.md entry \"%s\" missing **Functional signature:**\n", entry); bad=1 }
-      if (alts < 3) { printf("rosetta.md entry \"%s\" has alt count %d (need >=3)\n", entry, alts); bad=1 }
-      if (sigs < 3) { printf("rosetta.md entry \"%s\" has detection-signal categories %d (need >=3)\n", entry, sigs); bad=1 }
+      if (!has_sig) { printf("synonyms.md entry \"%s\" missing **Functional signature:**\n", entry); bad=1 }
+      if (alts < 3) { printf("synonyms.md entry \"%s\" has alt count %d (need >=3)\n", entry, alts); bad=1 }
+      if (sigs < 3) { printf("synonyms.md entry \"%s\" has detection-signal categories %d (need >=3)\n", entry, sigs); bad=1 }
     }
     /^### / {
       flush()
@@ -234,7 +234,7 @@ if [[ -f references/rosetta.md ]]; then
     in_sig && /^[[:space:]]+-/ { sigs++; next }
     /^## / { flush(); entry=""; in_sig=0 }
     END { flush(); exit bad }
-  ' references/rosetta.md || fail=1
+  ' references/synonyms.md || fail=1
 fi
 
 [[ $fail -eq 0 ]] && echo "refs.test.sh: OK"

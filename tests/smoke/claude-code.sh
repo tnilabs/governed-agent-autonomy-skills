@@ -10,7 +10,7 @@ fi
 fail=0
 [[ -f .claude-plugin/marketplace.json ]] || { echo "claude-code.sh: marketplace.json missing"; fail=1; }
 [[ -f .claude-plugin/plugin.json ]] || { echo "claude-code.sh: plugin.json missing"; fail=1; }
-[[ -f skills/using-agentic-maturity-model/SKILL.md ]] || { echo "claude-code.sh: gateway SKILL.md missing"; fail=1; }
+[[ -f skills/amm/SKILL.md ]] || { echo "claude-code.sh: gateway SKILL.md missing"; fail=1; }
 if [[ -f .claude-plugin/plugin.json ]]; then
   jq empty .claude-plugin/plugin.json || { echo "claude-code.sh: plugin.json invalid JSON"; fail=1; }
 fi

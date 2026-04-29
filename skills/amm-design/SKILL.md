@@ -1,5 +1,5 @@
 ---
-name: designing-enterprise-agent
+name: amm-design
 description: Use when the task is to design a new enterprise agent, scope an AI agent product to an AMM target level, or turn an idea into a control-aware agent specification
 ---
 
@@ -9,7 +9,7 @@ Turn an idea into an AMM-scoped design brief. The brief commits to a target leve
 
 ## Inputs
 
-`references/amm-levels.md`, `references/controls.md`, `references/patterns.md`, `references/rosetta.md`. Cite their `canon_version` in the brief.
+Load the shared reference files from the plugin root's `references/` directory (`../../references/` from this file in the source tree): `amm-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the brief.
 
 ## Process
 
@@ -34,7 +34,7 @@ Turn an idea into an AMM-scoped design brief. The brief commits to a target leve
 ```yaml
 amm:
   target_level: L<n>
-  canon_versions: { amm_levels: <x>, controls: <x>, patterns: <x>, rosetta: <x> }
+  canon_versions: { amm_levels: <x>, controls: <x>, patterns: <x>, synonyms: <x> }
 scenario: <one-sentence problem>
 schemas: [<schema names>]
 controls:
