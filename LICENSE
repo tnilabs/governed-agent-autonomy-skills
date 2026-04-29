@@ -1,0 +1,15 @@
+Split Project License
+
+Copyright (c) 2026 TNI Labs
+
+This repository uses split licensing.
+
+Apache License 2.0 (SPDX: Apache-2.0) applies to source code, scripts, package metadata, plugin manifests, tests, and other executable or machine-readable integration files.
+
+Creative Commons Attribution 4.0 International (SPDX: CC-BY-4.0) applies to documentation, AMM skill bodies, bundled AMM references, README/install prose, and other explanatory AMM material.
+
+When a file contains an explicit SPDX-License-Identifier, that identifier controls.
+
+Apache License 2.0: https://www.apache.org/licenses/LICENSE-2.0
+CC BY 4.0 deed: https://creativecommons.org/licenses/by/4.0/
+CC BY 4.0 legal code: https://creativecommons.org/licenses/by/4.0/legalcode
