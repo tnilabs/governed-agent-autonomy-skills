@@ -15,19 +15,21 @@ Evidence-first classification. The lowest level whose exit criteria are unmet se
 
 1. For each level L1→L10: read its exit criteria and the controls activated at that level (from the matrix in `references/controls.md`).
 2. For each control AND each pattern family at the level: resolve to its functional signature via `references/rosetta.md` and search the user's codebase by detection signals (file/dir patterns, dep names, log keywords, schema fields).
-3. Record every search performed (what was looked for, where, what was found) — even when the answer is "found".
-4. Classify: observed level = max L such that all criteria for L1..L are satisfied.
-5. Produce the report using the **Output template** below.
+3. For each AMM exit criterion that is not a control or pattern family: search for the named artifact under any local name (docs, configs, tests, schemas, telemetry, evidence outputs).
+4. Record every search performed (what was looked for, where, what was found) — even when the answer is "found".
+5. Classify: observed level = max L such that all criteria for L1..L are satisfied.
+6. Produce the report using the **Output template** below.
 
 ## Hard rules
 
-- **No control, pattern, or AMM exit criterion may be marked absent without a recorded rosetta-driven search** (≥3 detection signals checked, locations recorded).
+- **No control or pattern may be marked absent without a recorded rosetta-driven search** (≥3 detection signals checked, locations recorded).
+- **No pure AMM exit criterion may be marked absent without a recorded artifact search** (artifact sought, aliases checked, locations and result recorded).
 - Self-claim is not evidence. Framework name is not evidence. Vocabulary match is not evidence. Vocabulary mismatch is not absence.
 
 ## Forbidden shortcuts
 
 - "They use LangGraph so they're at L8" — framework ≠ exit criteria.
-- "I don't see `evidence_pack`" — search via rosetta first.
+- "I don't see `evidence_pack`" — search via the applicable rosetta or artifact rule first.
 - "Codebase is too big, I'll sample" — say so in the report; don't classify on sampling alone.
 - "They told me L7" — verify against artifacts.
 
@@ -47,7 +49,7 @@ Evidence-first classification. The lowest level whose exit criteria are unmet se
 
 ## Evidence per level
 ### L<n> — <name>
-- Exit criterion: <text>; verdict: satisfied | partial | missing; signals searched: <list>; locations: <files>
+- Exit criterion: <text>; verdict: satisfied | partial | missing; signals/artifacts searched: <list>; locations: <files>
 
 ## Blockers to next level
 - <criterion> — <what's missing> — <suggested smallest fix>
@@ -58,4 +60,4 @@ Evidence-first classification. The lowest level whose exit criteria are unmet se
 
 ## Inline gate
 
-Before declaring the assessment complete, re-check that every "missing"/"not satisfied" finding has its searched signals + locations recorded. If any is missing, re-do the search and update the report.
+Before declaring the assessment complete, re-check that every "missing"/"not satisfied" finding has the applicable recorded rosetta-driven search or recorded artifact search. If any is missing, re-do the search and update the report.
