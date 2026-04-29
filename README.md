@@ -16,14 +16,12 @@ The source implementation and full blueprint catalogue live in [`tnilabs/agentic
 
 ## Install — per tool
 
-### Claude Code (local marketplace)
+### Claude Code (GitHub marketplace)
 
 ```text
-/plugin marketplace add ./
-/plugin install agentic-maturity-model-skills@agentic-maturity-model-skills-dev
+/plugin marketplace add tnilabs/agentic-maturity-model-skills
+/plugin install agentic-maturity-model-skills@agentic-maturity-model-skills
 ```
-
-(Published-marketplace install is out of scope for v1; see "Updating / refreshing" for the release model.)
 
 ### Codex CLI / Codex App (manual symlink)
 
@@ -69,7 +67,7 @@ gemini extensions install https://github.com/tnilabs/agentic-maturity-model-skil
 
 ```bash
 copilot plugin marketplace add tnilabs/agentic-maturity-model-skills
-copilot plugin install agentic-maturity-model-skills@agentic-maturity-model-skills-dev
+copilot plugin install agentic-maturity-model-skills@agentic-maturity-model-skills
 ```
 
 ### Generic / manual install
@@ -100,13 +98,13 @@ Mention an AMM-related task — assess, design, implement, or review. The host's
 
 | Tool         | Update command                                                                                              |
 |--------------|-------------------------------------------------------------------------------------------------------------|
-| Claude Code  | `/plugin marketplace update agentic-maturity-model-skills-dev` then `/plugin reinstall agentic-maturity-model-skills` |
+| Claude Code  | `/plugin marketplace update agentic-maturity-model-skills` then `/plugin reinstall agentic-maturity-model-skills` |
 | Codex CLI    | `cd ~/.codex/agentic-maturity-model-skills && git pull` (skills update through the symlink), then restart Codex |
 | Codex App    | same as Codex CLI — `cd ~/.codex/agentic-maturity-model-skills && git pull`, then restart Codex App             |
 | Cursor       | `cd ~/.cursor/agentic-maturity-model-skills-src && git pull`, then reload Cursor (Cmd+Shift+P → "Developer: Reload Window") |
 | OpenCode     | restart OpenCode (it re-pulls the configured plugin source); to pin, change the `#vX.Y.Z` suffix in `opencode.json` and restart |
 | Gemini CLI   | `gemini extensions update agentic-maturity-model-skills`                                                        |
-| Copilot CLI  | `copilot plugin update agentic-maturity-model-skills@agentic-maturity-model-skills-dev`                             |
+| Copilot CLI  | `copilot plugin update agentic-maturity-model-skills@agentic-maturity-model-skills`                                 |
 
 ## Contributing
 

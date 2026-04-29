@@ -1,6 +1,6 @@
 {
-  "name": "agentic-maturity-model-skills-dev",
-  "description": "Local-development marketplace for agentic-maturity-model-skills.",
+  "name": "agentic-maturity-model-skills",
+  "description": "Marketplace for agentic-maturity-model-skills.",
   "owner": {
     "name": "TNI Labs"
   },
@@ -14,5 +14,6 @@
         "name": "TNI Labs"
       }
     }
-  ]
+  ],
+  "license": "Apache-2.0 AND CC-BY-4.0"
 }
