@@ -1,5 +1,5 @@
 ---
-canon_version: 1.3.0
+canon_version: 1.3.1
 last_reviewed: 2026-04-30
 ---
 
@@ -124,11 +124,11 @@ mapping is equivalent or not.
 
 ### L1-baseline-failure-cataloguing
 
-- **Functional signature:** typed baseline failure catalogue with manual cost/risk/adversarial tags - produces comparable L1 evidence - prevents unfalsifiable improvement claims.
+- **Functional signature:** typed baseline work-item failure catalogue with manual cost/risk/adversarial tags - produces comparable L1 evidence - prevents unfalsifiable improvement claims.
 - **Alternative names:** baseline catalog, failure inventory, current-state measurement, unmanaged prompt baseline, manual-work baseline
 - **Detection signals:**
   - Files/dirs: `baseline_cases/`, `level_01/`, `prompts/`, `baseline-report`
-  - Schemas/deps: baseline case fixtures, risk labels, failure labels
+  - Schemas/deps: baseline work-item fixtures, risk labels, failure labels
   - Code/log shapes: `failure_category`, `manual_time`, `handoffs`, `adversarial_failure_modes`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
@@ -154,7 +154,7 @@ mapping is equivalent or not.
 
 ### L3-knowledge-coverage-map
 
-- **Functional signature:** knowledge docs map to cases, failures, stages, and policies - produces coverage evidence - prevents irrelevant or incomplete corpora.
+- **Functional signature:** knowledge docs map to work items, failures, stages, and policies - produces coverage evidence - prevents irrelevant or incomplete corpora.
 - **Alternative names:** coverage map, knowledge matrix, evidence coverage, corpus mapping, policy-evidence map
 - **Detection signals:**
   - Files/dirs: `knowledge-coverage`, `knowledge_base/`, `knowledge-index`, `level_03/evals`
@@ -204,11 +204,11 @@ mapping is equivalent or not.
 
 ### L4-customer-safe-output-check
 
-- **Functional signature:** customer drafts pass typed leak/safety checks before review - produces validation records - prevents sensitive/internal text leakage.
-- **Alternative names:** customer safety check, leak checker, output guard, response validator, customer-visible gate
+- **Functional signature:** external-facing drafts pass typed leak/safety checks before review - produces validation records - prevents sensitive/internal text leakage.
+- **Alternative names:** external-output safety check, leak checker, output guard, response validator, external-facing gate
 - **Detection signals:**
   - Files/dirs: `data/`, `validation`, `customer_safe`, `assistant_output`
-  - Schemas/deps: validation report, leak terms, customer response schema
+  - Schemas/deps: validation report, leak terms, external response schema
   - Code/log shapes: `ValidationReport`, `customer_visible`, `leak_terms`, `blocks_acceptance`, `internal_marker`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
@@ -344,8 +344,8 @@ mapping is equivalent or not.
 
 ### L6-customer-safety-block-gate
 
-- **Functional signature:** customer-visible writes run safety gate before approval resolution - produces block gate status - prevents approved unsafe customer text.
-- **Alternative names:** customer write safety, safety block, leak block gate, customer-visible gate, write output guard
+- **Functional signature:** external-facing writes run safety gate before approval resolution - produces block gate status - prevents approved unsafe recipient-facing text.
+- **Alternative names:** external write safety, safety block, leak block gate, external-facing gate, write output guard
 - **Detection signals:**
   - Files/dirs: `customer_safety`, `data`, `level_06`, `approval_gate`
   - Schemas/deps: validation reports, data governance checks, approval records
@@ -434,7 +434,7 @@ mapping is equivalent or not.
 
 ### L9-global-pause-and-dead-letter
 
-- **Functional signature:** global pause halts autonomous workers and dead-letters work for replay - produces pause/DLQ records - prevents ignored kill switches and lost cases.
+- **Functional signature:** global pause halts autonomous workers and dead-letters work for replay - produces pause/DLQ records - prevents ignored kill switches and lost work.
 - **Alternative names:** global pause, kill switch, dead letter queue, autonomous halt, pause flag
 - **Detection signals:**
   - Files/dirs: `global_pause`, `dead_letter`, `policy/queue`, `level_09/examples`

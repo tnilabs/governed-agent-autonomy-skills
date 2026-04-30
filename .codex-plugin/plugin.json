@@ -1,6 +1,6 @@
 {
   "name": "agentic-maturity-model-skills",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review. Self-contained.",
   "author": {
     "name": "TNI Labs",

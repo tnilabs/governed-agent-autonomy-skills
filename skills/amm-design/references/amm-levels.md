@@ -1,15 +1,15 @@
 ---
-canon_version: 1.3.0
+canon_version: 1.3.1
 last_reviewed: 2026-04-30
 ---
 
 # Agentic Maturity Model - Levels
 
 Ten capability levels for production-grade AI agents, aligned to the source
-AMM implementation and support-operations scenario. Each level adds one
-capability boundary and carries forward the same scenario, fixtures, contracts,
-controls, and lessons. Level claims are made on evidence: artifacts, controls,
-tests, telemetry, and replayable records.
+AMM implementation. Each level adds one capability boundary and carries
+forward comparable work, fixtures, contracts, controls, and lessons. Level
+claims are made on evidence: artifacts, controls, tests, telemetry, and
+replayable records.
 
 Level descriptions, exit criteria, and record/schema names are semantic
 anchors, not required strings. A system can satisfy a requirement through
@@ -23,7 +23,7 @@ People may paste work into generic LLMs, but there is no governed assistant,
 tool access, approval, audit, or policy gate.
 
 **Exit criteria.**
-- Baseline cases record manual time, sources checked, handoffs, outcomes,
+- Baseline work items record manual time, sources checked, handoffs, outcomes,
   failures, risks, and unmanaged prompt examples.
 - Failure categories are typed enough for later levels to map, measure, and
   close them.
@@ -46,7 +46,7 @@ and threat-model surfaces.
 - Every L1 failure maps to the stage or policy intended to catch it.
 - A typed threat model names later agent attack surfaces, actors,
   motivations, mitigations, and out-of-scope boundaries.
-- Humans have run the documented workflow on representative cases.
+- Humans have run the documented workflow on representative work items.
 
 **Common confusion.** L2 is still not automated. It is the explicit substrate
 that later knowledge, prompts, tools, approvals, and agents inherit.
@@ -60,7 +60,7 @@ evals, candidate eval promotion, and provenance attestation.
 **Exit criteria.**
 - Every retrievable document has stable evidence ID, owner, source type,
   sensitivity label, review status, and provenance status.
-- Coverage links tie evidence IDs back to baseline cases, failure labels,
+- Coverage links tie evidence IDs back to baseline work items, failure labels,
   workflow stages, and policies.
 - Golden retrieval evals prove required evidence is retrievable for
   representative questions.
@@ -69,7 +69,7 @@ evals, candidate eval promotion, and provenance attestation.
 - Retrieval results preserve classification and provenance metadata.
 
 **Common confusion.** L3 is not a governed assistant and does not answer
-cases. It builds the retrieval contract L4 consumes.
+work items. It builds the retrieval contract L4 consumes.
 
 ## L4 - Human-guided assistance
 
@@ -78,18 +78,18 @@ artifacts from cited evidence and stops at human review. No send action, tool
 writes, approval authority, memory, or autonomous closure is allowed.
 
 **Exit criteria.**
-- Per case, the assistant produces triage, customer-safe response draft,
-  internal note, validation checklist, and run record.
+- Per work item, the assistant produces intake or routing, stakeholder-safe
+  response draft, internal note, validation checklist, and run record.
 - Every output records `pending_review`; side effects remain disabled.
-- Prompt context uses explicit trust frames for system, customer, retrieved
+- Prompt context uses explicit trust frames for system, external input, retrieved
   evidence, and tool output.
-- Customer-visible output passes a typed safety/leak check before acceptance.
+- External-facing output passes a typed safety/leak check before acceptance.
 - Adversarial input and retrieved-evidence matches produce
   `InjectionDetection` records and lower-trust framing.
 
 **Common confusion.** L4 is an assistant, not an agent that decides or
-publishes. If customer output ships without human review, the system is not
-L4-compliant.
+publishes. If external-facing output ships without human review, the system is
+not L4-compliant.
 
 ## L5 - Read-only tools
 
@@ -115,10 +115,10 @@ The runtime refuses write-capable manifests at this level.
 
 ## L6 - Approved write actions
 
-**Intent.** One specific pre-approved write per case may execute. The model
+**Intent.** One specific pre-approved write per work item may execute. The model
 recommends; the runtime assembles the executable action, verifies approval
 binding, issues a one-shot lease, enforces idempotency, records rollback
-metadata, and blocks unsafe customer-visible writes.
+metadata, and blocks unsafe external-facing writes.
 
 **Exit criteria.**
 - Runtime-owned action assembly determines `tool_id` and arguments from typed
@@ -130,7 +130,7 @@ metadata, and blocks unsafe customer-visible writes.
 - Signature verification runs before binding checks where signed approvals
   are configured.
 - Replays return the prior `ToolAction` without mutating state again.
-- Customer-visible writes run the safety block before approval resolution.
+- External-facing writes run the safety block before approval resolution.
 
 **Common confusion.** L6 does not introduce unattended policy autonomy. The
 gate checks durable approval and exact binding; L9 is where policy replaces
@@ -139,7 +139,7 @@ routine human approval.
 ## L7 - Goal-directed execution
 
 **Intent.** One producing agent owns end-to-end completion of one eligible
-case package within a signed goal. The model loop proposes next steps; the
+work package within a signed goal. The model loop proposes next steps; the
 runtime decides allowed actions, completion, stop reasons, escalation, budget,
 and memory validity.
 
@@ -195,7 +195,7 @@ bound the autonomy.
 - High-risk, ambiguous, or policy-sensitive work escalates with evidence.
 - Global pause is human-operated; workers read it during execution and halt
   within a bounded window.
-- Dead-lettered cases remain inspectable, replayable, and tenant-isolated.
+- Dead-lettered work remains inspectable, replayable, and tenant-isolated.
 - SLO, cost, retry, and latency budgets are tracked and enforced.
 - Dynamic credential revocation is honored before write boundaries.
 - Adversarial corpus freshness and threat-class coverage are startup gates.

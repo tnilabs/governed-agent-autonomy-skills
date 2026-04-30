@@ -119,7 +119,7 @@ use skill tool to load agentic-maturity-model-skills/amm
 ```markdown
 # AMM Assessment
 
-- Canon versions: amm-levels v1.3.0, controls v1.3.0, patterns v1.3.0, synonyms v1.3.0
+- Canon versions: amm-levels v1.3.1, controls v1.3.1, patterns v1.3.1, synonyms v1.3.1
 - Claimed level: unstated
 - Observed level: L2
 - Confidence: medium - workflow artifacts exist, but no L3 retrieval evidence was found
@@ -131,7 +131,7 @@ use skill tool to load agentic-maturity-model-skills/amm
 
 ## Evidence per level
 ### L1 - Unstructured AI use
-- Exit criterion: baseline cases recorded; verdict: satisfied; locations: docs/baseline.md
+- Exit criterion: baseline work items recorded; verdict: satisfied; locations: docs/baseline.md
 
 ### L2 - Process definition
 - Exit criterion: workflow stages have owners and policies; verdict: satisfied; locations: process/workflow.yaml

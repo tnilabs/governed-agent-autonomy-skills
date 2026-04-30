@@ -1,5 +1,5 @@
 ---
-canon_version: 1.3.0
+canon_version: 1.3.1
 last_reviewed: 2026-04-30
 ---
 
@@ -24,7 +24,7 @@ forward.
 
 ### L1-baseline-failure-cataloguing
 
-- **Functional signature:** typed failure catalogue for current unmanaged work - produces baseline cases with manual cost, handoff, risk, failure, and adversarial tags - prevents later levels from claiming improvement against a cherry-picked or undefined baseline
+- **Functional signature:** typed failure catalogue for current unmanaged work - produces baseline work items with manual cost, handoff, risk, failure, and adversarial tags - prevents later levels from claiming improvement against a cherry-picked or undefined baseline
 - **Controls activated:** None
 - **Test asserts:** baseline rows have typed failure categories, manual-cost fields, risk/adversarial tags, and stable IDs reused by later levels.
 
@@ -46,9 +46,9 @@ forward.
 
 ### L3-knowledge-coverage-map
 
-- **Functional signature:** coverage links from knowledge documents to cases, failure labels, workflow stages, and policies - produces an evidence-to-process map - prevents broad corpora that do not cover the actual work
+- **Functional signature:** coverage links from knowledge documents to work items, failure labels, workflow stages, and policies - produces an evidence-to-process map - prevents broad corpora that do not cover the actual work
 - **Controls activated:** Data Governance
-- **Test asserts:** every retrievable document maps to at least one case, failure, stage, or policy using typed IDs.
+- **Test asserts:** every retrievable document maps to at least one work item, failure, stage, or policy using typed IDs.
 
 ### L3-golden-retrieval-evals
 
@@ -72,19 +72,19 @@ forward.
 
 ### L4-provenance-framed-prompt-assembly
 
-- **Functional signature:** model context is assembled into explicit trust frames for system, customer, retrieved evidence, and tool output - produces stable provenance markers - prevents attacker-controlled text from being treated as instructions
+- **Functional signature:** model context is assembled into explicit trust frames for system, external input, retrieved evidence, and tool output - produces stable provenance markers - prevents attacker-controlled text from being treated as instructions
 - **Controls activated:** Adversarial Awareness, Data Governance, OpenTelemetry Mapping
-- **Test asserts:** customer and retrieved evidence appear only in lower-trust frames with verification metadata and a system trust-boundary directive.
+- **Test asserts:** external input and retrieved evidence appear only in lower-trust frames with verification metadata and a system trust-boundary directive.
 
 ### L4-customer-safe-output-check
 
-- **Functional signature:** typed leak/safety check runs on customer-visible drafts before review - produces validation records - prevents internal markers, evidence IDs, or sensitive fields from reaching customers
+- **Functional signature:** typed leak/safety check runs on external-facing drafts before review - produces validation records - prevents internal markers, evidence IDs, or sensitive fields from reaching recipients
 - **Controls activated:** Data Governance, Compliance Evidence Pack
-- **Test asserts:** customer-facing drafts with leak terms fail acceptance rather than producing warnings.
+- **Test asserts:** external-facing drafts with leak terms fail acceptance rather than producing warnings.
 
 ### L4-adversarial-input-labeling
 
-- **Functional signature:** pattern-library matches on hostile customer text or retrieved evidence are labeled as `InjectionDetection` records, not silently blocked - produces lower-trust framing decisions - prevents instruction override from entering model context as authority
+- **Functional signature:** pattern-library matches on hostile external input or retrieved evidence are labeled as `InjectionDetection` records, not silently blocked - produces lower-trust framing decisions - prevents instruction override from entering model context as authority
 - **Controls activated:** Adversarial Awareness, OpenTelemetry Mapping
 - **Test asserts:** matches produce typed detection records with source frame, pattern, action=`label`, and versioned detector metadata.
 
@@ -166,9 +166,9 @@ forward.
 
 ### L6-customer-safety-block-gate
 
-- **Functional signature:** customer-visible writes run the L4 safety check before approval resolution - produces first-class block gate status - prevents approved writes from leaking unsafe customer text
+- **Functional signature:** external-facing writes run the L4 safety check before approval resolution - produces first-class block gate status - prevents approved writes from leaking unsafe recipient-facing text
 - **Controls activated:** Data Governance, Compliance Evidence Pack, Incident Response
-- **Test asserts:** unsafe customer-visible writes short-circuit to `customer_safety_block` regardless of approval validity.
+- **Test asserts:** unsafe external-facing writes short-circuit to `customer_safety_block` regardless of approval validity.
 
 ## L7 - Goal-directed execution
 
@@ -222,13 +222,13 @@ forward.
 
 - **Functional signature:** autonomous workers run only when signed eligibility schema allows every criterion and ineligible work auto-escalates - produces eligibility decisions - prevents agents from choosing their own autonomy boundary
 - **Controls activated:** Agent Control Tower, Credential and Delegated Access, Protocol Conformance, Value and Cost Management, Compliance Evidence Pack
-- **Test asserts:** eligibility is typed/signed, every allow criterion must pass, and ineligible cases escalate with evidence.
+- **Test asserts:** eligibility is typed/signed, every allow criterion must pass, and ineligible work items escalate with evidence.
 
 ### L9-global-pause-and-dead-letter
 
-- **Functional signature:** human-operated global pause halts autonomous workers and dead-letters cases for replay - produces pause audit and dead-letter records - prevents ignored kill switches and lost autonomous work
+- **Functional signature:** human-operated global pause halts autonomous workers and dead-letters work for replay - produces pause audit and dead-letter records - prevents ignored kill switches and lost autonomous work
 - **Controls activated:** Incident Response, Agent Control Tower, Data Governance, OpenTelemetry Mapping, Compliance Evidence Pack
-- **Test asserts:** paused workers stop within a bounded window and dead-lettered cases remain inspectable with tenant isolation.
+- **Test asserts:** paused workers stop within a bounded window and dead-lettered work remains inspectable with tenant isolation.
 
 ### L9-continuous-adversarial-eval-corpus
 

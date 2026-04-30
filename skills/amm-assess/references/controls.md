@@ -1,5 +1,5 @@
 ---
-canon_version: 1.3.0
+canon_version: 1.3.1
 last_reviewed: 2026-04-30
 ---
 
@@ -39,7 +39,7 @@ infer from the heading order alone.
   input before it reaches the model; L9 makes the adversarial corpus
   load-bearing for autonomy.
 - **Evidence it produces:**
-  - `InjectionDetection` records for customer text, retrieved evidence, and
+  - `InjectionDetection` records for external input, retrieved evidence, and
     tool output.
   - Provenance-framed prompt markers and source verification status.
   - Signed approval, goal, agent-card, and release-gate verification results.
@@ -55,7 +55,7 @@ infer from the heading order alone.
 - **What it does:** Inventories agents, owners, versions, risk tiers,
   lifecycle state, runtime health, allowed scopes, allowed peers, pause
   state, revocations, and release lifecycle. It becomes load-bearing when
-  agents outlive one run and own case work.
+  agents outlive one run and own durable work.
 - **Evidence it produces:**
   - Goal, halt, resolution, and run records with agent identity.
   - Signed `AgentCard` registry entries and routing plans.
@@ -106,7 +106,7 @@ infer from the heading order alone.
 - **Evidence it produces:**
   - Knowledge-document classification, review status, sensitivity, coverage,
     and provenance attestation.
-  - Customer-safe output checks and leak-term validation results.
+  - External-output safety checks and leak-term validation results.
   - Redaction decisions on tool outputs, audit records, traces, and memory.
   - Memory-write validation and tenant-scoped dead-letter or counter records.
 - **Failure it prevents:** Restricted sources entering model context without
@@ -140,7 +140,7 @@ infer from the heading order alone.
   - Rollback plans, idempotent replay records, one-shot lease consumption,
     and write lifecycle records.
   - Durable orchestration checkpoints and typed halt/stop reasons.
-  - Global pause records, dead-lettered cases, revocation events, replay
+  - Global pause records, dead-lettered work, revocation events, replay
     artifacts, and postmortems.
   - Proposal and regression-test records for corrective changes.
 - **Failure it prevents:** Duplicate writes on retry, unrecoverable side
