@@ -1,5 +1,5 @@
 ---
-canon_version: 1.3.1
+canon_version: 1.3.2
 last_reviewed: 2026-04-30
 ---
 
@@ -199,7 +199,7 @@ mapping is equivalent or not.
 - **Detection signals:**
   - Files/dirs: `framing`, `prompt_assembly`, `adversarial`, `level_04`
   - Schemas/deps: provenance records, prompt providers, source metadata
-  - Code/log shapes: `[system]`, `[customer message]`, `[retrieved evidence`, `verified=`, `source_frame`
+  - Code/log shapes: `[system]`, `[external input]`, `[customer message]`, `[retrieved evidence`, `verified=`, `source_frame`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-customer-safe-output-check
@@ -207,9 +207,9 @@ mapping is equivalent or not.
 - **Functional signature:** external-facing drafts pass typed leak/safety checks before review - produces validation records - prevents sensitive/internal text leakage.
 - **Alternative names:** external-output safety check, leak checker, output guard, response validator, external-facing gate
 - **Detection signals:**
-  - Files/dirs: `data/`, `validation`, `customer_safe`, `assistant_output`
+  - Files/dirs: `data/`, `validation`, `external_output`, `customer_safe`, `assistant_output`
   - Schemas/deps: validation report, leak terms, external response schema
-  - Code/log shapes: `ValidationReport`, `customer_visible`, `leak_terms`, `blocks_acceptance`, `internal_marker`
+  - Code/log shapes: `ValidationReport`, `external_facing`, `customer_visible`, `leak_terms`, `blocks_acceptance`, `internal_marker`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-adversarial-input-labeling
@@ -347,9 +347,9 @@ mapping is equivalent or not.
 - **Functional signature:** external-facing writes run safety gate before approval resolution - produces block gate status - prevents approved unsafe recipient-facing text.
 - **Alternative names:** external write safety, safety block, leak block gate, external-facing gate, write output guard
 - **Detection signals:**
-  - Files/dirs: `customer_safety`, `data`, `level_06`, `approval_gate`
+  - Files/dirs: `external_output_safety`, `customer_safety`, `data`, `level_06`, `approval_gate`
   - Schemas/deps: validation reports, data governance checks, approval records
-  - Code/log shapes: `customer_safety_block`, `customer_visible`, `safety_check`, `short_circuit`, `leak_terms`
+  - Code/log shapes: `external_safety_block`, `customer_safety_block`, `external_facing`, `customer_visible`, `safety_check`, `short_circuit`, `leak_terms`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L7-signed-goal-with-immutable-scope

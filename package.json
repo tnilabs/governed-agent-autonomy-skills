@@ -1,6 +1,6 @@
 {
   "name": "agentic-maturity-model-skills",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "type": "module",
   "main": ".opencode/plugins/agentic-maturity-model-skills.js",
   "description": "Cross-tool coding-agent skills for assessing, designing, implementing, and reviewing enterprise agents against AMM-style discipline. Self-contained; no external deps.",

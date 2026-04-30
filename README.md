@@ -119,7 +119,7 @@ use skill tool to load agentic-maturity-model-skills/amm
 ```markdown
 # AMM Assessment
 
-- Canon versions: amm-levels v1.3.1, controls v1.3.1, patterns v1.3.1, synonyms v1.3.1
+- Canon versions: amm-levels v1.3.2, controls v1.3.2, patterns v1.3.2, synonyms v1.3.2
 - Claimed level: unstated
 - Observed level: L2
 - Confidence: medium - workflow artifacts exist, but no L3 retrieval evidence was found
