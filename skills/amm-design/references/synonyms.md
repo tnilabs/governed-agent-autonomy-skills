@@ -1,6 +1,6 @@
 ---
-canon_version: 1.2.0
-last_reviewed: 2026-04-29
+canon_version: 1.3.0
+last_reviewed: 2026-04-30
 ---
 
 # Synonyms and Detection Signals
@@ -20,6 +20,10 @@ satisfies a control or pattern when its local structure has the same functional
 meaning: it produces the same evidence, blocks the same failure mode, and
 enforces the same runtime boundary. Different file names, schema names,
 service boundaries, framework primitives, or workflow shapes can be equivalent.
+Canonical AMM names and record/schema names are semantic anchors, not required strings.
+Names such as approval record, credential lease, tool action, audit
+record, or evidence pack identify evidence shapes; equivalent local events,
+schemas, logs, tickets, services, or external systems can satisfy them.
 Mark evidence `partial` when only some parts of the functional signature exist.
 Record the local name or structure, the AMM item it maps to, and the reason the
 mapping is equivalent or not.

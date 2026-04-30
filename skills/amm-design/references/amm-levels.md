@@ -1,6 +1,6 @@
 ---
-canon_version: 1.2.0
-last_reviewed: 2026-04-29
+canon_version: 1.3.0
+last_reviewed: 2026-04-30
 ---
 
 # Agentic Maturity Model - Levels
@@ -10,6 +10,11 @@ AMM implementation and support-operations scenario. Each level adds one
 capability boundary and carries forward the same scenario, fixtures, contracts,
 controls, and lessons. Level claims are made on evidence: artifacts, controls,
 tests, telemetry, and replayable records.
+
+Level descriptions, exit criteria, and record/schema names are semantic
+anchors, not required strings. A system can satisfy a requirement through
+local vocabulary, services, workflows, external stores, or evidence shapes
+when they prove the same capability boundary and prevent the same failure.
 
 ## L1 - Unstructured AI use
 

@@ -15,7 +15,7 @@ Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `
 
 1. Read the change set and any AMM-level claim in the PR description / design brief.
 2. Build the checklist for L1 through the claimed level inclusive: exit criteria from `references/amm-levels.md`, controls whose `Activated at AMM levels` line includes the claimed level, and pattern entries introduced at L1 through the claimed level.
-3. For each control AND each pattern entry, run a conceptual-equivalence search via `synonyms.md`: compare functional signature, evidence produced, failure prevented, and detection signals. Record what was searched, where, what was found, and why local structures are equivalent or not.
+3. For each control AND pattern, run a conceptual-equivalence search via `synonyms.md`: compare functional signature, evidence, failure, and detection signals. Search semantic equivalents, not literal names; local services, schemas, events, workflows, or external systems can satisfy the AMM anchor. Record searches, findings, and rationale.
 4. For each AMM exit criterion that is not a control or pattern entry, run an artifact search for the named criterion under local names. Record terms, locations, and result.
 5. Verify each integrated pattern has a passing functional-signature test (per the implement skill's rule).
 6. Verify threat-model deltas, audit/observability mapping, and any evidence-pack outputs.
@@ -23,12 +23,13 @@ Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `
 
 ## Hard rule
 
-Controls and pattern entries use a **recorded conceptual-equivalence search**: load the synonym entry, search at least four detection-signal categories, compare the functional meaning, and record searches and locations. Pure AMM exit criteria use a **recorded artifact search**: search for the named exit-criterion artifact under local names, then record terms, locations, and result. A missing/not-satisfied finding without the applicable recorded search is invalid output.
+Controls and patterns require a **recorded conceptual-equivalence search**: load the synonym entry, search at least four signal categories, compare functional meaning, and record locations. Pure AMM exit criteria require a **recorded artifact search** under local names. Canonical control names, pattern IDs, and record/schema names are trace anchors and examples, not required strings. A missing/not-satisfied finding without the applicable recorded search is invalid output.
 
 ## Forbidden shortcuts
 
 - "I read the design brief, controls look fine" — verify against artifacts, not against documents.
 - Marking a control "missing" because the user's naming or file structure differs from the canonical naming.
+- Marking a record "missing" before checking whether an equivalent event, schema, log, ticket, or external system carries the same evidence.
 
 ## Output template
 
@@ -41,7 +42,7 @@ Controls and pattern entries use a **recorded conceptual-equivalence search**: l
 - Verdict: PASS | FAIL | NEEDS-FIX
 
 ## Control activation
-| AMM canonical | User structure/name | Location | Evidence | Equivalence rationale | Verdict |
+| AMM semantic anchor | User structure/name | Location | Evidence | Equivalence rationale | Verdict |
 
 ## Pattern integration
 | Pattern entry | Functional-sig test | Verdict |

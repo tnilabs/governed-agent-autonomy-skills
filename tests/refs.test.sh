@@ -223,6 +223,9 @@ if [[ -f references/synonyms.md ]]; then
   if ! grep -q '^## Conceptual Equivalence Rules$' references/synonyms.md; then
     echo "synonyms.md missing '## Conceptual Equivalence Rules'"; fail=1
   fi
+  if ! grep -qF 'Canonical AMM names and record/schema names are semantic anchors, not required strings.' references/synonyms.md; then
+    echo "synonyms.md missing semantic-anchor rule"; fail=1
+  fi
   for c in "${CONTROL_NAMES[@]}"; do
     if ! grep -qxF "### $c" references/synonyms.md; then
       echo "synonyms.md missing entry: '### $c'"; fail=1

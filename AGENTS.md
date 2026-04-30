@@ -45,7 +45,7 @@ installed in the host tool.
 | `CONTRIBUTING.md` | Human contribution, validation, and release guide. |
 | `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
-| `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, conceptual-equivalence sentinel in assess+review, no external plugin chains. |
+| `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, conceptual-equivalence sentinel in assess+review, semantic-anchor sentinel in all focused skills, no external plugin chains. |
 | `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, synonym/concept cross-check against patterns.md. |
 | `tests/no-external-fetch.test.sh` | Forbids fetch instructions in skills, refs, scripts, README, host-context files, install docs (allowlist for documented install URLs only). |
 | `tests/smoke/<tool>.sh` | Per-tool artifact-sanity scripts. Skip-with-message when the tool isn't installed. |
@@ -79,6 +79,10 @@ installed in the host tool.
   `recorded conceptual-equivalence search`. A finding marked "missing" /
   "not satisfied" without functional-signature comparison, detection
   signals searched, and locations is invalid output.
+- All focused skills MUST contain the literal sentinel
+  `semantic equivalents, not literal names`. AMM level descriptions,
+  requirements, control names, pattern IDs, and record/schema names are
+  semantic anchors and trace handles, not required strings in user repos.
 - Skills carry their own output templates inline (assessment report
   shape, design brief shape, implementation plan shape, review report
   shape). References hold canon; skills hold output shape.
@@ -105,6 +109,8 @@ installed in the host tool.
   substrate patterns; do not reintroduce `no v0 pattern family`.
 - `references/synonyms.md` has `## Conceptual Equivalence Rules`,
   `## Controls`, and `## Patterns` sections.
+  It MUST state that canonical AMM names and record/schema names are
+  semantic anchors, not required strings.
   Every control (nine) and every pattern entry gets a
   `### <Canonical Name or pattern-id>` entry with `**Functional signature:**`,
   `**Alternative names:**` (≥3), and `**Detection signals:**` with at

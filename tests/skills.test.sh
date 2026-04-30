@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Validate the exact set of skills, their frontmatter shape, word budgets,
-# the conceptual-equivalence sentinel in assess + review, and forbid external
+# conceptual-equivalence and semantic-anchor sentinels, and forbid external
 # plugin chains in skill bodies.
 set -euo pipefail
 fail=0
@@ -10,6 +10,8 @@ SIB_BUDGET=500
 ASSESS_BUDGET=650
 EXPECTED_SET="amm amm-assess amm-design amm-implement amm-review"
 SYNONYM_SENTINEL="recorded conceptual-equivalence search"
+SEMANTIC_SENTINEL="semantic equivalents, not literal names"
+ASSESS_SEMANTIC_SCOPE="level descriptions, requirements, controls, and record/schema names"
 
 if [[ ! -d skills ]]; then echo "skills/ missing"; exit 1; fi
 
@@ -67,8 +69,16 @@ for d in skills/*/; do
     fi
   fi
 
+  # Focused skills must treat AMM names as trace anchors, not strings the
+  # user's repo must literally contain.
+  if [[ "$name" != "amm" ]]; then
+    if ! grep -qF "$SEMANTIC_SENTINEL" "$f"; then
+      echo "SEMANTIC SENTINEL MISSING ('$SEMANTIC_SENTINEL') in $f"; fail=1
+    fi
+  fi
+
   if [[ "$name" == "amm-assess" ]]; then
-    for required in "full-spectrum L1-L10 scan" "partial higher-level evidence" "lowest failing boundary"; do
+    for required in "full-spectrum L1-L10 scan" "partial higher-level evidence" "lowest failing boundary" "$ASSESS_SEMANTIC_SCOPE"; do
       if ! grep -qF "$required" "$f"; then
         echo "ASSESS CONTRACT MISSING ('$required') in $f"; fail=1
       fi

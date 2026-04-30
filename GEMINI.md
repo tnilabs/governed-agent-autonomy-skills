@@ -19,7 +19,7 @@ For any target or claimed level, apply levels L1 through that level inclusive. C
 
 ## Conceptual-Equivalence Matching
 
-Controls and patterns are functional categories, not names. A user system has the control if it has the capability, evidence, failure prevention, and runtime boundary under any local name or structure. Before a skill marks any control or pattern "missing" or "not satisfied," it must load the synonym entry, search at least four detection-signal categories including conceptual equivalents, and record the equivalence rationale. A finding without a recorded conceptual-equivalence search is invalid output.
+Level descriptions, requirements, controls, patterns, and record/schema names are semantic anchors, not required strings. A user system has the AMM item if it has the capability, evidence, failure prevention, and runtime boundary under any local name or structure, including external systems. Before a skill marks any control or pattern "missing" or "not satisfied," it must load the synonym entry, search at least four detection-signal categories including conceptual equivalents, and record the equivalence rationale. A finding without a recorded conceptual-equivalence search is invalid output.
 
 ## Self-contained
 

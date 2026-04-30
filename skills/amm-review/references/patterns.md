@@ -1,6 +1,6 @@
 ---
-canon_version: 1.2.0
-last_reviewed: 2026-04-29
+canon_version: 1.3.0
+last_reviewed: 2026-04-30
 ---
 
 # Pattern Entries per AMM Level
@@ -9,6 +9,11 @@ This index mirrors the source AMM implementation.
 Each AMM level has one H2 section. Each reusable source pattern has one H3
 entry with a functional signature, the enterprise controls it exercises, and
 the assertion a reviewer or implementer should prove.
+
+Pattern IDs, test wording, and example record/schema names are semantic
+anchors, not required strings. Equivalent local implementations satisfy a
+pattern when they produce the same evidence, enforce the same boundary, and
+prevent the same failure.
 
 **Lookup rule for agents.** For target or claimed level L<n>, include every
 pattern entry under sections L1 through L<n> inclusive. Do not include only

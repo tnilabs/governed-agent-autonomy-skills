@@ -1,6 +1,6 @@
 ---
-canon_version: 1.2.0
-last_reviewed: 2026-04-29
+canon_version: 1.3.0
+last_reviewed: 2026-04-30
 ---
 
 # Enterprise Control Categories
@@ -9,6 +9,10 @@ Nine control categories from `../agentic-maturity-model/controls/`. Controls
 are cumulative: once a control activates at AMM level N, it remains active
 at every higher level. L1 and L2 are preparation levels; they name data,
 process, risk, and ownership before agentic controls become load-bearing.
+
+Control headings and example record names are semantic anchors, not required
+strings. A deployment satisfies a control when local artifacts prove the same
+capability, evidence, runtime boundary, and failure prevention.
 
 **Lookup rule for agents.** For a target or claimed AMM level, include every
 control whose `Activated at AMM levels` line contains that level. Do not

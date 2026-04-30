@@ -16,13 +16,14 @@ Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `
 1. Clarify the target AMM level (L1-L10). If unstated, ask before writing the brief.
 2. From `references/patterns.md`, list every pattern entry introduced at L1 through the target level inclusive (match `### L<n>-` headings).
 3. From `references/controls.md`, list every control whose `Activated at AMM levels` line includes the target level.
-4. For each control, capture both the AMM canonical name and the user-team's preferred name. The brief speaks the team's language while remaining AMM-traceable. Downstream review/assess depend on this map.
-5. Produce the brief using the **Output template** below.
+4. Treat level requirements, controls, pattern IDs, and record/schema names as semantic anchors. Design semantic equivalents, not literal names: same capability, evidence, runtime boundary, and prevented failure under the team's vocabulary.
+5. For each control, capture the AMM anchor plus the user-team's preferred capability/evidence name. The brief speaks the team's language while remaining AMM-traceable. Downstream review/assess depend on this map.
+6. Produce the brief using the **Output template** below.
 
 ## Hard rules
 
 - Target-level claim must come with the matching control activations and exit-criteria evidence in the brief — not vibes.
-- The brief must include a terminology map.
+- The brief must include a terminology map. Do not force AMM example record names into the design unless the team wants those names.
 
 ## Forbidden shortcuts
 
@@ -38,8 +39,8 @@ amm:
 scenario: <one-sentence problem>
 schemas: [<schema names>]
 controls:
-  - canonical: <Adversarial Awareness | …>
-    user_name: <team's preferred name>
+  - amm_anchor: <Adversarial Awareness | …>
+    local_name: <team's preferred capability/evidence name>
     activates_at: L<n>
     evidence: <what this control will produce>
 patterns:
@@ -47,6 +48,9 @@ patterns:
     pattern: <pattern entry from references/patterns.md>
     functional_signature: <capability — evidence — failure-prevented>
     test_asserts: <what the test will check>
+semantic_mapping:
+  - amm_anchor: <record/control/requirement shape>
+    local_shape: <team schema/event/workflow/external system>
 threat_model: [<assumption / new attack-surface entry>]
 evidence_pack: [<artifact required at exit>]
 exit_criteria: [<measurable check>]
