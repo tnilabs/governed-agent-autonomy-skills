@@ -12,6 +12,7 @@ EXPECTED_SET="amm amm-assess amm-design amm-implement amm-review"
 SYNONYM_SENTINEL="recorded conceptual-equivalence search"
 SEMANTIC_SENTINEL="semantic equivalents, not literal names"
 ASSESS_SEMANTIC_SCOPE="level descriptions, requirements, controls, and record/schema names"
+ASSESS_REF_LOAD_SENTINEL="Citing a reference as not loaded is invalid output"
 
 if [[ ! -d skills ]]; then echo "skills/ missing"; exit 1; fi
 
@@ -78,7 +79,7 @@ for d in skills/*/; do
   fi
 
   if [[ "$name" == "amm-assess" ]]; then
-    for required in "full-spectrum L1-L10 scan" "partial higher-level evidence" "lowest failing boundary" "$ASSESS_SEMANTIC_SCOPE"; do
+    for required in "full-spectrum L1-L10 scan" "partial higher-level evidence" "lowest failing boundary" "$ASSESS_SEMANTIC_SCOPE" "$ASSESS_REF_LOAD_SENTINEL"; do
       if ! grep -qF "$required" "$f"; then
         echo "ASSESS CONTRACT MISSING ('$required') in $f"; fail=1
       fi

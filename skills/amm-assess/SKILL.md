@@ -26,6 +26,7 @@ Load this skill's bundled `references/` files: `amm-levels.md`, `controls.md`, `
 
 - No control/pattern may be marked absent without a recorded conceptual-equivalence search: functional signature checked, at least four signal categories searched, and locations recorded.
 - No pure exit criterion may be marked absent without a recorded artifact search: artifact sought, aliases checked, locations recorded, and result stated.
+- Load all four bundled refs before classification. Citing a reference as not loaded is invalid output; load it or mark the assessment incomplete.
 - Canonical control names, pattern IDs, and record/schema names are trace anchors and examples. Do not require user artifacts to use AMM strings such as approval record, credential lease, audit record, or evidence pack.
 - L1-L3 are preparation evidence, not reliable runtime maturity detection. Reliable runtime assessment starts at L4, where review boundaries and control surfaces become observable. Still report L1-L3 artifacts or gaps when present.
 - Self-claim is not evidence. Framework name is not evidence. Vocabulary match is not evidence. Vocabulary mismatch is not absence.

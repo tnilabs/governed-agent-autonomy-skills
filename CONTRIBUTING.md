@@ -34,6 +34,7 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 - Skill bodies stay concise: gateway under 200 words; `amm-assess` under 650 words; other siblings under 500 words.
 - Skills do not chain to other plugins.
 - `amm-assess` and `amm-review` must enforce recorded conceptual-equivalence search before marking any control or pattern missing.
+- `amm-assess` must load all four bundled references before classifying; reporting a canon file as "not loaded" is invalid.
 - Every focused skill must treat AMM level descriptions, requirements, control names, pattern IDs, and record/schema names as semantic anchors. User artifacts satisfy AMM through equivalent capability, evidence, runtime boundary, and failure prevention, not literal names.
 
 ## Reference Rules

@@ -83,6 +83,9 @@ installed in the host tool.
   `semantic equivalents, not literal names`. AMM level descriptions,
   requirements, control names, pattern IDs, and record/schema names are
   semantic anchors and trace handles, not required strings in user repos.
+- `amm-assess` MUST contain the literal sentinel
+  `Citing a reference as not loaded is invalid output`; classification
+  requires all four bundled refs.
 - Skills carry their own output templates inline (assessment report
   shape, design brief shape, implementation plan shape, review report
   shape). References hold canon; skills hold output shape.
