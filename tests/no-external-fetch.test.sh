@@ -21,6 +21,7 @@ ALLOWLIST_PATTERNS=(
   '^[[:space:]]*"governed-agent-autonomy-skills@git\+https://github\.com/tnilabs/governed-agent-autonomy-skills\.git'
   '^[[:space:]]*https://github\.com/tnilabs/governed-agent-autonomy-skills([./#v0-9]*)?[[:space:]]*$'
   '\]\(https://github\.com/tnilabs/governed-agent-autonomy-skills'
+  '\]\(https://github\.com/tnilabs/governed-agent-autonomy\)'
   '\[OpenCode\.ai\]\(https://opencode\.ai\)'
   '\]\(https://(opencode\.ai|cursor\.com|github\.com/openai/codex|google\.github\.io/adk-docs)'
 )
