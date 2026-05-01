@@ -20,6 +20,7 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 5. For each control/pattern, run a recorded conceptual-equivalence search: compare functional signature, context, authority, evidence, failure, boundary, and detection signals.
 6. For pure exit criteria, run artifact search under local names and record locations.
 7. Classify: observed level = highest fully satisfied prefix. Authority-gate gaps fail the claim; scale-gate gaps block rollout/promotion. Later evidence is partial higher-level evidence, not observed level.
+8. After reporting, ask whether to save it unless saving was already requested. If yes, write the exact report to the chosen path, defaulting to `GAAM-assessment.md`.
 
 ## Hard rules
 
