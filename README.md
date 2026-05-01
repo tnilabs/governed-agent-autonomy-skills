@@ -18,59 +18,120 @@ This repo is a standalone GAAM skills distribution. It ships the GAAM levels, co
 - Semantic anchors: GAAM names are traceability handles, not required strings; the skills search semantic equivalents, not literal names.
 - Self-contained canon: GAAM levels, 10 enterprise controls, capability patterns, and detection signals ship in this repo.
 
-## Skills
+## Which Skill To Use
 
-| Skill | Use it for |
+This package ships one gateway skill and four focused skills. The gateway is useful when you want the agent to choose; the focused skills are better when you already know the job.
+
+| Skill | Use when | Give it | It returns |
+| --- | --- | --- | --- |
+| `gaam` | The request mentions GAAM, agent governance, agent compliance, or a GAAM level, but the exact task type is not clear. | The natural-language task. | A routed sibling skill announcement. The gateway does not do assessment, design, implementation, or review itself. |
+| `gaam-assess` | You need to know the observed GAAM level of an existing workflow or repo. | Workflow scope, claimed level if any, evidence locations, time period, and known out-of-repo systems. | An evidence-first L1-L10 assessment with observed level, lowest failing boundary, partial higher-level evidence, and semantic gaps. |
+| `gaam-design` | You are designing a new agent workflow or target-level upgrade. | Workflow, target level, allowed authority, excluded authority, owner, risk tolerance, and production domain. | A target-level design brief with active controls, capability patterns, evidence obligations, threat assumptions, and open questions. |
+| `gaam-implement` | You want to add or strengthen a GAAM capability in code. | Pattern ID or target level, repo area, workflow boundary, allowed authority, and whether edits are allowed. | An implementation record: existing-capability survey, file touch list, functional-signature test, code plan, and verification gates. |
+| `gaam-review` | You are reviewing a PR, change set, evidence pack, or claimed GAAM level before merge or release. | Claimed level, diff or artifact locations, workflow scope, evidence pack, and acceptance criteria. | A merge-oriented review with pass/fail findings, recorded conceptual-equivalence searches, blockers, and follow-up tasks. |
+
+The skills are intentionally evidence-bound. A framework name, a self-claim, or a matching file name is not enough. A differently named local service, schema, event stream, workflow, or external evidence store can satisfy GAAM when it proves the same workflow context, authority boundary, capability, evidence semantics, runtime boundary, and failure prevention.
+
+## Skill Contracts
+
+### `gaam`
+
+Use this as the front door when the prompt is broad: "assess this", "design an agent", "review this PR", or "help with GAAM". It routes to exactly one focused skill and announces that choice. If you already know the correct skill, call it directly.
+
+Example:
+
+```text
+Use gaam to decide how to handle this request: review this support-agent PR against GAAM L6.
+```
+
+### `gaam-assess`
+
+Use this to classify reality. It scans all levels L1-L10 and reports the highest fully satisfied prefix. It still records later evidence, but later evidence does not raise the observed level when an earlier boundary is missing.
+
+Best prompts include:
+
+- the workflow being assessed;
+- the time period or release being assessed;
+- the claimed level, if someone made one;
+- where evidence may live, including docs, tests, telemetry, tickets, dashboards, or external systems.
+
+Example:
+
+```text
+Use gaam-assess to classify the support triage workflow. Claimed level is L5. Evidence may be in docs/, tests/, observability dashboards, and the ticketing integration. Use evidence only and list every missing-boundary search.
+```
+
+### `gaam-design`
+
+Use this before building. The output is a production design brief, not a brainstorm. It should state what the agent may do, what it may not do, which controls are active at the target level, what evidence must be produced, and what would force reassessment.
+
+Best prompts include:
+
+- target GAAM level;
+- user or work-item population;
+- allowed and excluded authority;
+- data sources and side-effect surfaces;
+- security, compliance, reliability, and cost constraints.
+
+Example:
+
+```text
+Use gaam-design to design a GAAM L6 account-update agent. It may read customer profile and policy data, draft an update, and execute one approved side-effecting action. It may not decide eligibility or bypass reviewer approval.
+```
+
+### `gaam-implement`
+
+Use this when the desired GAAM capability should land in a repo. The skill first searches for semantic equivalents, then either strengthens existing code or designs the smallest missing piece. It requires a functional-signature test before implementation.
+
+Best prompts include:
+
+- the target pattern ID or level boundary;
+- the workflow and authority boundary;
+- files or packages likely involved;
+- whether the agent should edit code or produce a plan only.
+
+Example:
+
+```text
+Use gaam-implement to add L6-one-shot-action-authority for the account-update workflow. Edit code if needed. Preserve existing service names and add the functional-signature test first.
+```
+
+### `gaam-review`
+
+Use this before trusting a GAAM claim. It verifies the claim against artifacts, not just the design doc. Missing findings must include the conceptual-equivalence search that was performed before deciding the capability is absent.
+
+Best prompts include:
+
+- the claimed level and workflow scope;
+- the PR, branch, or artifact set to review;
+- evidence pack locations;
+- explicit merge or release criteria.
+
+Example:
+
+```text
+Use gaam-review to verify this PR's GAAM L6 claim for account updates. Treat differently named approval, authority, telemetry, and recovery artifacts as possible equivalents, but block the PR if the exact-action approval binding is not evidenced.
+```
+
+## Prompt Recipes
+
+| Goal | Prompt |
 | --- | --- |
-| `gaam` | Gateway. Routes GAAM-related work to one of the four focused skills. |
-| `gaam-assess` | Determine the observed GAAM level of an existing agent system. |
-| `gaam-design` | Design a new enterprise agent for a target GAAM level. |
-| `gaam-implement` | Plan or implement GAAM pattern entries in a codebase. |
-| `gaam-review` | Review a change, PR, or evidence pack for GAAM conformance. |
+| Baseline a repo | `Use gaam-assess to classify this repo's observed GAAM level. Use evidence only. Continue through L10 and separate observed level from partial higher-level evidence.` |
+| Design one level up | `Use gaam-design to design the smallest safe path from observed L<n> to target L<n+1> for <workflow>. Include active controls, evidence, authority boundaries, and stop conditions.` |
+| Plan without edits | `Use gaam-implement to plan the required GAAM pattern entries for <workflow>. Do not edit files yet. Include file touch list and functional-signature tests.` |
+| Implement a specific capability | `Use gaam-implement to implement <pattern-id> for <workflow>. Preserve local names. Write the functional-signature test first.` |
+| Review a PR | `Use gaam-review to check this PR's claimed GAAM L<n> compliance. List conceptual-equivalence searches before marking anything missing.` |
+| Validate an evidence pack | `Use gaam-review to validate this evidence pack for <workflow> at GAAM L<n>. Verify controls, patterns, telemetry, approvals, incidents, and residual gaps.` |
 
-The gateway announces the routed skill in the form `Using <skill> to <purpose>`. Direct invocation is also fine when your tool supports explicit skill names.
+## Explicit Skill Names
 
-## Example Prompts
-
-Use natural language first. The gateway should route automatically.
-
-```text
-What GAAM level is this repository at? Use evidence only.
-```
-
-```text
-Design a regulated support agent at GAAM L6. Include controls, evidence, failure modes, and review boundaries.
-```
-
-```text
-Use GAAM to plan L5 scoped read access for this codebase. Do not edit files yet.
-```
-
-```text
-Review this PR for GAAM L6 compliance. List every conceptual-equivalence search you performed before marking anything missing.
-```
-
-```text
-Create an implementation plan to move this prototype from L4 to L5.
-```
-
-## Explicit Skill Use
-
-Most tools load skills automatically from the prompt. When you want to be explicit, use the compact skill name.
+Most tools load skills automatically from the prompt. When you want to be explicit, use the compact skill name:
 
 ```text
 Use gaam-assess to classify this repo's observed GAAM level.
-```
-
-```text
 Use gaam-design to design a claims-processing agent at GAAM L6.
-```
-
-```text
 Use gaam-implement to plan L5 read-only tool manifests and audit evidence.
-```
-
-```text
 Use gaam-review to check this PR's claimed GAAM L7 compliance.
 ```
 
@@ -93,24 +154,15 @@ use skill tool to load governed-agent-autonomy-skills/gaam
 ## Typical Workflow
 
 1. Assess the current system:
-   `What GAAM level is this repo at? Use evidence only.`
+   `Use gaam-assess to classify <workflow>. Use evidence only.`
 2. Pick a target level:
-   `Design the smallest safe path from observed L<n> to target L<n+1>.`
-3. Plan the implementation:
+   `Use gaam-design to design the smallest safe path from observed L<n> to target L<n+1>.`
+3. Plan implementation:
    `Use gaam-implement to plan the required GAAM pattern entries. Do not edit files yet.`
-4. Implement in small changes:
-   Ask your coding agent to make one bounded change at a time.
+4. Implement one bounded capability:
+   `Use gaam-implement to implement <pattern-id>. Write the functional-signature test first.`
 5. Review before merge:
    `Use gaam-review to verify this PR against claimed GAAM L<n>.`
-
-## Expected Outputs
-
-| Skill | Output |
-| --- | --- |
-| `gaam-assess` | GAAM assessment with observed level, full L1-L10 evidence, lowest failing boundary, partial higher-level evidence, and semantic gaps. |
-| `gaam-design` | Target-level design brief with active controls, pattern entries, evidence to produce, failure modes, and open questions. |
-| `gaam-implement` | Implementation plan with files to inspect/change, tests to add, controls activated, and verification gates. |
-| `gaam-review` | Review report with pass/fail findings, conceptual-equivalence searches performed, control/pattern verdicts, and merge blockers. |
 
 ## Sample Output Shapes
 
@@ -119,15 +171,16 @@ use skill tool to load governed-agent-autonomy-skills/gaam
 ```markdown
 # GAAM Assessment
 
-- Canon versions: gaam-levels v2.0.0, controls v2.0.0, patterns v2.0.0, synonyms v2.0.0
+- Canon versions: gaam-levels v3.0.0, controls v3.0.0, patterns v3.0.0, synonyms v3.0.0
 - Claimed level: unstated
 - Observed level: L2
+- Claim context: workflow=support triage; scope=customer support tickets; period=current main branch; allowed/excluded authority=analysis only/no side effects; owner=support platform
 - Confidence: medium - workflow artifacts exist, but no L3 retrieval evidence was found
 
 ## Terminology and conceptual mapping
 | User-team structure/name | GAAM semantic anchor | Equivalent capability/evidence |
 | --- | --- | --- |
-| support run dossier | evidence and assurance | run, review, eval, audit, and approval evidence exported together |
+| support run dossier | Evidence & Assurance | run, review, eval, audit, and approval evidence exported together |
 
 ## Evidence per level
 ### L1 - Unmanaged AI Baseline
@@ -152,25 +205,29 @@ use skill tool to load governed-agent-autonomy-skills/gaam
 `gaam-design` produces a target-level design brief:
 
 ```yaml
-target_level: L6
-agent_goal: "Draft and execute one approved account-update action"
-active_controls:
-  - Threat & Adversarial Resilience
-  - Evidence & Assurance
-  - Data, Context & Memory Governance
-  - Runtime Isolation & Execution Safety
-  - Observability & Telemetry
-  - Value, Cost & Reliability
-  - Delegated Authority & Access
-  - Tool & Protocol Safety
-  - Incident Response & Recovery
-evidence_to_produce:
-  - approval evidence bound by action hash
-  - one-use action authority consumed once
-  - action result entry with idempotency key
-  - recovery or compensation plan for every side effect
+gaam:
+  target_level: L6
+  canon_versions: { gaam_levels: "3.0.0", controls: "3.0.0", patterns: "3.0.0", synonyms: "3.0.0" }
+claim:
+  workflow: account update
+  scope: support-agent updates to verified customer account fields
+  allowed_authority: read customer profile and policy data; execute one approved account-update action
+  excluded_authority: eligibility decisions, bulk updates, reviewer bypass, and autonomous closure
+  owner: support platform
+controls:
+  - gaam_anchor: Threat & Adversarial Resilience
+    local_name: hostile-input and approval-tamper gate
+    evidence: detection events, signature checks, and adversarial eval results
+  - gaam_anchor: Delegated Authority & Access
+    local_name: one-shot account-update authority
+    evidence: action-bound authority grant consumed exactly once
+patterns:
+  - level: L6
+    pattern: L6-one-shot-action-authority
+    functional_signature: approved action authority is action-bound and consumed once
+    test_asserts: same grant cannot execute twice or execute a different action
 open_questions:
-  - Which actions are eligible for L6 approval?
+  - Which account-update actions are eligible for L6 approval?
   - Which local approval artifact is the audit source of truth?
 ```
 
@@ -179,8 +236,11 @@ open_questions:
 ```markdown
 # GAAM Review
 
+- Canon versions: gaam-levels v3.0.0, controls v3.0.0, patterns v3.0.0, synonyms v3.0.0
 - Claimed level: L6
-- Verdict: blocked
+- Verified level: L5
+- Claim context: workflow=account update; scope=support-agent updates; period=this PR; allowed/excluded authority=one approved action/no reviewer bypass; owner=support platform
+- Verdict: NEEDS-FIX
 
 ## Findings
 - BLOCKER: approved actions are not bound to the exact action payload.
