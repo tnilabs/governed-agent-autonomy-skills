@@ -4,14 +4,16 @@
 
 ## Entrypoint
 
-Start at `skills/gaam/SKILL.md`. It is the gateway; it routes to one of four sibling skills based on intent.
+Start at `skills/gaam/SKILL.md` when the task involves an AI agent, agent workflow, retrieval, tool use, scoped data access, delegated action, approval gate, autonomous task, agent handoff, GAAM claim, or agent governance question. It is the gateway; it routes to one of four sibling skills based on intent.
 
-## Canon
+Do not route ordinary software changes through GAAM when there is no AI or agent workflow.
 
-All canonical GAAM/control/pattern/synonym-map material lives in `references/*.md`. The plugin does not depend on any external repo and does not fetch from the network.
+## References
+
+The GAAM/control/pattern/synonym-map source material lives in `references/*.md`. The plugin does not depend on any external repo and does not fetch from the network.
 
 - `references/gaam-levels.md` — the 10 GAAM levels with intent and exit criteria.
-- `references/controls.md` — 10 control categories with the canonical activation matrix.
+- `references/controls.md` — 10 control categories with the activation matrix.
 - `references/patterns.md` — GAAM capability patterns per level (functional signature + controls activated + test asserts, including L1/L2 substrate patterns).
 - `references/synonyms.md` — synonym, conceptual-equivalence, and detection-signal guide for every control and every pattern entry.
 

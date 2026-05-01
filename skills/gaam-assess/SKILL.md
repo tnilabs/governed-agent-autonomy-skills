@@ -1,6 +1,6 @@
 ---
 name: gaam-assess
-description: Use when the task asks "what GAAM level are we at?", to assess an existing agent system against GAAM, for due-diligence reviews, audits, or maturity gap analyses
+description: Use when assessing an existing AI agent or agent workflow, asking what maturity or governance level it has, checking production readiness, due-diligence reviews, audits, or maturity gap analyses
 ---
 
 # Assessing GAAM Level

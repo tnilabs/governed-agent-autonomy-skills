@@ -1,6 +1,6 @@
 ---
 name: gaam-implement
-description: Use when the task is to apply a GAAM pattern entry to a codebase, implement a GAAM-level capability such as L5 scoped read access or L6 approved action, or refactor existing code to satisfy GAAM exit criteria
+description: Use when building or changing code for an AI-agent workflow with retrieval, tool access, scoped data access, approvals, delegated actions, autonomy boundaries, GAAM pattern entries, or GAAM exit criteria
 ---
 
 # Implementing GAAM Patterns

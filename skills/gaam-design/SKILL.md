@@ -1,6 +1,6 @@
 ---
 name: gaam-design
-description: Use when the task is to design a new enterprise agent, scope an AI agent product to a GAAM target level, or turn an idea into a control-aware agent specification
+description: Use when designing a new AI agent, agent workflow, tool-calling workflow, retrieval workflow, delegated-action capability, approval-gated automation, enterprise agent, or control-aware agent specification
 ---
 
 # Designing an Enterprise Agent

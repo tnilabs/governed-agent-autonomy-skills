@@ -1,6 +1,6 @@
 ---
 name: gaam-review
-description: Use when reviewing an enterprise agent change for GAAM conformance, performing a pre-merge agent audit, validating an evidence pack, or checking a PR's claimed GAAM level against artifacts
+description: Use when reviewing an AI-agent change, tool or retrieval workflow, delegated-action workflow, approval-gated automation, enterprise agent PR, evidence pack, pre-merge agent audit, or claimed GAAM level against artifacts
 ---
 
 # Reviewing an Enterprise Agent

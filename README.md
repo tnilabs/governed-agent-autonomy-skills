@@ -1,13 +1,8 @@
 # governed-agent-autonomy-skills
 
-Skills for coding agents that work with the Governed Agent Autonomy Model (GAAM).
+Skills for coding agents that design, build, assess, and review governed AI-agent workflows.
 
-Use them when you want an AI coding agent to:
-
-- assess what GAAM level an agent workflow is actually at;
-- design a new agent workflow for a target level;
-- implement a GAAM capability in code;
-- review a PR or evidence pack against a claimed level.
+Use them when software work involves an AI agent, retrieval workflow, tool use, scoped data access, delegated action, approval gate, autonomous task, agent handoff, or GAAM claim. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to check the gateway automatically.
 
 Core model repo: [tnilabs/governed-agent-autonomy](https://github.com/tnilabs/governed-agent-autonomy)
 
@@ -17,17 +12,51 @@ This skills repo is standalone. It ships its own GAAM level, control, pattern, a
 
 | Skill | Use For | Output |
 | --- | --- | --- |
-| `gaam` | Router when you are not sure which skill to use. | Chooses one focused skill. |
-| `gaam-assess` | Find the real GAAM level of a workflow. | Evidence report, observed level, first missing boundary. |
-| `gaam-design` | Design a workflow for a target GAAM level. | Design brief with authority, controls, evidence, tests. |
-| `gaam-implement` | Add a GAAM capability to a repo. | Implementation plan or code changes with tests first. |
-| `gaam-review` | Review a PR, change, or evidence pack. | Pass/fail review with blockers and searched evidence. |
+| `gaam` | Preflight router for AI-agent or GAAM-relevant work. | Chooses one focused skill. |
+| `gaam-assess` | Assess an existing agent workflow, maturity claim, audit, or readiness gap. | Evidence report, observed level, first missing boundary. |
+| `gaam-design` | Design an agent workflow, tool/retrieval/action boundary, or target-level specification. | Design brief with authority, controls, evidence, tests. |
+| `gaam-implement` | Build or refactor agent code for retrieval, tools, approvals, delegated actions, or GAAM exit criteria. | Implementation plan or code changes with tests first. |
+| `gaam-review` | Review an agent PR, change, claimed level, or evidence pack. | Pass/fail review with blockers and searched evidence. |
 
 GAAM names are labels, not required class names. Your code can call things whatever it wants. The skills look for equivalent behavior: same workflow, authority boundary, evidence, runtime boundary, and failure prevention.
 
-## How To Prompt
+## Automatic Use
 
-Keep prompts short. Name the workflow and the level if you know it.
+To avoid saying `Use gaam...` every time, add a rule like this to your repo's `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`, or equivalent project instruction file:
+
+```markdown
+## AI agent work
+
+Before designing, implementing, or reviewing software that includes an AI agent,
+agent workflow, tool use, retrieval, scoped data access, delegated action,
+approval gate, autonomous task execution, or agent-to-agent handoff, check
+whether the `gaam` skill applies.
+
+If it applies, load `gaam` and let it route to `gaam-design`,
+`gaam-implement`, `gaam-assess`, or `gaam-review`.
+
+Do not use GAAM for ordinary software changes with no AI or agent workflow.
+```
+
+After that, normal software requests should be enough:
+
+```text
+Build a support routing agent that can read customer history and draft a reply.
+```
+
+```text
+Add approval-gated email changes to the account update agent.
+```
+
+```text
+Review this PR for the billing dispute agent.
+```
+
+Automatic use still depends on the host tool's skill matching and project-instruction behavior. The gateway trigger is broad enough for AI-agent work, but the project rule above makes the intended behavior explicit.
+
+## Direct Prompts
+
+Explicit prompts still work. Keep them short. Name the workflow and the level if you know it.
 
 ```text
 Use gaam-assess to assess the support triage workflow.
@@ -38,7 +67,7 @@ Use gaam-design to design an L6 account update agent.
 ```
 
 ```text
-Use gaam-implement to add L6-one-shot-action-authority.
+Use gaam-implement to add one-shot approved action authority to the account update workflow.
 ```
 
 ```text
