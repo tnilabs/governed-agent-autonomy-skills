@@ -5,11 +5,15 @@ description: Use when building, changing, reviewing, or assessing AI-agent softw
 
 # Using Governed Agent Autonomy Model Skills
 
-This gateway routes AI-agent and GAAM-relevant work. Pick one sibling and announce it in the literal form ``Using `<sibling-skill>` to <purpose>``.
+Routes AI-agent and GAAM-relevant work. Pick one sibling and announce ``Using `<sibling-skill>` to <purpose>``.
 
 ## Trigger boundary
 
 Use for AI software that retrieves knowledge, reads scoped context, calls tools, drafts or takes actions, uses approvals, coordinates handoffs, or carries an autonomy/governance claim. Skip ordinary non-agent changes.
+
+## Level rule
+
+Never assume L10 or any target level. For assessment/review, treat an unstated claim as unstated and verify evidence. For design/implementation, ask for target level or authority boundary before writing.
 
 ## Routing
 
@@ -25,7 +29,3 @@ Pick the sibling whose trigger best fits the user's intent. Use the bare directo
 ## Hard rule
 
 Do not produce assessment, design, implementation, or review output without first invoking the matching sibling. The gateway routes only.
-
-## References
-
-Reference material lives in each focused skill's bundled `references/` directory. Root `references/` files are kept in sync for humans and tests.

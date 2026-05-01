@@ -4,7 +4,7 @@ Call it governance, production readiness, or just not getting surprised later: A
 
 Those questions usually show up after the risky part has already shipped. These skills move them into the build path, so authority, evidence, review, and recovery boundaries get handled while the agent is still being designed and coded.
 
-Use them when software work involves building an AI agent, or changing agent retrieval, tool use, scoped data access, delegated actions, approval gates, autonomous tasks, agent handoffs, or GAAM claims. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to check the gateway automatically.
+Use them when software work involves building an AI agent, or changing agent retrieval, tool use, scoped data access, delegated actions, approval gates, autonomous tasks, agent handoffs, or GAAM claims. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to start with `gaam`, which routes to the right focused skill.
 
 Core model repo: [tnilabs/governed-agent-autonomy](https://github.com/tnilabs/governed-agent-autonomy)
 
@@ -36,6 +36,11 @@ whether the `gaam` skill applies.
 
 If it applies, load `gaam` and let it route to `gaam-design`,
 `gaam-implement`, `gaam-assess`, or `gaam-review`.
+
+Automatic use does not assume L10 or any other target level. If the task is
+assessing or reviewing existing work, treat the claim as unstated unless the
+user names one. If the task is designing or implementing new authority, ask for
+the target level or authority boundary before writing code.
 
 Do not use GAAM for ordinary software changes with no AI or agent workflow.
 ```
