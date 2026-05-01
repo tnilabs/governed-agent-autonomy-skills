@@ -3,7 +3,7 @@
   "version": "4.0.0",
   "type": "module",
   "main": ".opencode/plugins/governed-agent-autonomy-skills.js",
-  "description": "Cross-tool coding-agent skills for assessing, designing, implementing, and reviewing enterprise agents against GAAM-style discipline. Self-contained; no external deps.",
+  "description": "Coding-agent skills for assessing, designing, implementing, and reviewing enterprise agents against GAAM-style discipline. Self-contained; no external deps.",
   "license": "Apache-2.0 AND CC-BY-4.0",
   "repository": "https://github.com/tnilabs/governed-agent-autonomy-skills",
   "homepage": "https://github.com/tnilabs/governed-agent-autonomy-skills",

@@ -1,6 +1,6 @@
 # governed-agent-autonomy-skills
 
-Cross-tool skills that help coding agents assess, design, implement, and review enterprise AI agents against the Governed Agent Autonomy Model (GAAM).
+Skills that help coding agents assess, design, implement, and review enterprise AI agents against the Governed Agent Autonomy Model (GAAM).
 
 This repo is standalone. The GAAM levels, controls, capability patterns, synonym rules, and detection guidance ship with the skills. Installed skills do not fetch canon from another repository at runtime.
 

@@ -6,7 +6,7 @@ narrative — if you need the human onboarding doc, see
 
 ## What this repo is
 
-`governed-agent-autonomy-skills`, a self-contained, cross-tool skills plugin
+`governed-agent-autonomy-skills`, a self-contained skills plugin
 for coding agents. It enforces GAAM-style discipline (assess / design /
 implement / review) for enterprise agents. The plugin ships:
 
