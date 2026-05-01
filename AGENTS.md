@@ -6,8 +6,8 @@ narrative — if you need the human onboarding doc, see
 
 ## What this repo is
 
-`agentic-maturity-model-skills`, a self-contained, cross-tool skills plugin
-for coding agents. It enforces AMM-style discipline (assess / design /
+`governed-agent-autonomy-skills`, a self-contained, cross-tool skills plugin
+for coding agents. It enforces GAAM-style discipline (assess / design /
 implement / review) for enterprise agents. The plugin ships:
 
 - five skills under `skills/` (one gateway + four sibling skills);
@@ -27,16 +27,16 @@ installed in the host tool.
 | Path | Owns |
 | --- | --- |
 | `skills/<skill-name>/SKILL.md` | One skill: frontmatter (`name`, `description`) + body. Five skills total, set is fixed. |
-| `skills/<focused-skill>/references/*.md` | Skill-local copies of AMM canon for installed-plugin sandboxes; must match root `references/*.md` byte-for-byte. |
-| `references/amm-levels.md` | Root canon of the 10 AMM levels (one H2 per level). |
-| `references/controls.md` | Root canon of the 9 enterprise control categories (canonical spelling enforced by tests). |
-| `references/patterns.md` | Root source-aligned pattern index per AMM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
+| `skills/<focused-skill>/references/*.md` | Skill-local copies of GAAM canon for installed-plugin sandboxes; must match root `references/*.md` byte-for-byte. |
+| `references/gaam-levels.md` | Root canon of the 10 GAAM levels (one H2 per level). |
+| `references/controls.md` | Root canon of the 10 enterprise control categories (canonical spelling enforced by tests). |
+| `references/patterns.md` | Root source-aligned pattern index per GAAM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
 | `references/synonyms.md` | Root synonym, conceptual-equivalence, and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
 | `.codex-plugin/plugin.json` | Codex App marketplace manifest, with full `interface` block. |
 | `.cursor-plugin/plugin.json` | Cursor plugin manifest. |
-| `.opencode/INSTALL.md` + `.opencode/plugins/agentic-maturity-model-skills.js` | OpenCode install instructions + minimal plugin (registers the bundled `skills/` via the `config` hook). |
+| `.opencode/INSTALL.md` + `.opencode/plugins/governed-agent-autonomy-skills.js` | OpenCode install instructions + minimal plugin (registers the bundled `skills/` via the `config` hook). |
 | `gemini-extension.json` | Gemini CLI extension manifest (`contextFileName: "GEMINI.md"`). |
 | `package.json` | npm metadata, ESM (`type: "module"`), `main` points at the OpenCode plugin. |
 | `GEMINI.md` | Compact Gemini CLI host-context entrypoint. |
@@ -46,7 +46,7 @@ installed in the host tool.
 | `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
 | `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, conceptual-equivalence sentinel in assess+review, semantic-anchor sentinel in all focused skills, no external plugin chains. |
-| `tests/refs.test.sh` | Asserts ref content shape: 10 AMM levels, 9 canonical controls, L1–L10 patterns coverage, synonym/concept cross-check against patterns.md. |
+| `tests/refs.test.sh` | Asserts ref content shape: 10 GAAM levels, 10 canonical controls, L1–L10 patterns coverage, synonym/concept cross-check against patterns.md. |
 | `tests/no-external-fetch.test.sh` | Forbids fetch instructions in skills, refs, scripts, README, host-context files, install docs (allowlist for documented install URLs only). |
 | `tests/smoke/<tool>.sh` | Per-tool artifact-sanity scripts. Skip-with-message when the tool isn't installed. |
 | `internal/` | Gitignored. Design memos, sourcing notes, manual verification checklist, codex-review outputs. Not part of the public surface. |
@@ -54,14 +54,14 @@ installed in the host tool.
 
 ## Skills
 
-- The set of skills under `skills/` is exactly `{amm, amm-assess,
-  amm-design, amm-implement, amm-review}`. Adding, renaming, or
+- The set of skills under `skills/` is exactly `{gaam, gaam-assess,
+  gaam-design, gaam-implement, gaam-review}`. Adding, renaming, or
   removing a skill is a deliberate scope change.
 - Frontmatter has two required fields: `name` (matches the directory)
   and `description` (starts with "Use when…", trigger-only, no workflow
   summary, no first-person, no process steps). Total frontmatter ≤1024
   chars.
-- Body is ≤200 words for the gateway, ≤650 words for `amm-assess`, and
+- Body is ≤200 words for the gateway, ≤650 words for `gaam-assess`, and
   ≤500 words for other siblings. Word count is enforced by
   `tests/skills.test.sh`.
 - Skills do NOT chain to other plugins. If a skill needs TDD, file-touch
@@ -70,7 +70,7 @@ installed in the host tool.
   `superpowers:<skill-name>` references, no `<plugin>:<skill>` form
   anywhere in skill bodies.
 - Inside this plugin, skills do NOT chain to each other. The gateway
-  (`amm`) announces a sibling skill in the literal
+  (`gaam`) announces a sibling skill in the literal
   form ``Using `<sibling-skill>` to <purpose>``; the host's native skill
   resolution loads the sibling. Use bare skill directory names in the
   gateway's routing table.
@@ -80,10 +80,10 @@ installed in the host tool.
   "not satisfied" without functional-signature comparison, detection
   signals searched, and locations is invalid output.
 - All focused skills MUST contain the literal sentinel
-  `semantic equivalents, not literal names`. AMM level descriptions,
+  `semantic equivalents, not literal names`. GAAM level descriptions,
   requirements, control names, pattern IDs, and record/schema names are
   semantic anchors and trace handles, not required strings in user repos.
-- `amm-assess` MUST contain the literal sentinel
+- `gaam-assess` MUST contain the literal sentinel
   `Citing a reference as not loaded is invalid output`; classification
   requires all four bundled refs.
 - Skills carry their own output templates inline (assessment report
@@ -98,23 +98,24 @@ installed in the host tool.
 
 - Every reference file's frontmatter has `canon_version:` (semver-like)
   and `last_reviewed:` (ISO date). Tests reject a missing field.
-- `references/amm-levels.md` has exactly 10 H2 sections, one per L1–L10.
-- `references/controls.md` has exactly 9 H2 sections using the canonical
-  spelling (no ampersands, no abbreviations): `Adversarial Awareness`,
-  `Agent Control Tower`, `Compliance Evidence Pack`,
-  `Credential and Delegated Access`, `Data Governance`,
-  `Protocol Conformance`, `Incident Response`, `OpenTelemetry Mapping`,
-  `Value and Cost Management`. Tests fail on any deviation.
-- `references/patterns.md` has one section per AMM level L1–L10. Every
-  source AMM pattern ID appears as a `### <pattern-id>` entry with
+- `references/gaam-levels.md` has exactly 10 H2 sections, one per L1–L10.
+- `references/controls.md` has exactly 10 H2 sections using the canonical
+  spelling (no ampersands, no abbreviations): `Threat & Adversarial Resilience`,
+  `Agent Registry & Lifecycle`, `Evidence & Assurance`,
+  `Delegated Authority & Access`, `Data, Context & Memory Governance`,
+  `Tool & Protocol Safety`, `Incident Response & Recovery`,
+  `Runtime Isolation & Execution Safety`, `Observability & Telemetry`,
+  `Value, Cost & Reliability`. Tests fail on any deviation.
+- `references/patterns.md` has one section per GAAM level L1–L10. Every
+  source GAAM pattern ID appears as a `### <pattern-id>` entry with
   `**Functional signature:**`,
   `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
   substrate patterns; do not reintroduce `no v0 pattern family`.
 - `references/synonyms.md` has `## Conceptual Equivalence Rules`,
   `## Controls`, and `## Patterns` sections.
-  It MUST state that canonical AMM names and record/schema names are
+  It MUST state that canonical GAAM names and record/schema names are
   semantic anchors, not required strings.
-  Every control (nine) and every pattern entry gets a
+  Every control (ten) and every pattern entry gets a
   `### <Canonical Name or pattern-id>` entry with `**Functional signature:**`,
   `**Alternative names:**` (≥3), and `**Detection signals:**` with at
   least four signal categories, including `Conceptual equivalents:`.
@@ -134,7 +135,7 @@ installed in the host tool.
 - The Codex CLI is served by `.codex/INSTALL.md` (manual symlinks into
   `$CODEX_HOME/skills`), not by the App manifest.
 - `package.json` MUST have `"type": "module"` and
-  `"main": ".opencode/plugins/agentic-maturity-model-skills.js"`. The
+  `"main": ".opencode/plugins/governed-agent-autonomy-skills.js"`. The
   OpenCode plugin file MUST export a named async plugin function
   (`AgenticMaturityModelSkillsPlugin`) returning an object with a `config`
   async hook that pushes the bundled `skills/` absolute path into
@@ -198,7 +199,7 @@ installed in the host tool.
   Fail fast on missing prerequisites.
 - JSON manifests are minimal and conform to their tool's documented
   schema.
-- The OpenCode plugin (`.opencode/plugins/agentic-maturity-model-skills.js`)
+- The OpenCode plugin (`.opencode/plugins/governed-agent-autonomy-skills.js`)
   is ESM and stays minimal — register skills, nothing else.
 - Files scoped to one responsibility; split files that start mixing
   concerns.
@@ -241,7 +242,7 @@ installed in the host tool.
 - Don't add AI assistants, automation, or tools as co-authors or
   attribution in commit messages, file headers, docs, or release notes.
 - Commit subjects use `type(scope): summary` (e.g.,
-  `ref(controls): clarify Compliance Evidence Pack failure mode`,
+  `ref(controls): clarify Evidence & Assurance failure mode`,
   `skill(reviewing): tighten missing-finding rule`,
   `manifest(opencode): wire config hook to skills.paths`).
 

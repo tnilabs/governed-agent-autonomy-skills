@@ -1,4 +1,4 @@
-# Installing agentic-maturity-model-skills for Cursor
+# Installing governed-agent-autonomy-skills for Cursor
 
 Cursor's `/add-plugin` requires a published marketplace. For local installs, copy or symlink the cloned repo into Cursor's per-user plugins directory.
 
@@ -10,19 +10,19 @@ Cursor's `/add-plugin` requires a published marketplace. For local installs, cop
 ## Installation (Linux / macOS)
 
 ```bash
-git clone https://github.com/tnilabs/agentic-maturity-model-skills.git ~/.cursor/agentic-maturity-model-skills-src
+git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git ~/.cursor/governed-agent-autonomy-skills-src
 mkdir -p ~/.cursor/plugins
-ln -s ~/.cursor/agentic-maturity-model-skills-src ~/.cursor/plugins/agentic-maturity-model-skills
+ln -s ~/.cursor/governed-agent-autonomy-skills-src ~/.cursor/plugins/governed-agent-autonomy-skills
 ```
 
-Then in Cursor: Cmd+Shift+P → "Developer: Reload Window" (or quit and relaunch). Cursor reads the plugin manifest from `~/.cursor/plugins/agentic-maturity-model-skills/.cursor-plugin/plugin.json` and the bundled `skills/` directory.
+Then in Cursor: Cmd+Shift+P → "Developer: Reload Window" (or quit and relaunch). Cursor reads the plugin manifest from `~/.cursor/plugins/governed-agent-autonomy-skills/.cursor-plugin/plugin.json` and the bundled `skills/` directory.
 
 ## Installation (Windows PowerShell)
 
 ```powershell
-git clone https://github.com/tnilabs/agentic-maturity-model-skills.git "$env:USERPROFILE\.cursor\agentic-maturity-model-skills-src"
+git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git "$env:USERPROFILE\.cursor\governed-agent-autonomy-skills-src"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.cursor\plugins"
-cmd /c mklink /J "$env:USERPROFILE\.cursor\plugins\agentic-maturity-model-skills" "$env:USERPROFILE\.cursor\agentic-maturity-model-skills-src"
+cmd /c mklink /J "$env:USERPROFILE\.cursor\plugins\governed-agent-autonomy-skills" "$env:USERPROFILE\.cursor\governed-agent-autonomy-skills-src"
 ```
 
 Reload Cursor.
@@ -33,7 +33,7 @@ If you want the skills available only in a specific Cursor workspace (not user-w
 
 ```bash
 mkdir -p .cursor/skills
-ln -s /path/to/agentic-maturity-model-skills/skills .cursor/skills/agentic-maturity-model-skills
+ln -s /path/to/governed-agent-autonomy-skills/skills .cursor/skills/governed-agent-autonomy-skills
 ```
 
 Reload the workspace. (This path covers skills only — the full plugin manifest is not loaded.)
@@ -42,14 +42,14 @@ Reload the workspace. (This path covers skills only — the full plugin manifest
 
 In Cursor Agent chat:
 
-> "What AMM level is this agent at?"
+> "What GAAM level is this agent at?"
 
-Expect the gateway to announce `Using \`assessing-amm-level\` to <purpose>`.
+Expect the gateway to announce `Using \`assessing-gaam-level\` to <purpose>`.
 
 ## Updating
 
 ```bash
-cd ~/.cursor/agentic-maturity-model-skills-src && git pull
+cd ~/.cursor/governed-agent-autonomy-skills-src && git pull
 ```
 
 Reload Cursor.
@@ -57,7 +57,7 @@ Reload Cursor.
 ## Uninstalling
 
 ```bash
-rm ~/.cursor/plugins/agentic-maturity-model-skills
+rm ~/.cursor/plugins/governed-agent-autonomy-skills
 ```
 
-Optionally delete the source clone: `rm -rf ~/.cursor/agentic-maturity-model-skills-src`.
+Optionally delete the source clone: `rm -rf ~/.cursor/governed-agent-autonomy-skills-src`.

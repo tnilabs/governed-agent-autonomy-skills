@@ -8,7 +8,7 @@ fail=0
 GATE_BUDGET=200
 SIB_BUDGET=500
 ASSESS_BUDGET=650
-EXPECTED_SET="amm amm-assess amm-design amm-implement amm-review"
+EXPECTED_SET="gaam gaam-assess gaam-design gaam-implement gaam-review"
 SYNONYM_SENTINEL="recorded conceptual-equivalence search"
 SEMANTIC_SENTINEL="semantic equivalents, not literal names"
 ASSESS_SEMANTIC_SCOPE="level descriptions, requirements, controls, and record/schema names"
@@ -57,28 +57,28 @@ for d in skills/*/; do
   body=$(awk 'BEGIN{c=0} /^---$/{c++; next} c>=2{print}' "$f")
   words=$(printf '%s' "$body" | wc -w)
   budget=$SIB_BUDGET
-  [[ "$name" == "amm" ]] && budget=$GATE_BUDGET
-  [[ "$name" == "amm-assess" ]] && budget=$ASSESS_BUDGET
+  [[ "$name" == "gaam" ]] && budget=$GATE_BUDGET
+  [[ "$name" == "gaam-assess" ]] && budget=$ASSESS_BUDGET
   if [[ $words -gt $budget ]]; then
     echo "WORD COUNT $words > $budget: $f"; fail=1
   fi
 
   # Sentinel check: assess + review skills must contain the conceptual-equivalence hard rule.
-  if [[ "$name" == "amm-assess" || "$name" == "amm-review" ]]; then
+  if [[ "$name" == "gaam-assess" || "$name" == "gaam-review" ]]; then
     if ! grep -qF "$SYNONYM_SENTINEL" "$f"; then
       echo "SENTINEL MISSING ('$SYNONYM_SENTINEL') in $f"; fail=1
     fi
   fi
 
-  # Focused skills must treat AMM names as trace anchors, not strings the
+  # Focused skills must treat GAAM names as trace anchors, not strings the
   # user's repo must literally contain.
-  if [[ "$name" != "amm" ]]; then
+  if [[ "$name" != "gaam" ]]; then
     if ! grep -qF "$SEMANTIC_SENTINEL" "$f"; then
       echo "SEMANTIC SENTINEL MISSING ('$SEMANTIC_SENTINEL') in $f"; fail=1
     fi
   fi
 
-  if [[ "$name" == "amm-assess" ]]; then
+  if [[ "$name" == "gaam-assess" ]]; then
     for required in "full-spectrum L1-L10 scan" "partial higher-level evidence" "lowest failing boundary" "$ASSESS_SEMANTIC_SCOPE" "$ASSESS_REF_LOAD_SENTINEL"; do
       if ! grep -qF "$required" "$f"; then
         echo "ASSESS CONTRACT MISSING ('$required') in $f"; fail=1
@@ -90,7 +90,7 @@ for d in skills/*/; do
   body_only=$(awk 'BEGIN{c=0} /^---$/{c++; next} c>=2{print}' "$f")
 
   # No qualified plugin chains in skill bodies (catches superpowers:tdd,
-  # @org/plugin:x, agentic-maturity-model-skills:assess, etc.)
+  # @org/plugin:x, governed-agent-autonomy-skills:assess, etc.)
   if printf '%s' "$body_only" | grep -qE '(^|[[:space:]])(@[a-z0-9_-]+/)?[a-z][a-z0-9-]*:[a-z][a-z0-9-]*'; then
     echo "QUALIFIED PLUGIN CHAIN in $f body (skills must use bare skill names)"
     fail=1

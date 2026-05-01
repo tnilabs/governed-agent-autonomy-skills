@@ -4,8 +4,8 @@ This repo ships skills and reference canon for coding agents. Keep changes small
 
 ## Public Surface
 
-- `skills/`: exactly five skill directories: `amm`, `amm-assess`, `amm-design`, `amm-implement`, `amm-review`.
-- `references/`: root AMM canon.
+- `skills/`: exactly five skill directories: `gaam`, `gaam-assess`, `gaam-design`, `gaam-implement`, `gaam-review`.
+- `references/`: root GAAM canon.
 - `skills/<focused-skill>/references/`: copies of root canon used by hosts that sandbox skill resources.
 - Tool packaging: `.claude-plugin/`, `.codex/`, `.codex-plugin/`, `.cursor-plugin/`, `.opencode/`, `gemini-extension.json`, and `package.json`.
 - `README.md`: human install and usage guide.
@@ -31,18 +31,18 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 
 - Skill frontmatter has only `name` and `description`.
 - Descriptions start with `Use when` and describe trigger conditions only.
-- Skill bodies stay concise: gateway under 200 words; `amm-assess` under 650 words; other siblings under 500 words.
+- Skill bodies stay concise: gateway under 200 words; `gaam-assess` under 650 words; other siblings under 500 words.
 - Skills do not chain to other plugins.
-- `amm-assess` and `amm-review` must enforce recorded conceptual-equivalence search before marking any control or pattern missing.
-- `amm-assess` must load all four bundled references before classifying; reporting a canon file as "not loaded" is invalid.
-- Every focused skill must treat AMM level descriptions, requirements, control names, pattern IDs, and record/schema names as semantic anchors. User artifacts satisfy AMM through equivalent capability, evidence, runtime boundary, and failure prevention, not literal names.
+- `gaam-assess` and `gaam-review` must enforce recorded conceptual-equivalence search before marking any control or pattern missing.
+- `gaam-assess` must load all four bundled references before classifying; reporting a canon file as "not loaded" is invalid.
+- Every focused skill must treat GAAM level descriptions, requirements, control names, pattern IDs, and record/schema names as semantic anchors. User artifacts satisfy GAAM through equivalent capability, evidence, runtime boundary, and failure prevention, not literal names.
 
 ## Reference Rules
 
 - Every reference file has `canon_version:` and `last_reviewed:` frontmatter.
-- `references/amm-levels.md` keeps exactly 10 AMM level sections.
-- `references/controls.md` keeps exactly 9 canonical control sections and the activation matrix.
-- `references/patterns.md` keeps one section per AMM level and one entry per source AMM pattern ID.
+- `references/gaam-levels.md` keeps exactly 10 GAAM level sections.
+- `references/controls.md` keeps exactly 10 canonical control sections and the activation matrix.
+- `references/patterns.md` keeps one section per GAAM level and one entry per source GAAM pattern ID.
 - `references/synonyms.md` keeps entries for every control and pattern, with functional signature, alternative names, conceptual-equivalence guidance, semantic-anchor guidance, and detection signals.
 - The focused skill reference copies must match root `references/*.md` exactly.
 

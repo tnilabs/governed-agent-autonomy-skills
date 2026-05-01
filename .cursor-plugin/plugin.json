@@ -1,16 +1,16 @@
 {
-  "name": "agentic-maturity-model-skills",
-  "displayName": "Agentic Maturity Model Skills",
-  "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review.",
-  "version": "2.2.3",
+  "name": "governed-agent-autonomy-skills",
+  "displayName": "Governed Agent Autonomy Model Skills",
+  "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review.",
+  "version": "3.0.0",
   "author": {
     "name": "TNI Labs"
   },
-  "homepage": "https://github.com/tnilabs/agentic-maturity-model-skills",
-  "repository": "https://github.com/tnilabs/agentic-maturity-model-skills",
+  "homepage": "https://github.com/tnilabs/governed-agent-autonomy-skills",
+  "repository": "https://github.com/tnilabs/governed-agent-autonomy-skills",
   "license": "Apache-2.0 AND CC-BY-4.0",
   "keywords": [
-    "amm",
+    "gaam",
     "enterprise-agents",
     "skills",
     "design",

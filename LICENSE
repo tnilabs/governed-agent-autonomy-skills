@@ -6,7 +6,7 @@ This repository uses split licensing.
 
 Apache License 2.0 (SPDX: Apache-2.0) applies to source code, scripts, package metadata, plugin manifests, tests, and other executable or machine-readable integration files.
 
-Creative Commons Attribution 4.0 International (SPDX: CC-BY-4.0) applies to documentation, AMM skill bodies, bundled AMM references, README/install prose, and other explanatory AMM material.
+Creative Commons Attribution 4.0 International (SPDX: CC-BY-4.0) applies to documentation, GAAM skill bodies, bundled GAAM references, README/install prose, and other explanatory GAAM material.
 
 When a file contains an explicit SPDX-License-Identifier, that identifier controls.
 

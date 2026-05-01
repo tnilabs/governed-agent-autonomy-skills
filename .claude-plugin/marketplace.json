@@ -1,14 +1,14 @@
 {
-  "name": "agentic-maturity-model-skills",
-  "description": "Marketplace for agentic-maturity-model-skills.",
+  "name": "governed-agent-autonomy-skills",
+  "description": "Marketplace for governed-agent-autonomy-skills.",
   "owner": {
     "name": "TNI Labs"
   },
   "plugins": [
     {
-      "name": "agentic-maturity-model-skills",
-      "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review.",
-      "version": "2.2.3",
+      "name": "governed-agent-autonomy-skills",
+      "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review.",
+      "version": "3.0.0",
       "source": "./",
       "author": {
         "name": "TNI Labs"

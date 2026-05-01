@@ -1,16 +1,16 @@
 {
-  "name": "agentic-maturity-model-skills",
-  "version": "2.2.3",
-  "description": "Coding-agent skills for AMM-style enterprise agent design, implementation, and review. Self-contained.",
+  "name": "governed-agent-autonomy-skills",
+  "version": "3.0.0",
+  "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review. Self-contained.",
   "author": {
     "name": "TNI Labs",
-    "url": "https://github.com/tnilabs/agentic-maturity-model-skills"
+    "url": "https://github.com/tnilabs/governed-agent-autonomy-skills"
   },
-  "homepage": "https://github.com/tnilabs/agentic-maturity-model-skills",
-  "repository": "https://github.com/tnilabs/agentic-maturity-model-skills",
+  "homepage": "https://github.com/tnilabs/governed-agent-autonomy-skills",
+  "repository": "https://github.com/tnilabs/governed-agent-autonomy-skills",
   "license": "Apache-2.0 AND CC-BY-4.0",
   "keywords": [
-    "amm",
+    "gaam",
     "enterprise-agents",
     "skills",
     "design",
@@ -18,9 +18,9 @@
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Agentic Maturity Model Skills",
-    "shortDescription": "AMM-style design / implement / review for enterprise agents",
-    "longDescription": "Five skills routing coding agents through assessing AMM levels, designing enterprise agents, implementing source-aligned AMM pattern entries, and reviewing changes for control activation and evidence \u2014 with naming-agnostic recognition of existing systems.",
+    "displayName": "Governed Agent Autonomy Model Skills",
+    "shortDescription": "GAAM-style design / implement / review for enterprise agents",
+    "longDescription": "Five skills routing coding agents through assessing GAAM levels, designing enterprise agents, implementing source-aligned GAAM pattern entries, and reviewing changes for control activation and evidence — with naming-agnostic recognition of existing systems.",
     "developerName": "TNI Labs",
     "category": "Coding",
     "capabilities": [
@@ -29,9 +29,9 @@
       "Write"
     ],
     "defaultPrompt": [
-      "What AMM level is this agent at?",
+      "What GAAM level is this agent at?",
       "Design an enterprise agent for <use case>.",
-      "Review this PR for AMM compliance."
+      "Review this PR for GAAM compliance."
     ],
     "brandColor": "#1F6FEB"
   }

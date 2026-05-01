@@ -1,4 +1,4 @@
-# Installing agentic-maturity-model-skills for OpenCode
+# Installing governed-agent-autonomy-skills for OpenCode
 
 ## Prerequisites
 
@@ -11,21 +11,21 @@ Add to the `plugin` array in your `opencode.json` (global or project-level):
 ```json
 {
   "plugin": [
-    "agentic-maturity-model-skills@git+https://github.com/tnilabs/agentic-maturity-model-skills.git"
+    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git"
   ]
 }
 ```
 
 Restart OpenCode. The plugin auto-installs and registers all skills.
 
-Verify with: "Use the skill tool to list skills" — you should see `agentic-maturity-model-skills/amm` and four siblings.
+Verify with: "Use the skill tool to list skills" — you should see `governed-agent-autonomy-skills/gaam` and four siblings.
 
 ## Pinning a version
 
 ```json
 {
   "plugin": [
-    "agentic-maturity-model-skills@git+https://github.com/tnilabs/agentic-maturity-model-skills.git#v2.0.0"
+    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git#v2.0.0"
   ]
 }
 ```
@@ -35,7 +35,7 @@ Verify with: "Use the skill tool to list skills" — you should see `agentic-mat
 Use OpenCode's native `skill` tool:
 
 ```
-use skill tool to load agentic-maturity-model-skills/amm
+use skill tool to load governed-agent-autonomy-skills/gaam
 ```
 
 ## Updating
@@ -44,17 +44,17 @@ OpenCode pulls the configured plugin source on restart. To pin a specific versio
 
 ## Troubleshooting
 
-- **Plugin not loading:** `opencode run --print-logs "hello" 2>&1 | grep -i agentic-maturity`
+- **Plugin not loading:** `opencode run --print-logs "hello" 2>&1 | grep -i governed-agent-autonomy`
 - **Skills not found:** use the `skill` tool to list discovered skills.
 
 ## Manual fallback if the `config` hook isn't called by your OpenCode build
 
-A small set of OpenCode builds may not honor the plugin `config` hook at startup. If `use skill tool to list skills` does not show `agentic-maturity-model-skills/amm` after a clean restart, add the `skills.paths` entry yourself in `opencode.json` (alongside the `plugin` array):
+A small set of OpenCode builds may not honor the plugin `config` hook at startup. If `use skill tool to list skills` does not show `governed-agent-autonomy-skills/gaam` after a clean restart, add the `skills.paths` entry yourself in `opencode.json` (alongside the `plugin` array):
 
 ```json
 {
   "plugin": [
-    "agentic-maturity-model-skills@git+https://github.com/tnilabs/agentic-maturity-model-skills.git"
+    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git"
   ],
   "skills": {
     "paths": [

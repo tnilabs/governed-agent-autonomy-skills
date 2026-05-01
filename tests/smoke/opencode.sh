@@ -16,10 +16,10 @@ if ! command -v node >/dev/null 2>&1; then
 fi
 fail=0
 [[ -f .opencode/INSTALL.md ]] || { echo "opencode.sh: .opencode/INSTALL.md missing"; fail=1; }
-[[ -f .opencode/plugins/agentic-maturity-model-skills.js ]] || { echo "opencode.sh: plugin JS missing"; fail=1; }
+[[ -f .opencode/plugins/governed-agent-autonomy-skills.js ]] || { echo "opencode.sh: plugin JS missing"; fail=1; }
 if [[ $fail -ne 0 ]]; then exit $fail; fi
 
-node --check .opencode/plugins/agentic-maturity-model-skills.js
+node --check .opencode/plugins/governed-agent-autonomy-skills.js
 
 # Functionally exercise the config hook.
 node --input-type=module - <<'NODEJS'
@@ -27,7 +27,7 @@ import path from "node:path";
 const repoRoot = process.cwd();
 const expected = path.resolve(repoRoot, "skills");
 
-const mod = await import(path.resolve(repoRoot, ".opencode/plugins/agentic-maturity-model-skills.js"));
+const mod = await import(path.resolve(repoRoot, ".opencode/plugins/governed-agent-autonomy-skills.js"));
 const plugin = mod.AgenticMaturityModelSkillsPlugin || mod.default;
 if (typeof plugin !== "function") {
   console.error("plugin is not a callable function");

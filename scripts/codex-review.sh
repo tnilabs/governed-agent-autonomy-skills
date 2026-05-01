@@ -18,7 +18,7 @@ ts="$(date -u +%Y%m%dT%H%M%SZ)"
 out="internal/codex-review-${ts}.md"
 before_sha="$(git rev-parse HEAD)"
 
-prompt='Review AND FIX the agentic-maturity-model-skills repo. The tracked tree (not a diff) is the input — every prior task already committed.
+prompt='Review AND FIX the governed-agent-autonomy-skills repo. The tracked tree (not a diff) is the input — every prior task already committed.
 
 For every BLOCKER and MAJOR finding you identify: edit the affected file(s) inline, run `git add <paths>`, and run `git commit -m "fix(review): <one-line summary>"` for each logical fix. Do not batch unrelated fixes into one commit. Use `<type>(<scope>): <summary>` style consistently with the existing repo (see git log).
 
@@ -36,8 +36,8 @@ Review criteria (do not skip any):
 5c. The assess skill rejects incomplete canon loading: the literal phrase "Citing a reference as not loaded is invalid output" appears in the body.
 6. Each synonym entry has **Functional signature:** + >=3 alternative names + >=4 detection-signal categories, including conceptual equivalents.
 7. No skill, reference, README, context file, install doc, or script instructs the agent to fetch from external repos beyond the documented install/update commands.
-8. patterns.md has one section per AMM level L1–L10; every source AMM pattern ID has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
-9. controls.md uses the canonical 9 names exactly with the source-aligned activation matrix from ../agentic-maturity-model/controls/README.md.
+8. patterns.md has one section per GAAM level L1–L10; every source GAAM pattern ID has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
+9. controls.md uses the canonical 10 names exactly with the source-aligned activation matrix from ../governed-agent-autonomy/controls/README.md.
 10. Skills do not chain to any other plugin (no superpowers:* or <plugin>:<skill> form anywhere in skill bodies).
 11. Bash test scripts under tests/ and tests/smoke/ are correct (regexes match what they claim, exit codes are not masked, all paths exist) and consistent with the repo test requirements.
 
@@ -47,7 +47,7 @@ Final report (the only thing written to stdout, also the file Codex captures via
 - For each deferred MINOR/NIT: severity, location, what was wrong, suggested fix.
 - Verdict: GO (no BLOCKER/MAJOR findings remain) / CONDITIONAL GO (only deferred MINOR/NIT) / HOLD (further iterations needed).
 
-Do NOT modify gitignored files (docs/, internal/, .env, etc.). Do NOT touch any file outside this repo. Stay within the agentic-maturity-model-skills tracked tree.'
+Do NOT modify gitignored files (docs/, internal/, .env, etc.). Do NOT touch any file outside this repo. Stay within the governed-agent-autonomy-skills tracked tree.'
 
 codex exec --sandbox workspace-write --skip-git-repo-check --ephemeral -o "$out" "$prompt"
 

@@ -25,9 +25,9 @@ set_marketplace_plugin_version() {
   local f=".claude-plugin/marketplace.json"
   [[ -f "$f" ]] || { echo "missing: $f"; return 1; }
   local tmp; tmp=$(mktemp)
-  jq --arg v "$new" '.plugins |= map(if .name == "agentic-maturity-model-skills" then .version = $v else . end)' "$f" > "$tmp"
+  jq --arg v "$new" '.plugins |= map(if .name == "governed-agent-autonomy-skills" then .version = $v else . end)' "$f" > "$tmp"
   mv "$tmp" "$f"
-  echo "  updated $f (plugins[].version where name==agentic-maturity-model-skills)"
+  echo "  updated $f (plugins[].version where name==governed-agent-autonomy-skills)"
 }
 
 echo "bumping plugin version → $new"
@@ -45,7 +45,7 @@ versions=$(
   jq -r .version .codex-plugin/plugin.json
   jq -r .version .cursor-plugin/plugin.json
   jq -r .version gemini-extension.json
-  jq -r '.plugins[] | select(.name=="agentic-maturity-model-skills") | .version' .claude-plugin/marketplace.json
+  jq -r '.plugins[] | select(.name=="governed-agent-autonomy-skills") | .version' .claude-plugin/marketplace.json
 )
 uniq=$(printf '%s\n' "$versions" | sort -u | wc -l)
 if [[ "$uniq" != "1" ]]; then

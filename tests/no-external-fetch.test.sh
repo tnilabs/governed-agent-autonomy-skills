@@ -14,14 +14,14 @@ HARD_FORBIDDEN_RE='WebFetch|web_fetch|(^|[[:space:]])curl([[:space:]]|$)|(^|[[:s
 URL_OR_GIT_FETCH_RE='https?://[^[:space:]]+|(^|[[:space:]])git[[:space:]]+(clone|pull|fetch|submodule)([[:space:]]|$)'
 
 ALLOWLIST_PATTERNS=(
-  '^[[:space:]]*git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-maturity-model-skills\.git[[:space:]]+~/\.(codex|cursor)/'
-  'git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/agentic-maturity-model-skills\.git[[:space:]]+"\$env'
-  '^[[:space:]]*cd[[:space:]]+~/\.(codex|cursor)/agentic-maturity-model-skills(-src)?[[:space:]]*&&[[:space:]]*git[[:space:]]+pull([[:space:]]|$)'
-  '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/tnilabs/agentic-maturity-model-skills([[:space:]]|$)'
-  '^[[:space:]]*"agentic-maturity-model-skills@git\+https://github\.com/tnilabs/agentic-maturity-model-skills\.git'
-  '^[[:space:]]*https://github\.com/tnilabs/agentic-maturity-model-skills([./#v0-9]*)?[[:space:]]*$'
-  '\]\(https://github\.com/tnilabs/agentic-maturity-model-skills'
-  '\]\(https://github\.com/tnilabs/agentic-maturity-model\)'
+  '^[[:space:]]*git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/governed-agent-autonomy-skills\.git[[:space:]]+~/\.(codex|cursor)/'
+  'git[[:space:]]+clone[[:space:]]+https://github\.com/tnilabs/governed-agent-autonomy-skills\.git[[:space:]]+"\$env'
+  '^[[:space:]]*cd[[:space:]]+~/\.(codex|cursor)/governed-agent-autonomy-skills(-src)?[[:space:]]*&&[[:space:]]*git[[:space:]]+pull([[:space:]]|$)'
+  '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/tnilabs/governed-agent-autonomy-skills([[:space:]]|$)'
+  '^[[:space:]]*"governed-agent-autonomy-skills@git\+https://github\.com/tnilabs/governed-agent-autonomy-skills\.git'
+  '^[[:space:]]*https://github\.com/tnilabs/governed-agent-autonomy-skills([./#v0-9]*)?[[:space:]]*$'
+  '\]\(https://github\.com/tnilabs/governed-agent-autonomy-skills'
+  '\]\(https://github\.com/tnilabs/governed-agent-autonomy\)'
   '\[OpenCode\.ai\]\(https://opencode\.ai\)'
   '\]\(https://(opencode\.ai|cursor\.com|github\.com/openai/codex|google\.github\.io/adk-docs)'
 )
@@ -68,7 +68,7 @@ scan_file README.md
 scan_file .codex/INSTALL.md
 scan_file .cursor-plugin/INSTALL.md
 scan_file .opencode/INSTALL.md
-scan_file .opencode/plugins/agentic-maturity-model-skills.js
+scan_file .opencode/plugins/governed-agent-autonomy-skills.js
 
 [[ $fail -eq 0 ]] && echo "no-external-fetch.test.sh: OK"
 exit $fail

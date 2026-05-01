@@ -67,7 +67,7 @@ if check_json_parse package.json; then
   if [[ "$(jq -r .type package.json)" != "module" ]]; then
     echo "package.json .type must be \"module\""; fail=1
   fi
-  expected_main=".opencode/plugins/agentic-maturity-model-skills.js"
+  expected_main=".opencode/plugins/governed-agent-autonomy-skills.js"
   if [[ "$(jq -r .main package.json)" != "$expected_main" ]]; then
     echo "package.json .main must be \"$expected_main\""; fail=1
   fi
@@ -102,7 +102,7 @@ if [[ -f gemini-extension.json ]]; then
   fi
 fi
 
-for f in .opencode/INSTALL.md .opencode/plugins/agentic-maturity-model-skills.js; do
+for f in .opencode/INSTALL.md .opencode/plugins/governed-agent-autonomy-skills.js; do
   if [[ ! -f "$f" ]]; then echo "MISSING OpenCode artifact: $f"; fail=1; fi
 done
 
