@@ -1,10 +1,10 @@
 # governed-agent-autonomy-skills
 
-Skills for coding agents that design, build, assess, and review governed AI-agent workflows.
+Call it governance, production readiness, or just not getting surprised later: AI agents need clear answers for what they can do, what they must prove, who reviews them, and how recovery works.
+
+Those questions usually show up after the risky part has already shipped. These skills move them into the build path, so authority, evidence, review, and recovery boundaries get handled while the agent is still being designed and coded.
 
 Use them when software work involves building an AI agent, or changing agent retrieval, tool use, scoped data access, delegated actions, approval gates, autonomous tasks, agent handoffs, or GAAM claims. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to check the gateway automatically.
-
-Governance usually shows up after the risky part has already shipped. These skills move it into the build path, so authority, evidence, review, and recovery boundaries get handled while the agent is still being designed and coded.
 
 Core model repo: [tnilabs/governed-agent-autonomy](https://github.com/tnilabs/governed-agent-autonomy)
 
