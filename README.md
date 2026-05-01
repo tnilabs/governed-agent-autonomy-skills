@@ -101,97 +101,96 @@ Give it:
 
 It checks artifacts, not just the design doc. A missing finding must include what was searched before calling it missing.
 
-## GAAM Levels
-
-Each level includes the previous levels.
-
-| Level | Name | Developer Meaning |
-| --- | --- | --- |
-| L1 | Unmanaged AI Baseline | Measure today's manual or unmanaged AI work. |
-| L2 | Process & Policy Contract | Write down the human workflow, owners, policies, and threat model. |
-| L3 | Grounded Knowledge | Use reviewed, classified knowledge with retrieval tests. |
-| L4 | Reviewed Assistance | AI drafts only. Human review is required. No side effects. |
-| L5 | Scoped Read Access | AI can use scoped, audited, read-only tools. |
-| L6 | Approved Action | AI can execute one exact approved action with replay and recovery controls. |
-| L7 | Bounded Task Agency | AI owns a bounded task under signed goal, budget, and stop rules. |
-| L8 | Verified Agent Coordination | Multiple agents coordinate through verified identities and typed handoffs. |
-| L9 | Policy-Gated Autonomy | Low-risk eligible work can run through signed policy gates. |
-| L10 | Governed Improvement Loop | Improvements go through proposals, tests, reviews, and release gates. |
-
-L1-L3 are setup evidence. Runtime assessment becomes much more concrete at L4.
-
-## Controls
-
-Controls turn on at a level and stay on after that.
-
-| Control | Starts | Developer Meaning |
-| --- | --- | --- |
-| Data, Context & Memory Governance | L3 | Control data, context, redaction, retention, tenants, and memory. |
-| Threat & Adversarial Resilience | L4 | Handle prompt injection, poisoning, tampering, and adversarial tests. |
-| Evidence & Assurance | L4 | Keep auditable proof of runs, reviews, evals, approvals, and releases. |
-| Runtime Isolation & Execution Safety | L4 | Bound filesystem, network, subprocess, workspace, cleanup, and retries. |
-| Observability & Telemetry | L4 | Correlate model, retrieval, tool, approval, incident, cost, and release events. |
-| Value, Cost & Reliability | L4 | Track latency, cost, retries, SLOs, outcomes, and reliability. |
-| Delegated Authority & Access | L5 | Use scoped grants, one-shot action authority, revocation, and delegation. |
-| Tool & Protocol Safety | L5 | Keep tool and protocol surfaces aligned with runtime contracts. |
-| Incident Response & Recovery | L6 | Support rollback, compensation, replay, pause, dead-letter, and postmortems. |
-| Agent Registry & Lifecycle | L7 | Track agent identity, owner, version, risk tier, health, pause, and deprecation. |
-
 ## Example Outputs
 
-`gaam-assess`:
+These examples are shortened, but they show the kind of evidence the skills should name. Real output should say what was searched, what was found, what is missing, and what to do next.
+
+### `gaam-assess`
 
 ```markdown
-# GAAM Assessment
+# GAAM Assessment: Support Ticket Routing
 
 - Claimed level: L5
-- Observed level: L2
-- Workflow: support triage
-- Lowest failing boundary: L3 Grounded Knowledge
+- Observed level: L4
+- Workflow: classify inbound support tickets and draft routing notes
+- Lowest failing boundary: L5 scoped read access
 
-## Partial Higher-Level Evidence
-- L5 scoped grants exist in src/auth/grants.ts, but L3 and L4 are incomplete.
+## Evidence Checked
+- Workflow doc: docs/support-routing.md defines owner, review step, and escalation policy.
+- Knowledge source: src/retrieval/supportKb.ts filters to reviewed help-center articles.
+- Tests: tests/retrieval/supportKb.test.ts covers stale article exclusion.
+- Runtime: src/agents/supportRouter.ts drafts a route recommendation but does not call ticketing APIs.
+
+## Gap
+- The agent can read customer records through src/tools/customerLookup.ts, but the grant is shared with the admin service and is not scoped to this workflow.
+
+## Next Step
+- Add a workflow-specific read grant and audit event before claiming L5.
 ```
 
-`gaam-design`:
+### `gaam-design`
 
 ```yaml
-gaam:
-  target_level: L6
-claim:
-  workflow: account update
-  allowed_authority: execute one approved account-update action
-  excluded_authority: eligibility decisions, bulk updates, reviewer bypass
-controls:
-  - gaam_anchor: Delegated Authority & Access
-    local_name: one-shot account-update authority
-patterns:
-  - pattern: L6-one-shot-action-authority
+workflow: customer email change
+target: L6 approved action
+agent_may:
+  - validate a signed support approval
+  - update exactly one customer's email address
+  - write an audit record with the approval id and payload hash
+agent_must_not:
+  - decide whether the customer is eligible
+  - change any other customer fields
+  - reuse the same approval for a second update
+required_evidence:
+  - approval record is bound to the exact customer id and new email
+  - expired, revoked, or already-used approvals fail closed
+  - replay and rollback path is documented and tested
+open_questions:
+  - Which system owns approval revocation events?
+  - Where should failed update attempts be monitored?
 ```
 
-`gaam-implement`:
+### `gaam-implement`
 
 ```markdown
-# Implementation Record: L6-one-shot-action-authority
+# Implementation Plan: One-Use Approval For Email Changes
 
-- Workflow: account update
-- Test first: same authority grant cannot execute twice
-- Test first: same authority grant cannot execute a different action
-- Test first: expired or revoked authority fails closed
+Workflow: customer email change
+Files inspected: src/account/emailChange.ts, src/approvals/store.ts, tests/account/emailChange.test.ts
+
+Tests to add first:
+- rejects an approval whose payload hash does not match the requested email change
+- rejects a second execution with the same approval id
+- records a compensating action when the downstream profile update fails
+
+Implementation steps:
+- Add payload hash verification before calling updateCustomerEmail.
+- Mark the approval consumed in the same transaction as the action record.
+- Emit account.email_change.approved_action with approval id, actor, and result.
 ```
 
-`gaam-review`:
+### `gaam-review`
 
 ```markdown
-# GAAM Review: PR-1042
+# GAAM Review: PR 1042
 
 - Claimed level: L6
 - Verified level: L5
 - Verdict: NEEDS-FIX
 
+## What Passed
+- Approval is required before the account update endpoint runs.
+- Approval ids are logged in the account_update_audit table.
+- Revoked approvals are rejected by tests/accountUpdateApproval.test.ts.
+
 ## Blocker
-- Approved actions are not bound to the exact action payload.
-- Searched: binding hash, approval ledger, reviewer signoff, action digest.
+- The approval is bound to the customer id, but not to the requested field changes. A reused approval could change a different email value.
+
+## Searched
+- src/account/updateAccount.ts for payload digest or field-level binding
+- src/approvals/approvalLedger.ts for consumed-action records
+- tests/accountUpdateApproval.test.ts for replay and mismatch coverage
+- docs/runbooks/account-update-recovery.md for rollback evidence
 ```
 
 ## Install From GitHub
