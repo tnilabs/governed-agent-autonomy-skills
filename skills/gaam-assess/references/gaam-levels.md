@@ -1,6 +1,6 @@
 ---
-canon_version: 2.0.0
-last_reviewed: 2026-04-30
+canon_version: 3.0.0
+last_reviewed: 2026-05-01
 ---
 
 # Governed Agent Autonomy Model - Levels
@@ -11,10 +11,12 @@ forward comparable work, fixtures, contracts, controls, and lessons. Level
 claims are made on evidence: artifacts, controls, tests, telemetry, and
 replayable records.
 
-Level descriptions, exit criteria, and record/schema names are semantic
-anchors, not required strings. A system can satisfy a requirement through
-local vocabulary, services, workflows, external stores, or evidence shapes
-when they prove the same capability boundary and prevent the same failure.
+Level descriptions, exit criteria, and example artifact names are context
+cues, not required strings. GAAM does not require specific record or schema
+names. A system satisfies a requirement through local vocabulary, services,
+workflows, external stores, or evidence shapes when they prove the same
+workflow context, authority boundary, evidence semantics, runtime boundary,
+and prevented failure.
 
 ## L1 - Unmanaged AI Baseline
 
@@ -74,8 +76,8 @@ work items. It builds the retrieval contract L4 consumes.
 ## L4 - Reviewed Assistance
 
 **Intent.** The first governed assistant uses L3 retrieval to draft work
-artifacts from cited evidence and stops at human review. No send action, tool
-writes, approval authority, memory, or autonomous closure is allowed.
+artifacts from cited evidence and stops at human review. No send action,
+side-effecting tool action, approval authority, memory, or autonomous closure is allowed.
 
 **Exit criteria.**
 - Per work item, the assistant produces intake or routing, stakeholder-safe
@@ -84,8 +86,8 @@ writes, approval authority, memory, or autonomous closure is allowed.
 - Prompt context uses explicit trust frames for system, external input, retrieved
   evidence, and tool output.
 - External-facing output passes a typed safety/leak check before acceptance.
-- Adversarial input and retrieved-evidence matches produce
-  `InjectionDetection` records and lower-trust framing.
+- Adversarial input and retrieved-evidence matches produce threat-detection
+  evidence and lower-trust framing.
 
 **Common confusion.** L4 is an assistant, not an agent that decides or
 publishes. If external-facing output ships without human review, the system is
@@ -115,22 +117,22 @@ The runtime refuses write-capable manifests at this level.
 
 ## L6 - Approved Action
 
-**Intent.** One specific pre-approved write per work item may execute. The model
-recommends; the runtime assembles the executable action, verifies approval
-binding, issues a one-shot lease, enforces idempotency, records rollback
-metadata, and blocks unsafe external-facing writes.
+**Intent.** One specific pre-approved side-effecting action per work item may
+execute. The model recommends; the runtime assembles the executable action,
+verifies approval binding, issues one-shot authority, enforces idempotency,
+records recovery metadata, and blocks unsafe external-facing actions.
 
 **Exit criteria.**
 - Runtime-owned action assembly determines `tool_id` and arguments from typed
   sources; model recommendations are review evidence, not executable
   authority.
-- Every executed write has a signed approval record bound to the exact action
-  by hash, a one-shot credential lease, an idempotency key, a `ToolAction`,
-  and a `RollbackPlan`.
+- Every executed side-effecting action has approval evidence bound to the
+  exact action by digest, one-shot action authority, an idempotency key,
+  execution evidence, and rollback or compensation metadata.
 - Signature verification runs before binding checks where signed approvals
   are configured.
-- Replays return the prior `ToolAction` without mutating state again.
-- External-facing writes run the safety block before approval resolution.
+- Replays return the prior action result without mutating state again.
+- External-facing actions run the safety block before approval resolution.
 
 **Common confusion.** L6 does not introduce unattended policy autonomy. The
 gate checks durable approval and exact binding; L9 is where policy replaces
@@ -154,7 +156,7 @@ and memory validity.
 - Multi-dimensional retry/budget caps are enforced.
 - Memory writes pass the seven-stage validator; the model reads redacted
   tenant-scoped content only.
-- Write actions still flow through L6 approval.
+- Side-effecting actions still flow through L6 approval.
 
 **Common confusion.** L7 is the first task-owning agent, but it is not
 multi-agent coordination, routine unattended autonomy, or self-improvement.
@@ -197,11 +199,11 @@ bound the autonomy.
   within a bounded window.
 - Dead-lettered work remains inspectable, replayable, and tenant-isolated.
 - SLO, cost, retry, and latency budgets are tracked and enforced.
-- Dynamic credential revocation is honored before write boundaries.
+- Dynamic credential revocation is honored before side-effect boundaries.
 - Adversarial corpus freshness and threat-class coverage are startup gates.
 
 **Common confusion.** L9 does not let the agent choose eligibility,
-self-unpause, skip write-boundary rechecks, or run without typed halts.
+self-unpause, skip side-effect boundary rechecks, or run without typed halts.
 
 ## L10 - Governed Improvement Loop
 

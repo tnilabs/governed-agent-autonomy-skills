@@ -28,7 +28,7 @@ const repoRoot = process.cwd();
 const expected = path.resolve(repoRoot, "skills");
 
 const mod = await import(path.resolve(repoRoot, ".opencode/plugins/governed-agent-autonomy-skills.js"));
-const plugin = mod.AgenticMaturityModelSkillsPlugin || mod.default;
+const plugin = mod.GovernedAgentAutonomySkillsPlugin || mod.default;
 if (typeof plugin !== "function") {
   console.error("plugin is not a callable function");
   process.exit(1);

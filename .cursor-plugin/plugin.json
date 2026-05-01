@@ -2,7 +2,7 @@
   "name": "governed-agent-autonomy-skills",
   "displayName": "Governed Agent Autonomy Model Skills",
   "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review.",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "author": {
     "name": "TNI Labs"
   },

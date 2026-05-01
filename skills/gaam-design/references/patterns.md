@@ -1,19 +1,20 @@
 ---
-canon_version: 2.0.0
-last_reviewed: 2026-04-30
+canon_version: 3.0.0
+last_reviewed: 2026-05-01
 ---
 
 # Pattern Entries per GAAM Level
 
-This index mirrors the source GAAM implementation.
-Each GAAM level has one H2 section. Each reusable source pattern has one H3
-entry with a functional signature, the enterprise controls it exercises, and
-the assertion a reviewer or implementer should prove.
+This index describes reusable GAAM capability patterns.
+Each GAAM level has one H2 section. Each pattern has one H3 entry with a
+functional signature, the enterprise controls it exercises, and the assertion
+a reviewer or implementer should prove.
 
-Pattern IDs, test wording, and example record/schema names are semantic
-anchors, not required strings. Equivalent local implementations satisfy a
-pattern when they produce the same evidence, enforce the same boundary, and
-prevent the same failure.
+Pattern IDs and test wording are trace handles. Example artifact, record, or
+schema names are non-normative context cues, not GAAM requirements.
+Equivalent local implementations satisfy a pattern when they fit the workflow
+context, produce the same evidence semantics, enforce the same authority and
+runtime boundaries, and prevent the same failure.
 
 **Lookup rule for agents.** For target or claimed level L<n>, include every
 pattern entry under sections L1 through L<n> inclusive. Do not include only
@@ -84,7 +85,7 @@ forward.
 
 ### L4-adversarial-input-labeling
 
-- **Functional signature:** pattern-library matches on hostile external input or retrieved evidence are labeled as `InjectionDetection` records, not silently blocked - produces lower-trust framing decisions - prevents instruction override from entering model context as authority
+- **Functional signature:** pattern-library matches on hostile external input or retrieved evidence are labeled as threat-detection evidence, not silently ignored - produces lower-trust framing decisions - prevents instruction override from entering model context as authority
 - **Controls activated:** Threat & Adversarial Resilience, Observability & Telemetry
 - **Test asserts:** matches produce typed detection records with source frame, pattern, action=`label`, and versioned detector metadata.
 
@@ -104,7 +105,7 @@ forward.
 
 ### L5-read-tool-audit-redaction
 
-- **Functional signature:** every read-tool call emits an `AuditRecord` and sends only redacted output to the model - produces actor/scope/status/protocol/native-tool evidence - prevents silent data egress through tool results
+- **Functional signature:** every read-tool call emits audit evidence and sends only redacted output to the model - produces actor/scope/status/protocol/native-tool evidence - prevents silent data egress through tool results
 - **Controls activated:** Data, Context & Memory Governance, Evidence & Assurance, Observability & Telemetry, Delegated Authority & Access
 - **Test asserts:** every read call records actor, scope, args/result digest or redacted output, status, and the model receives the redacted payload.
 
@@ -130,45 +131,45 @@ forward.
 
 ### L6-model-recommends-runtime-assembles
 
-- **Functional signature:** model recommends an action while runtime authoritatively assembles `tool_id` and arguments from typed templates - produces divergence audit evidence - prevents model-authored writes
+- **Functional signature:** model recommends an action while runtime authoritatively assembles `tool_id` and arguments from typed templates - produces divergence audit evidence - prevents model-authored side effects
 - **Controls activated:** Evidence & Assurance, Tool & Protocol Safety, Delegated Authority & Access
-- **Test asserts:** executable writes use runtime-assembled arguments and model/runtime divergence is logged without changing execution.
+- **Test asserts:** executable actions use runtime-assembled arguments and model/runtime divergence is logged without changing execution.
 
 ### L6-approval-binding-hash
 
-- **Functional signature:** approval records bind to the exact runtime-assembled action via recomputable hash - produces approval gate decisions - prevents reusing a valid-looking approval for a different mutation
+- **Functional signature:** approval evidence binds to the exact runtime-assembled action via recomputable hash - produces approval gate decisions - prevents reusing a valid-looking approval for a different side effect
 - **Controls activated:** Evidence & Assurance, Delegated Authority & Access, Incident Response & Recovery, Observability & Telemetry
-- **Test asserts:** approval is consumed only when binding hash matches; invalid gates do not consume leases.
+- **Test asserts:** approval is consumed only when binding hash matches; invalid gates do not consume action authority.
 
-### L6-one-shot-credential-lease
+### L6-one-shot-action-authority
 
-- **Functional signature:** approved writes receive one action-bound, time-bound credential lease consumed exactly once - produces lease issue/consume records - prevents replay or broad write authority
+- **Functional signature:** approved actions receive one action-bound, time-bound authority grant consumed exactly once - produces authority issue/consume evidence - prevents replay or broad side-effect authority
 - **Controls activated:** Delegated Authority & Access, Incident Response & Recovery, Evidence & Assurance
-- **Test asserts:** lease action ID and idempotency key must match the call and the same lease cannot be consumed twice.
+- **Test asserts:** authority grant action ID and idempotency key must match the call and the same grant cannot be consumed twice.
 
-### L6-idempotent-write-replay
+### L6-idempotent-action-replay
 
-- **Functional signature:** repeated idempotency key returns the prior `ToolAction` without fresh mutation - produces replay evidence - prevents duplicate side effects during retries
+- **Functional signature:** repeated idempotency key returns the prior action result without fresh mutation - produces replay evidence - prevents duplicate side effects during retries
 - **Controls activated:** Incident Response & Recovery, Evidence & Assurance, Observability & Telemetry
-- **Test asserts:** a replay does not consume a fresh lease and does not mutate state again.
+- **Test asserts:** a replay does not consume fresh authority and does not mutate state again.
 
-### L6-rollback-metadata-on-every-write
+### L6-recovery-metadata-on-every-action
 
-- **Functional signature:** every executed write carries a `RollbackPlan` with reverse, compensation, append-only correction, or follow-up correction path - produces recovery metadata - prevents incident response improvising after mutation
+- **Functional signature:** every executed side-effecting action carries rollback or compensation metadata with reverse, append-only correction, or follow-up correction path - produces recovery metadata - prevents incident response improvising after mutation
 - **Controls activated:** Incident Response & Recovery, Evidence & Assurance, Observability & Telemetry
-- **Test asserts:** every executed write has a rollback plan whose correction path is one of the allowed typed paths.
+- **Test asserts:** every executed action has a recovery path whose correction type is one of the allowed typed paths.
 
-### L6-signed-approval-record
+### L6-signed-approval-evidence
 
-- **Functional signature:** approval records are Ed25519-signed over canonical payload and verified before binding checks - produces signature verification evidence - prevents at-rest approval tampering
+- **Functional signature:** approval evidence is signed over canonical payload and verified before binding checks - produces signature verification evidence - prevents at-rest approval tampering
 - **Controls activated:** Threat & Adversarial Resilience, Evidence & Assurance, Delegated Authority & Access
-- **Test asserts:** invalid, rotated, or revoked signing keys fail cleanly before binding and lease consumption.
+- **Test asserts:** invalid, rotated, or revoked signing keys fail cleanly before binding and authority consumption.
 
 ### L6-customer-safety-block-gate
 
-- **Functional signature:** external-facing writes run the L4 safety check before approval resolution - produces first-class block gate status - prevents approved writes from leaking unsafe recipient-facing text
+- **Functional signature:** external-facing actions run the L4 safety check before approval resolution - produces first-class block gate status - prevents approved actions from leaking unsafe recipient-facing text
 - **Controls activated:** Data, Context & Memory Governance, Evidence & Assurance, Incident Response & Recovery
-- **Test asserts:** unsafe external-facing writes short-circuit to `customer_safety_block` regardless of approval validity.
+- **Test asserts:** unsafe external-facing actions short-circuit to `customer_safety_block` regardless of approval validity.
 
 ## L7 - Bounded Task Agency
 
@@ -212,7 +213,7 @@ forward.
 
 ### L8-durable-orchestration-state
 
-- **Functional signature:** coordinated workflow state persists across failure and resumes without duplicate side effects - produces signed checkpoints - prevents crash recovery from replaying writes or losing approvals
+- **Functional signature:** coordinated workflow state persists across failure and resumes without duplicate side effects - produces signed checkpoints - prevents crash recovery from replaying actions or losing approvals
 - **Controls activated:** Incident Response & Recovery, Agent Registry & Lifecycle, Observability & Telemetry, Evidence & Assurance
 - **Test asserts:** checkpoints include tool calls and approval state; resume continues from checkpoint without duplicate mutation.
 

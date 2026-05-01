@@ -1,11 +1,11 @@
 ---
 name: gaam-implement
-description: Use when the task is to apply a GAAM pattern entry to a codebase, implement a GAAM-level capability such as L5 scoped read access or L6 approved writes, or refactor existing code to satisfy GAAM exit criteria
+description: Use when the task is to apply a GAAM pattern entry to a codebase, implement a GAAM-level capability such as L5 scoped read access or L6 approved action, or refactor existing code to satisfy GAAM exit criteria
 ---
 
 # Implementing GAAM Patterns
 
-Integrate GAAM pattern entries into the *existing* user system, under the team's existing names. Land the functional-signature test before code.
+Integrate GAAM pattern entries into the *existing* user system, under the team's existing names. Preserve the workflow context and authority boundary. Land the functional-signature test before code.
 
 ## Inputs
 
@@ -13,7 +13,7 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 
 ## Process
 
-1. Locate the pattern entry in `references/patterns.md`. Note its functional signature, the controls it activates, and the test that asserts the signature.
+1. Locate the pattern entry in `references/patterns.md`. Note its functional signature, controls, target workflow context, authority boundary, and test assertion.
 2. Survey the user's codebase via `synonyms.md`. Search semantic equivalents, not literal names: local code may satisfy GAAM via different services, schemas, events, workflows, or external stores. Record what you found and where.
 3. If equivalent exists: integrate / strengthen it under the existing names. Do not rename or duplicate.
 4. If not: design the smallest addition that satisfies the functional signature; integrate at the natural seam in the existing architecture.
@@ -23,7 +23,7 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 ## Hard rules
 
 - Every pattern integration lands a test that asserts the functional signature *before* code lands.
-- Do not rename existing user systems to match canonical GAAM terminology, and do not add GAAM example record names just for naming parity. Adapt and record the mapping. The team owns the vocabulary.
+- Do not rename existing user systems to match canonical GAAM terminology, and do not add GAAM example artifact names just for naming parity. GAAM does not require specific record names; adapt and record the mapping. The team owns the vocabulary.
 - When the pattern requires a contract change (schema field, header, log shape), update consumers and bump the contract version in the same change.
 
 ## Output template
@@ -33,6 +33,7 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 
 - Pattern entry: <pattern-id from references/patterns.md>
 - Canon versions: patterns v<x>, synonyms v<x>, controls v<x>
+- Claim context: workflow=<x>; scope=<x>; allowed/excluded authority=<x>; owner=<x>
 - User-team mapping: <local structure/name> ↔ <GAAM semantic anchor>
 
 ## Existing capability survey (conceptual-equivalence)

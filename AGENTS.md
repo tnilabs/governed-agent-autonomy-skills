@@ -30,7 +30,7 @@ installed in the host tool.
 | `skills/<focused-skill>/references/*.md` | Skill-local copies of GAAM canon for installed-plugin sandboxes; must match root `references/*.md` byte-for-byte. |
 | `references/gaam-levels.md` | Root canon of the 10 GAAM levels (one H2 per level). |
 | `references/controls.md` | Root canon of the 10 enterprise control categories (canonical spelling enforced by tests). |
-| `references/patterns.md` | Root source-aligned pattern index per GAAM level (one section per L1–L10; every source pattern ID has functional signature, controls activated, and test asserts). |
+| `references/patterns.md` | Root GAAM capability-pattern index per level (one section per L1–L10; every pattern ID has functional signature, controls activated, and test asserts). |
 | `references/synonyms.md` | Root synonym, conceptual-equivalence, and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
@@ -81,8 +81,9 @@ installed in the host tool.
   signals searched, and locations is invalid output.
 - All focused skills MUST contain the literal sentinel
   `semantic equivalents, not literal names`. GAAM level descriptions,
-  requirements, control names, pattern IDs, and record/schema names are
-  semantic anchors and trace handles, not required strings in user repos.
+  requirements, control names, and pattern IDs are semantic anchors and trace
+  handles. Example artifact names are context cues, not required strings in
+  user repos.
 - `gaam-assess` MUST contain the literal sentinel
   `Citing a reference as not loaded is invalid output`; classification
   requires all four bundled refs.
@@ -99,22 +100,22 @@ installed in the host tool.
 - Every reference file's frontmatter has `canon_version:` (semver-like)
   and `last_reviewed:` (ISO date). Tests reject a missing field.
 - `references/gaam-levels.md` has exactly 10 H2 sections, one per L1–L10.
-- `references/controls.md` has exactly 10 H2 sections using the canonical
-  spelling (no ampersands, no abbreviations): `Threat & Adversarial Resilience`,
+- `references/controls.md` has exactly 10 H2 sections using the exact
+  canonical spelling: `Threat & Adversarial Resilience`,
   `Agent Registry & Lifecycle`, `Evidence & Assurance`,
   `Delegated Authority & Access`, `Data, Context & Memory Governance`,
   `Tool & Protocol Safety`, `Incident Response & Recovery`,
   `Runtime Isolation & Execution Safety`, `Observability & Telemetry`,
   `Value, Cost & Reliability`. Tests fail on any deviation.
 - `references/patterns.md` has one section per GAAM level L1–L10. Every
-  source GAAM pattern ID appears as a `### <pattern-id>` entry with
+  GAAM capability pattern ID appears as a `### <pattern-id>` entry with
   `**Functional signature:**`,
   `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
   substrate patterns; do not reintroduce `no v0 pattern family`.
 - `references/synonyms.md` has `## Conceptual Equivalence Rules`,
   `## Controls`, and `## Patterns` sections.
-  It MUST state that canonical GAAM names and record/schema names are
-  semantic anchors, not required strings.
+  It MUST state that canonical GAAM names are semantic anchors and example
+  artifact names are non-normative context cues, not required strings.
   Every control (ten) and every pattern entry gets a
   `### <Canonical Name or pattern-id>` entry with `**Functional signature:**`,
   `**Alternative names:**` (≥3), and `**Detection signals:**` with at
@@ -137,7 +138,7 @@ installed in the host tool.
 - `package.json` MUST have `"type": "module"` and
   `"main": ".opencode/plugins/governed-agent-autonomy-skills.js"`. The
   OpenCode plugin file MUST export a named async plugin function
-  (`AgenticMaturityModelSkillsPlugin`) returning an object with a `config`
+  (`GovernedAgentAutonomySkillsPlugin`) returning an object with a `config`
   async hook that pushes the bundled `skills/` absolute path into
   `config.skills.paths`. No symlinks. No prompt injection. No
   system-message hook.
@@ -200,7 +201,7 @@ installed in the host tool.
 - JSON manifests are minimal and conform to their tool's documented
   schema.
 - The OpenCode plugin (`.opencode/plugins/governed-agent-autonomy-skills.js`)
-  is ESM and stays minimal — register skills, nothing else.
+  is ESM and stays minimal: register skills, nothing else.
 - Files scoped to one responsibility; split files that start mixing
   concerns.
 - Use repo-relative or environment-derived paths.

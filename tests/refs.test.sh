@@ -51,10 +51,10 @@ PATTERN_IDS=(
   "L5-native-tool-conformance"
   "L6-model-recommends-runtime-assembles"
   "L6-approval-binding-hash"
-  "L6-one-shot-credential-lease"
-  "L6-idempotent-write-replay"
-  "L6-rollback-metadata-on-every-write"
-  "L6-signed-approval-record"
+  "L6-one-shot-action-authority"
+  "L6-idempotent-action-replay"
+  "L6-recovery-metadata-on-every-action"
+  "L6-signed-approval-evidence"
   "L6-customer-safety-block-gate"
   "L7-signed-goal-with-immutable-scope"
   "L7-success-criteria-predicate-registry"
@@ -159,8 +159,8 @@ if [[ -f references/controls.md ]]; then
   fi
 fi
 
-# 5. patterns.md: exactly 10 H2 sections, one per L1..L10. Every source
-# pattern from ../governed-agent-autonomy must be represented as a `###` entry with
+# 5. patterns.md: exactly 10 H2 sections, one per L1..L10. Every GAAM
+# capability pattern must be represented as a `###` entry with
 # a functional signature, controls activated, and test asserts. L1/L2 are
 # substrate patterns, not "no pattern" placeholders.
 PATTERN_ENTRY_NAMES=()
@@ -185,7 +185,7 @@ if [[ -f references/patterns.md ]]; then
 
   for pattern_id in "${PATTERN_IDS[@]}"; do
     if ! grep -qxF "### $pattern_id" references/patterns.md; then
-      echo "patterns.md missing source pattern entry: '### $pattern_id'"; fail=1; continue
+      echo "patterns.md missing GAAM capability pattern entry: '### $pattern_id'"; fail=1; continue
     fi
     body=$(awk -v hdr="### $pattern_id" 'index($0, hdr)==1 {found=1; next} found && /^### / {exit} found && /^## / {exit} found {print}' references/patterns.md)
     for label in "Functional signature" "Controls activated" "Test asserts"; do
@@ -221,7 +221,7 @@ if [[ -f references/synonyms.md ]]; then
   if ! grep -q '^## Conceptual Equivalence Rules$' references/synonyms.md; then
     echo "synonyms.md missing '## Conceptual Equivalence Rules'"; fail=1
   fi
-  if ! grep -qF 'Canonical GAAM names and record/schema names are semantic anchors, not required strings.' references/synonyms.md; then
+  if ! grep -qF 'Canonical GAAM names are semantic anchors. Example artifact names are non-normative context cues, not required strings.' references/synonyms.md; then
     echo "synonyms.md missing semantic-anchor rule"; fail=1
   fi
   for c in "${CONTROL_NAMES[@]}"; do

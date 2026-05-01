@@ -5,7 +5,7 @@ description: Use when reviewing an enterprise agent change for GAAM conformance,
 
 # Reviewing an Enterprise Agent
 
-Verify GAAM level claims against artifacts using conceptual-equivalence search for controls/patterns and artifact search for pure exit criteria. Produce a structured review report.
+Verify workflow-scoped GAAM claims against artifacts using conceptual-equivalence search for controls/patterns and artifact search for exit criteria.
 
 ## Inputs
 
@@ -13,9 +13,9 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 
 ## Process
 
-1. Read the change set and any GAAM-level claim in the PR description / design brief.
+1. Read the change set and GAAM claim: workflow, scope, period, allowed/excluded authority, controls, evidence, owner, and reassessment triggers.
 2. Build the checklist for L1 through the claimed level inclusive: exit criteria from `references/gaam-levels.md`, controls whose `Activated at GAAM levels` line includes the claimed level, and pattern entries introduced at L1 through the claimed level.
-3. For each control AND pattern, run a conceptual-equivalence search via `synonyms.md`: compare functional signature, evidence, failure, and detection signals. Search semantic equivalents, not literal names; local services, schemas, events, workflows, or external systems can satisfy the GAAM anchor. Record searches, findings, and rationale.
+3. For each control AND pattern, run a conceptual-equivalence search via `synonyms.md`: compare functional signature, workflow context, authority boundary, evidence semantics, failure, runtime boundary, and detection signals. Search semantic equivalents, not literal names. Record searches, findings, and rationale.
 4. For each GAAM exit criterion that is not a control or pattern entry, run an artifact search for the named criterion under local names. Record terms, locations, and result.
 5. Verify each integrated pattern has a passing functional-signature test (per the implement skill's rule).
 6. Verify threat-model deltas, audit/observability mapping, and any evidence-pack outputs.
@@ -23,7 +23,7 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 
 ## Hard rule
 
-Controls and patterns require a **recorded conceptual-equivalence search**: load the synonym entry, search at least four signal categories, compare functional meaning, and record locations. Pure GAAM exit criteria require a **recorded artifact search** under local names. Canonical control names, pattern IDs, and record/schema names are trace anchors and examples, not required strings. A missing/not-satisfied finding without the applicable recorded search is invalid output.
+Controls and patterns require a **recorded conceptual-equivalence search**: load the synonym entry, search at least four signal categories, compare context and function, and record locations. Pure GAAM exit criteria require a **recorded artifact search** under local names. Canonical control names and pattern IDs are trace anchors. Example artifact names are context cues, not required records. A missing/not-satisfied finding without the applicable recorded search is invalid output.
 
 ## Forbidden shortcuts
 
@@ -39,6 +39,7 @@ Controls and patterns require a **recorded conceptual-equivalence search**: load
 - Canon versions: gaam-levels v<x>, controls v<x>, patterns v<x>, synonyms v<x>
 - Claimed level: L<n>
 - Verified level: L<n>
+- Claim context: workflow=<x>; scope=<x>; period=<x>; allowed/excluded authority=<x>; owner=<x>
 - Verdict: PASS | FAIL | NEEDS-FIX
 
 ## Control activation

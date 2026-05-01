@@ -11,7 +11,7 @@ ASSESS_BUDGET=650
 EXPECTED_SET="gaam gaam-assess gaam-design gaam-implement gaam-review"
 SYNONYM_SENTINEL="recorded conceptual-equivalence search"
 SEMANTIC_SENTINEL="semantic equivalents, not literal names"
-ASSESS_SEMANTIC_SCOPE="level descriptions, requirements, controls, and record/schema names"
+ASSESS_SEMANTIC_SCOPE="workflow context, authority boundary, capability, evidence semantics"
 ASSESS_REF_LOAD_SENTINEL="Citing a reference as not loaded is invalid output"
 
 if [[ ! -d skills ]]; then echo "skills/ missing"; exit 1; fi

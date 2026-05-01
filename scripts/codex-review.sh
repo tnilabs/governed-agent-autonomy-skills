@@ -32,12 +32,12 @@ Review criteria (do not skip any):
 3. Plugin manifests are syntactically correct and reference real files (Codex interface block + capabilities=[Interactive,Read,Write], OpenCode package.json type/main, Cursor skills path with no agents/commands/hooks, Gemini contextFileName=GEMINI.md, Claude marketplace plugins[].source).
 4. Cross-tool installation paths in README match each tool actual mechanism (Claude Code local marketplace, Codex CLI/App symlink, Cursor symlink, OpenCode opencode.json, Gemini extensions install, Copilot marketplace).
 5. The assess and review skills enforce the conceptual-equivalence rule (no "missing" finding without a recorded conceptual-equivalence search; the literal phrase "recorded conceptual-equivalence search" must appear in both bodies).
-5b. All focused skills enforce semantic-anchor matching: the literal phrase "semantic equivalents, not literal names" appears in assess/design/implement/review, and assess explicitly covers level descriptions, requirements, controls, and record/schema names.
+5b. All focused skills enforce semantic-anchor matching: the literal phrase "semantic equivalents, not literal names" appears in assess/design/implement/review, and assess explicitly covers workflow context, authority boundary, capability, and evidence semantics.
 5c. The assess skill rejects incomplete canon loading: the literal phrase "Citing a reference as not loaded is invalid output" appears in the body.
 6. Each synonym entry has **Functional signature:** + >=3 alternative names + >=4 detection-signal categories, including conceptual equivalents.
 7. No skill, reference, README, context file, install doc, or script instructs the agent to fetch from external repos beyond the documented install/update commands.
-8. patterns.md has one section per GAAM level L1–L10; every source GAAM pattern ID has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
-9. controls.md uses the canonical 10 names exactly with the source-aligned activation matrix from ../governed-agent-autonomy/controls/README.md.
+8. patterns.md has one section per GAAM level L1–L10; every GAAM capability pattern ID has a `### <pattern-id>` entry with **Functional signature:** + **Controls activated:** + **Test asserts:** blocks; L1 and L2 are substrate patterns and MUST NOT carry "no v0 pattern family" placeholders.
+9. controls.md uses the canonical 10 names exactly with the self-contained activation matrix in references/controls.md.
 10. Skills do not chain to any other plugin (no superpowers:* or <plugin>:<skill> form anywhere in skill bodies).
 11. Bash test scripts under tests/ and tests/smoke/ are correct (regexes match what they claim, exit codes are not masked, all paths exist) and consistent with the repo test requirements.
 

@@ -1,6 +1,6 @@
 {
   "name": "governed-agent-autonomy-skills",
-  "version": "3.0.0",
+  "version": "4.0.0",
   "type": "module",
   "main": ".opencode/plugins/governed-agent-autonomy-skills.js",
   "description": "Cross-tool coding-agent skills for assessing, designing, implementing, and reviewing enterprise agents against GAAM-style discipline. Self-contained; no external deps.",

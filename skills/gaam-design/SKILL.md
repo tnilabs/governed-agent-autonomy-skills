@@ -5,7 +5,7 @@ description: Use when the task is to design a new enterprise agent, scope an AI 
 
 # Designing an Enterprise Agent
 
-Turn an idea into a GAAM-scoped design brief. The brief commits to a target level and lists the controls + patterns + evidence that level demands.
+Turn an idea into a workflow-scoped GAAM design brief. The brief states the target authority, excluded authority, active controls, evidence, and production boundaries.
 
 ## Inputs
 
@@ -13,17 +13,17 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 
 ## Process
 
-1. Clarify the target GAAM level (L1-L10). If unstated, ask before writing the brief.
+1. Clarify workflow, scope, target GAAM level (L1-L10), allowed/excluded authority, owner, and acceptable risk. If the target level is unstated, ask before writing.
 2. From `references/patterns.md`, list every pattern entry introduced at L1 through the target level inclusive (match `### L<n>-` headings).
 3. From `references/controls.md`, list every control whose `Activated at GAAM levels` line includes the target level.
-4. Treat level requirements, controls, pattern IDs, and record/schema names as semantic anchors. Design semantic equivalents, not literal names: same capability, evidence, runtime boundary, and prevented failure under the team's vocabulary.
+4. Treat level requirements, controls, pattern IDs, and example artifact names as context cues. Design semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, runtime boundary, and prevented failure under the team's vocabulary.
 5. For each control, capture the GAAM anchor plus the user-team's preferred capability/evidence name. The brief speaks the team's language while remaining GAAM-traceable. Downstream review/assess depend on this map.
 6. Produce the brief using the **Output template** below.
 
 ## Hard rules
 
 - Target-level claim must come with the matching control activations and exit-criteria evidence in the brief — not vibes.
-- The brief must include a terminology map. Do not force GAAM example record names into the design unless the team wants those names.
+- The brief must include a terminology map. Do not force GAAM example artifact names into the design; GAAM does not require specific record names.
 
 ## Forbidden shortcuts
 
@@ -36,12 +36,19 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 gaam:
   target_level: L<n>
   canon_versions: { gaam_levels: <x>, controls: <x>, patterns: <x>, synonyms: <x> }
-scenario: <one-sentence problem>
-schemas: [<schema names>]
+claim:
+  workflow: <workflow>
+  scope: <covered users/work items/environments>
+  allowed_authority: <what the agent may read/draft/prepare/act on>
+  excluded_authority: <what it may not do>
+  owner: <team/person>
+  reassessment_triggers: [<events/cadence>]
+local_artifacts: [<team schemas/events/services/evidence stores>]
 controls:
   - gaam_anchor: <Threat & Adversarial Resilience | ...>
     local_name: <team's preferred capability/evidence name>
-    activates_at: L<n>
+    introduced_at: L<n>
+    active_for_target: true
     evidence: <what this control will produce>
 patterns:
   - level: L<n introduced>

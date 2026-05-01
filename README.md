@@ -2,21 +2,21 @@
 
 Cross-tool skills for making coding agents assess, design, implement, and review enterprise agents against the Governed Agent Autonomy Model (GAAM).
 
-GAAM is a 10-level maturity model for production AI agents. It starts with unmanaged AI baseline and ends with governed improvement loop. Each level adds a capability boundary: grounded knowledge, human review, scoped read access, approved writes, bounded task agency, verified agent coordination, policy-gated autonomy, and governed improvement loop.
+GAAM is a 10-level framework for governed production AI agents. It starts with unmanaged AI baseline and ends with governed improvement loop. Each level adds an authority boundary: grounded knowledge, reviewed assistance, scoped read access, approved action, bounded task agency, verified agent coordination, policy-gated autonomy, and governed improvement loop.
 
 This repo packages that discipline as installable skills for coding agents. The skills make an agent ask for evidence, map GAAM anchors to local semantics, search across naming and architecture differences, and produce assessment/design/implementation/review artifacts that an enterprise team can actually audit.
 
-The source GAAM implementation lives in [`tnilabs/governed-agent-autonomy`](https://github.com/tnilabs/governed-agent-autonomy). This repo vendors a self-contained snapshot of the GAAM levels, controls, pattern entries, synonyms, and detection guidance. Installed skills do not fetch from that repo at runtime.
+This repo is a standalone GAAM skills distribution. It ships the GAAM levels, controls, capability patterns, synonyms, and detection guidance needed by installed skills. Installed skills do not fetch canon from another repository at runtime.
 
 ## What You Get
 
 - Evidence-first GAAM assessment: classify the actual level from repo artifacts, not self-claims.
 - Enterprise design briefs: turn an agent idea into a target-level plan with controls, evidence, and failure modes.
-- Implementation planning: apply GAAM pattern entries such as L5 scoped read access, L6 approved writes, or L8 verified agent coordination.
+- Implementation planning: apply GAAM capability patterns such as L5 scoped read access, L6 approved action, or L8 verified agent coordination.
 - Review discipline: verify PRs, evidence packs, and level claims using conceptual-equivalence searches.
-- Conceptual matching: do not miss a level requirement, control, pattern, or record shape just because a team names or structures it differently.
+- Conceptual matching: do not miss a level requirement, control, pattern, or evidence shape just because a team names or structures it differently.
 - Semantic anchors: GAAM names are traceability handles, not required strings; the skills search semantic equivalents, not literal names.
-- Self-contained canon: GAAM levels, 10 enterprise controls, all source-aligned pattern entries, and detection signals ship in this repo.
+- Self-contained canon: GAAM levels, 10 enterprise controls, capability patterns, and detection signals ship in this repo.
 
 ## Skills
 
@@ -67,7 +67,7 @@ Use gaam-design to design a claims-processing agent at GAAM L6.
 ```
 
 ```text
-Use gaam-implement to plan L5 read-only tool manifests and audit records.
+Use gaam-implement to plan L5 read-only tool manifests and audit evidence.
 ```
 
 ```text
@@ -140,7 +140,7 @@ use skill tool to load governed-agent-autonomy-skills/gaam
 - Exit criterion: evidence IDs and retrieval evals; verdict: missing; searched: evidence_id, retrieval-evals, knowledge-index, equivalent corpus gates; locations: no matches
 
 ### L5 - Scoped Read Access
-- Pattern: scoped read grants; verdict: partial; searched: issue_read_grant, lease broker, delegated read access, equivalent per-run authority; locations: src/auth/grants.ts
+- Pattern: scoped read grants; verdict: partial; searched: issue_read_grant, authority broker, delegated read access, equivalent per-run authority; locations: src/auth/grants.ts
 
 ## Lowest failing boundary
 - L3 grounded knowledge - add reviewed knowledge index, coverage map, and golden retrieval evals
@@ -155,17 +155,22 @@ use skill tool to load governed-agent-autonomy-skills/gaam
 target_level: L6
 agent_goal: "Draft and execute one approved account-update action"
 active_controls:
+  - Threat & Adversarial Resilience
+  - Evidence & Assurance
   - Data, Context & Memory Governance
+  - Runtime Isolation & Execution Safety
+  - Observability & Telemetry
+  - Value, Cost & Reliability
   - Delegated Authority & Access
   - Tool & Protocol Safety
   - Incident Response & Recovery
 evidence_to_produce:
   - approval evidence bound by action hash
-  - one-use write authority consumed once
-  - mutation ledger entry with idempotency key
-  - recovery or compensation plan for every write
+  - one-use action authority consumed once
+  - action result entry with idempotency key
+  - recovery or compensation plan for every side effect
 open_questions:
-  - Which writes are eligible for L6 approval?
+  - Which actions are eligible for L6 approval?
   - Which local approval artifact is the audit source of truth?
 ```
 
@@ -178,10 +183,10 @@ open_questions:
 - Verdict: blocked
 
 ## Findings
-- BLOCKER: approved writes are not bound to exact action hash.
+- BLOCKER: approved actions are not bound to the exact action payload.
   - Signals searched: binding hash, approval ledger, reviewer signoff, action digest, equivalent approval workflow
-  - Locations: src/actions/write.ts, tests/actions/
-  - Required fix: verify signed approval before issuing one-shot lease
+  - Locations: src/actions/execute.ts, tests/actions/
+  - Required fix: verify signed approval before issuing one-shot authority
 
 ## Passing Evidence
 - Read-only tool manifests include side_effect_class=read_only.
@@ -267,14 +272,14 @@ The skills consult four shipped canon files:
 
 - [`references/gaam-levels.md`](references/gaam-levels.md): the 10 GAAM levels and exit criteria.
 - [`references/controls.md`](references/controls.md): 10 enterprise control categories and activation matrix.
-- [`references/patterns.md`](references/patterns.md): source-aligned GAAM pattern entries by level.
+- [`references/patterns.md`](references/patterns.md): GAAM capability patterns by level.
 - [`references/synonyms.md`](references/synonyms.md): alternative names, conceptual-equivalence rules, and detection signals for controls and patterns.
 
 Focused skills also include local copies of those reference files so installed-plugin hosts can read the canon even when they restrict access outside a skill directory. Tests enforce that the copies match the root references exactly.
 
 Assessment and review skills must record their searches. A missing-control finding is invalid unless the agent checked functional meaning, detection signals, local structures, and locations. This is the main value of the plugin: it turns "I don't see it" into auditable evidence.
 
-The canon uses stable GAAM names so reports are traceable, but those names are not a naming mandate. Level descriptions, requirements, control headings, pattern IDs, and example record/schema names are semantic anchors. A local ticket workflow, event stream, table, service, external evidence store, or existing schema can satisfy a GAAM item when it proves the same capability, evidence, runtime boundary, and failure prevention.
+The canon uses stable GAAM names so reports are traceable, but those names are not a naming mandate. Level descriptions, requirements, control headings, and pattern IDs are semantic anchors. Example artifact names are context cues, not required records. A local ticket workflow, event stream, table, service, external evidence store, or existing schema can satisfy a GAAM item when it proves the same workflow context, authority boundary, capability, evidence semantics, runtime boundary, and failure prevention.
 
 For headless Claude Code validation, plugin skill references may need the plugin cache added as a readable directory:
 

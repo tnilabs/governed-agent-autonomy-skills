@@ -35,14 +35,14 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 - Skills do not chain to other plugins.
 - `gaam-assess` and `gaam-review` must enforce recorded conceptual-equivalence search before marking any control or pattern missing.
 - `gaam-assess` must load all four bundled references before classifying; reporting a canon file as "not loaded" is invalid.
-- Every focused skill must treat GAAM level descriptions, requirements, control names, pattern IDs, and record/schema names as semantic anchors. User artifacts satisfy GAAM through equivalent capability, evidence, runtime boundary, and failure prevention, not literal names.
+- Every focused skill must treat GAAM level descriptions, requirements, control names, and pattern IDs as semantic anchors. Example artifact names are context cues, not required record names. User artifacts satisfy GAAM through equivalent workflow context, authority boundary, capability, evidence semantics, runtime boundary, and failure prevention.
 
 ## Reference Rules
 
 - Every reference file has `canon_version:` and `last_reviewed:` frontmatter.
 - `references/gaam-levels.md` keeps exactly 10 GAAM level sections.
 - `references/controls.md` keeps exactly 10 canonical control sections and the activation matrix.
-- `references/patterns.md` keeps one section per GAAM level and one entry per source GAAM pattern ID.
+- `references/patterns.md` keeps one section per GAAM level and one entry per GAAM capability pattern ID.
 - `references/synonyms.md` keeps entries for every control and pattern, with functional signature, alternative names, conceptual-equivalence guidance, semantic-anchor guidance, and detection signals.
 - The focused skill reference copies must match root `references/*.md` exactly.
 

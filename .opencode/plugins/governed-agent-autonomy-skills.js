@@ -10,7 +10,7 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const skillsDir = path.resolve(__dirname, "..", "..", "skills");
 
-export const AgenticMaturityModelSkillsPlugin = async ({ client, directory }) => {
+export const GovernedAgentAutonomySkillsPlugin = async ({ client, directory }) => {
   return {
     config: async (config) => {
       config.skills = config.skills || {};
@@ -22,4 +22,4 @@ export const AgenticMaturityModelSkillsPlugin = async ({ client, directory }) =>
   };
 };
 
-export default AgenticMaturityModelSkillsPlugin;
+export default GovernedAgentAutonomySkillsPlugin;
