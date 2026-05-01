@@ -2,7 +2,7 @@
 
 Skills for coding agents that design, build, assess, and review governed AI-agent workflows.
 
-Use them when software work involves an AI agent, retrieval workflow, tool use, scoped data access, delegated action, approval gate, autonomous task, agent handoff, or GAAM claim. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to check the gateway automatically.
+Use them when software work involves building an AI agent, or changing agent retrieval, tool use, scoped data access, delegated actions, approval gates, autonomous tasks, agent handoffs, or GAAM claims. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to check the gateway automatically.
 
 Core model repo: [tnilabs/governed-agent-autonomy](https://github.com/tnilabs/governed-agent-autonomy)
 
@@ -83,52 +83,17 @@ Evidence may be in src/actions, tests/actions, docs/security, and telemetry dash
 Do not assume names must match GAAM.
 ```
 
-## What Each Skill Needs
+## What To Tell The Agent
 
-### `gaam-assess`
+You do not need to fill out a form. Start with the workflow and what you want the agent to do.
 
-Give it:
+For assessment, name the workflow or repo area and any claimed level. The skill will look for evidence and report the level that is actually supported.
 
-- workflow name;
-- claimed level, if any;
-- where to look for evidence;
-- known out-of-repo evidence, such as dashboards or tickets.
+For design, describe what the agent should be allowed to do, what it must not do, what data and tools it can use, and who owns the risk.
 
-It checks all levels L1 through L10. The observed level is the highest complete prefix. If L3 is missing but L6-looking code exists, the observed level is still L2 and the L6-looking code is reported as partial higher-level evidence.
+For implementation, name the workflow and point to the relevant files or packages. Say whether you want code changes or only a plan. The skill should look for existing equivalents before adding new structures, then write behavior tests before implementation.
 
-### `gaam-design`
-
-Give it:
-
-- target level;
-- what the agent may do;
-- what the agent must not do;
-- data sources and tools;
-- owner and risk constraints.
-
-It returns a design brief: target level, authority boundary, active controls, required patterns, evidence, tests, and open questions.
-
-### `gaam-implement`
-
-Give it:
-
-- target pattern or level;
-- workflow boundary;
-- files/packages to inspect;
-- whether it should edit code or only plan.
-
-It searches for existing equivalents first. If code is missing, it writes the functional-signature test before implementation.
-
-### `gaam-review`
-
-Give it:
-
-- claimed level;
-- workflow scope;
-- PR or artifact locations;
-- evidence pack location, if one exists.
-
-It checks artifacts, not just the design doc. A missing finding must include what was searched before calling it missing.
+For review, point to the PR, diff, or evidence pack and say what claim is being checked. The skill should inspect artifacts, not just the design doc, and should name what it searched before saying something is missing.
 
 ## Example Outputs
 
@@ -308,12 +273,6 @@ claude -p "Use gaam-assess to classify this repo" \
 | OpenCode | Restart OpenCode, or pin/update the `#vX.Y.Z` suffix in `opencode.json` |
 | Gemini CLI | `gemini extensions update governed-agent-autonomy-skills` |
 | Copilot CLI | `copilot plugin update governed-agent-autonomy-skills@governed-agent-autonomy-skills` |
-
-## Non-Goals
-
-This is not a runtime, CLI, model integration, or framework. It does not execute agents.
-
-This is not a literal-name checklist. Local names are fine when the behavior and evidence are equivalent.
 
 ## Contributing
 
