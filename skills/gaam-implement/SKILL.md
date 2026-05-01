@@ -13,16 +13,17 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 
 ## Process
 
-1. Locate the pattern entry in `references/patterns.md`. Note its functional signature, controls, target workflow context, authority boundary, and test assertion.
-2. Survey the user's codebase via `synonyms.md`. Search semantic equivalents, not literal names: local code may satisfy GAAM via different services, schemas, events, workflows, or external stores. Record what you found and where.
-3. If equivalent exists: integrate / strengthen it under the existing names. Do not rename or duplicate.
-4. If not: design the smallest addition that satisfies the functional signature; integrate at the natural seam in the existing architecture.
+1. Locate the pattern entry in `references/patterns.md`. Note its functional signature, controls, target workflow context, authority boundary, priority gates, and test assertion.
+2. Check whether the requested change reclassifies the level: live reads L5, writes L6, task ownership L7, handoffs L8, autonomy L9, production-change proposals L10. Surface conflicts before coding.
+3. Survey the user's codebase via `synonyms.md`. Search semantic equivalents, not literal names: local code may satisfy GAAM via different services, schemas, events, workflows, or external stores. Record what you found and where.
+4. If equivalent exists, strengthen it under existing names. If not, add the smallest capability that satisfies the functional signature and authority gates.
 5. Write the functional-signature test first. Run it; it should fail. Implement minimally to pass. Add edge-case tests.
-6. Use the **Output template** as the work record. If the user requested implementation, make the edits and run tests before final; do not stop at a plan.
+6. Use the **Output template** as the work record. If implementation was requested, make edits and run tests before final.
 
 ## Hard rules
 
 - Every pattern integration lands a test that asserts the functional signature *before* code lands.
+- Authority gates land before the new authority is enabled. Scale gates block rollout or promotion.
 - Do not rename existing user systems to match canonical GAAM terminology, and do not add GAAM example artifact names just for naming parity. GAAM does not require specific record names; adapt and record the mapping. The team owns the vocabulary.
 - When the pattern requires a contract change (schema field, header, log shape), update consumers and bump the contract version in the same change.
 
@@ -34,7 +35,9 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 - Pattern entry: <pattern-id from references/patterns.md>
 - Canon versions: patterns v<x>, synonyms v<x>, controls v<x>
 - Claim context: workflow=<x>; scope=<x>; allowed/excluded authority=<x>; owner=<x>
+- Authority reclassification: none | target must be L<n> because <actual authority>
 - User-team mapping: <local structure/name> ↔ <GAAM semantic anchor>
+- Priority gates: blockers=<items>; scale-out=<items>; improve-next=<items>
 
 ## Existing capability survey (conceptual-equivalence)
 | Detection signal | Searched in | Found / not found |

@@ -19,6 +19,8 @@ The GAAM/control/pattern/synonym-map source material lives in `references/*.md`.
 
 For any target or claimed level, apply levels L1 through that level inclusive. Controls are active when their `Activated at GAAM levels` line contains the target level; patterns are active when introduced in any included level section.
 
+Before accepting a claimed level, check actual authority: live production reads imply at least L5, durable side effects L6, task ownership L7, agent handoffs L8, action without routine per-action approval L9, and production behavior proposals L10. Report authority gates blocking the claim, scale gates blocking rollout or promotion, and maturity-depth backlog.
+
 ## Conceptual-Equivalence Matching
 
 Level descriptions, requirements, controls, and patterns are semantic anchors. Example artifact names are context cues, not required record names. A user system has the GAAM item if it has the same workflow context, authority boundary, capability, evidence semantics, failure prevention, and runtime boundary under any local name or structure, including external systems. Before a skill marks any control or pattern "missing" or "not satisfied," it must load the synonym entry, search at least four detection-signal categories including conceptual equivalents, and record the equivalence rationale. A finding without a recorded conceptual-equivalence search is invalid output.

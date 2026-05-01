@@ -10,6 +10,16 @@ Core model repo: [tnilabs/governed-agent-autonomy](https://github.com/tnilabs/go
 
 This skills repo is standalone. It ships its own GAAM level, control, pattern, and synonym references. Installed skills do not fetch anything from the core model repo at runtime.
 
+The skills sort findings by consequence:
+
+| Finding type | Meaning |
+| --- | --- |
+| Authority gate | Missing evidence or enforcement blocks the GAAM claim. |
+| Scale gate | Missing work blocks broader rollout, higher risk, higher volume, or promotion. |
+| Maturity depth | Useful improvement backlog; reassess when risk or scope changes. |
+
+They also check actual authority before accepting a claimed level. Live reads are at least L5, durable side effects at least L6, task ownership at least L7, agent handoffs at least L8, action without routine per-action approval at least L9, and production behavior proposals at least L10.
+
 ## Skills
 
 | Skill | Use For | Output |
@@ -64,8 +74,10 @@ Real output should name evidence, gaps, and next steps.
 # GAAM Assessment: Support Routing
 
 - Claimed level: L5
+- Authority reclassification: actual authority implies at least L5 because scoped live reads are present.
 - Observed level: L4
-- Gap: customer lookup uses a shared admin grant, not a workflow-scoped read grant.
+- Authority gates blocking the claim: customer lookup uses a shared admin grant, not a workflow-scoped read grant; no per-read audit event.
+- Scale gates blocking rollout/promotion: no unusual-read monitoring.
 - Searched: workflow docs, retrieval tests, runtime tools, audit events.
 - Next step: add a support-routing read grant and audit event before claiming L5.
 ```

@@ -1,7 +1,7 @@
 {
   "name": "governed-agent-autonomy-skills",
   "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review. Self-contained.",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "contextFileName": "GEMINI.md",
   "license": "Apache-2.0 AND CC-BY-4.0"
 }

@@ -14,12 +14,12 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 ## Process
 
 1. Identify the GAAM claim context: workflow, scope, period, allowed/excluded authority, owner, evidence records, and reassessment triggers. If unstated, infer cautiously and mark gaps.
-2. For every level L1→L10, read exit criteria, activated controls, and pattern entries.
-3. Treat level descriptions, requirements, controls, pattern IDs, and example artifact names as context cues. Search semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, failure prevented, and runtime boundary.
-4. For each control/pattern, run a recorded conceptual-equivalence search: compare functional signature, context, authority, evidence, failure, boundary, and detection signals.
-5. For pure exit criteria, search equivalent artifacts under local names (docs, configs, schemas, telemetry, tests, evidence outputs, external-store contracts). Record searches, locations, evidence, and rationale.
-6. Mark each criterion `satisfied`, `partial`, `missing`, or `not_applicable`. Continue through L10.
-7. Classify: observed level = highest L where all criteria for L1..L are satisfied. The first `partial`/`missing` item is the lowest failing boundary. Later satisfied/partial items are partial higher-level evidence, not the observed level.
+2. Determine actual authority first. If the system reads live production systems, prepares durable side effects, owns queue work, coordinates agents, acts without per-action approval, or proposes production changes, record the minimum candidate level before assessing the claim.
+3. For every level L1→L10, read exit criteria, activated controls, patterns, and priority rules. Separate authority gates from scale gates and maturity-depth backlog.
+4. Treat level descriptions, requirements, controls, pattern IDs, and example artifact names as context cues. Search semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, failure prevented, and runtime boundary.
+5. For each control/pattern, run a recorded conceptual-equivalence search: compare functional signature, context, authority, evidence, failure, boundary, and detection signals.
+6. For pure exit criteria, run artifact search under local names and record locations.
+7. Classify: observed level = highest fully satisfied prefix. Authority-gate gaps fail the claim; scale-gate gaps block rollout/promotion. Later evidence is partial higher-level evidence, not observed level.
 
 ## Hard rules
 
@@ -28,15 +28,12 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 - Load all four bundled refs before classification. Citing a reference as not loaded is invalid output; load it or mark the assessment incomplete.
 - Canonical control names and pattern IDs are trace anchors. Example artifact names are non-normative context cues; GAAM does not require specific record names.
 - L1-L3 are preparation evidence, not reliable runtime maturity detection. Reliable runtime assessment starts at L4, where review boundaries and control surfaces become observable. Report L1-L3 artifacts or gaps.
-- Self-claim is not evidence. Framework name is not evidence. Vocabulary match is not evidence. Vocabulary mismatch is not absence.
+- Self-claim, framework name, and vocabulary match are not evidence. Vocabulary mismatch is not absence.
+- A pilot is a narrower claim, not fewer controls. P0-style authority-gate gaps are not waived for production GAAM claims.
 
 ## Forbidden shortcuts
 
-- "They use LangGraph so they're at L8" — framework ≠ exit criteria.
-- "I don't see `evidence_pack`" — search via the applicable synonym-map or artifact rule first.
-- "They do not use the expected approval record name" — search for equivalent approval evidence and exact-action binding first.
-- "Codebase is too big, I'll sample" — say so in the report; don't classify on sampling alone.
-- "They told me L7" — verify against artifacts.
+- Framework, expected record names, sampling, and self-claims do not establish level. Verify artifacts.
 
 ## Output template
 
@@ -45,9 +42,9 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 
 - Canon versions: gaam-levels v<x>, controls v<x>, patterns v<x>, synonyms v<x>
 - Claimed level: L<n> (or "unstated")
+- Authority reclassification: none | actual authority implies at least L<n> because <reason>
 - Observed level: L<n>
 - Claim context: workflow=<x>; scope=<x>; period=<x>; allowed/excluded authority=<x>; owner=<x>
-- Assessment band note: L1-L3 are preparation evidence; reliable runtime assessment starts at L4.
 - Confidence: high | medium | low (with reason)
 
 ## Terminology and conceptual mapping
@@ -56,10 +53,15 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 
 ## Evidence per level
 ### L<n> — <name>
-- Requirement/control/pattern: <semantic anchor>; verdict: satisfied | partial | missing | not_applicable; searched: <list>; locations: <files>; rationale: <text>
+- <requirement/control/pattern>: <verdict>; searched=<signals/artifacts>; locations=<files>; rationale=<text>
 
 ## Lowest failing boundary
 - <level/criterion> — <partial or missing reason> — <smallest fix>
+
+## Priority findings
+- Authority gates blocking the claim: <items>
+- Scale gates blocking rollout/promotion: <items>
+- Maturity-depth backlog: <items>
 
 ## Partial higher-level evidence
 - <level/item> — <evidence found> — <why it does not raise observed level>
@@ -70,4 +72,4 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 
 ## Inline gate
 
-Before declaring the assessment complete, re-check that every `partial`, `missing`, or `not satisfied` finding has the applicable recorded conceptual-equivalence or artifact search. If any is missing, re-do the search and update the report.
+Before declaring complete, re-check every `partial`, `missing`, or `not satisfied` finding has the applicable recorded conceptual-equivalence or artifact search.

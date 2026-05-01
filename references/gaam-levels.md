@@ -1,5 +1,5 @@
 ---
-canon_version: 3.0.0
+canon_version: 3.1.0
 last_reviewed: 2026-05-01
 ---
 
@@ -17,6 +17,12 @@ names. A system satisfies a requirement through local vocabulary, services,
 workflows, external stores, or evidence shapes when they prove the same
 workflow context, authority boundary, evidence semantics, runtime boundary,
 and prevented failure.
+
+Priority language separates mandatory claim blockers from useful maturity work.
+An authority gate blocks the level claim. A scale gate blocks broader rollout,
+higher-risk scope, higher volume, or promotion. Maturity depth is backlog that
+must be reassessed when risk changes. A pilot is a smaller claim, not fewer
+controls.
 
 ## L1 - Unmanaged AI Baseline
 
@@ -48,6 +54,8 @@ and threat-model surfaces.
 - Every L1 failure maps to the stage or policy intended to catch it.
 - A typed threat model names later agent attack surfaces, actors,
   motivations, mitigations, and out-of-scope boundaries.
+- Evidence ownership, minimal artifact versioning, and validation checks are
+  present for the process contract.
 - Humans have run the documented workflow on representative work items.
 
 **Common confusion.** L2 is still not automated. It is the explicit substrate
@@ -64,6 +72,8 @@ evals, candidate eval promotion, and provenance attestation.
   sensitivity label, review status, and provenance status.
 - Coverage links tie evidence IDs back to baseline work items, failure labels,
   workflow stages, and policies.
+- Corpus manifest/version and documented gap dispositions exist for the claim
+  period.
 - Golden retrieval evals prove required evidence is retrievable for
   representative questions.
 - Observed-query signals remain candidate-only until a human eval owner
@@ -83,6 +93,9 @@ side-effecting tool action, approval authority, memory, or autonomous closure is
 - Per work item, the assistant produces intake or routing, stakeholder-safe
   response draft, internal note, validation checklist, and run record.
 - Every output records `pending_review`; side effects remain disabled.
+- Run records join work item, context, sources, output, reviewer, validation
+  results, model/provider or deployment identity, prompt/template version, and
+  runtime policy version; provider opacity is recorded as residual risk.
 - Prompt context uses explicit trust frames for system, external input, retrieved
   evidence, and tool output.
 - External-facing output passes a typed safety/leak check before acceptance.
@@ -106,6 +119,8 @@ boundary.
 - Each run gets a scoped read grant; out-of-scope calls are refused.
 - Every read call emits an audit record, including actor, scope, status,
   protocol/native surface, and redacted output.
+- Tenant, data-class, and purpose boundaries are enforced where supported, and
+  hidden side effects in read paths are analyzed.
 - Tool output is sanitized before model context; raw output remains audit
   only.
 - MCP or other protocol exposure is derived from the internal manifest and
@@ -129,6 +144,9 @@ records recovery metadata, and blocks unsafe external-facing actions.
 - Every executed side-effecting action has approval evidence bound to the
   exact action by digest, one-shot action authority, an idempotency key,
   execution evidence, and rollback or compensation metadata.
+- Containment and affected-object identification are always available; each
+  write class has rollback, compensation, or explicit irreversible-side-effect
+  treatment with residual-risk evidence.
 - Signature verification runs before binding checks where signed approvals
   are configured.
 - Replays return the prior action result without mutating state again.
@@ -148,6 +166,8 @@ and memory validity.
 **Exit criteria.**
 - Goals are signed at creation with immutable scope, allowed tools, budgets,
   expiry, required outputs, and success criteria.
+- Task-owning agents have registry entries, run-state visibility, and queue
+  leases where queued work is owned.
 - Completion checks use runtime-owned predicate registry entries, not model
   self-report.
 - Closed typed stop reasons cover success, uncertainty, policy risk,
@@ -175,6 +195,8 @@ veto, and durable orchestration state.
   allowed tools, allowed peers, scopes, eval status, and lifecycle state.
 - Routing plan, handoff envelope, payload hash, expiry, and single-use
   consumption are validated before cross-agent work.
+- Hop limits, cycle detection, aggregate budgets, durable checkpoints,
+  idempotent resume, and dead-letter ownership are enforced.
 - Validator decisions bind to the exact artifact reviewed; veto/revise/
   escalate decisions are not advisory.
 - Checkpoints persist orchestration state, tool calls, approval state, and
@@ -193,7 +215,8 @@ bound the autonomy.
 
 **Exit criteria.**
 - Every autonomous run starts with a signed eligibility decision and every
-  allow criterion must pass.
+  allow criterion must pass using deterministic typed eligibility over
+  source-backed facts, not model confidence alone.
 - High-risk, ambiguous, or policy-sensitive work escalates with evidence.
 - Global pause is human-operated; workers read it during execution and halt
   within a bounded window.
@@ -223,6 +246,8 @@ robustness checks.
   baselines; aggregate gains cannot hide adversarial regressions.
 - Failed gates block release; recovery is revise, withdraw, or typed waiver
   only where the dimension is waivable.
+- High-consequence or autonomous production changes use staged rollout or
+  canary monitoring with defined freeze or rollback triggers.
 - Memory cannot become an ungoverned feedback channel.
 
 **Common confusion.** L10 is not silent self-modification or "we run evals."

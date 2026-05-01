@@ -14,15 +14,16 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 ## Process
 
 1. Clarify workflow, scope, target GAAM level (L1-L10), allowed/excluded authority, owner, and acceptable risk. If the target level is unstated, ask before writing.
-2. From `references/patterns.md`, list every pattern entry introduced at L1 through the target level inclusive (match `### L<n>-` headings).
-3. From `references/controls.md`, list every control whose `Activated at GAAM levels` line includes the target level.
-4. Treat level requirements, controls, pattern IDs, and example artifact names as context cues. Design semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, runtime boundary, and prevented failure under the team's vocabulary.
-5. For each control, capture the GAAM anchor plus the user-team's preferred capability/evidence name. The brief speaks the team's language while remaining GAAM-traceable. Downstream review/assess depend on this map.
-6. Produce the brief using the **Output template** below.
+2. Check actual authority against the reclassification rule: live reads imply at least L5, writes L6, task ownership L7, handoffs L8, autonomy L9, production-change proposals L10. If target and authority conflict, surface it before designing.
+3. From `references/patterns.md`, list every pattern entry introduced at L1 through the target level inclusive (match `### L<n>-` headings).
+4. From `references/controls.md`, list every control whose `Activated at GAAM levels` line includes the target level, separating authority gates, scale gates, and maturity-depth backlog.
+5. Treat level requirements, controls, pattern IDs, and example artifact names as context cues. Design semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, runtime boundary, and prevented failure under the team's vocabulary.
+6. For each control, capture the GAAM anchor plus the user-team's preferred capability/evidence name. The brief speaks the team's language while remaining GAAM-traceable.
 
 ## Hard rules
 
 - Target-level claim must come with the matching control activations and exit-criteria evidence in the brief — not vibes.
+- A pilot is narrower scope, not fewer controls. Authority gates cannot be deferred for a production claim.
 - The brief must include a terminology map. Do not force GAAM example artifact names into the design; GAAM does not require specific record names.
 
 ## Forbidden shortcuts
@@ -43,12 +44,14 @@ claim:
   excluded_authority: <what it may not do>
   owner: <team/person>
   reassessment_triggers: [<events/cadence>]
+authority_reclassification: none | target must be L<n> because <actual authority>
 local_artifacts: [<team schemas/events/services/evidence stores>]
 controls:
   - gaam_anchor: <Threat & Adversarial Resilience | ...>
     local_name: <team's preferred capability/evidence name>
     introduced_at: L<n>
     active_for_target: true
+    priority: blocks_claim | blocks_scale_out | improve_next
     evidence: <what this control will produce>
 patterns:
   - level: L<n introduced>

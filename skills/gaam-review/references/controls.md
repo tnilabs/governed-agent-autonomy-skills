@@ -1,5 +1,5 @@
 ---
-canon_version: 3.0.0
+canon_version: 3.1.0
 last_reviewed: 2026-05-01
 ---
 
@@ -20,18 +20,56 @@ prevention.
 control whose `Activated at GAAM levels` line contains that level. Do not
 infer from the heading order alone.
 
+**Priority rule for agents.** Report findings in this order: authority gates
+that block the claim, scale gates that block broader rollout or promotion,
+maturity-depth backlog, then evidence gaps. A pilot is a narrower claim, not
+fewer controls. P0-style authority-gate gaps are not waived for production GAAM
+claims.
+
+**Authority reclassification rule.** First determine actual authority. If the
+system reads live production systems, the candidate level is at least L5. If it
+prepares or executes durable side effects, at least L6. If it owns queue work or
+long-running task completion, at least L7. If it coordinates agents through
+handoffs, at least L8. If it acts without routine per-action approval, at least
+L9. If it proposes or promotes production behavior changes, at least L10.
+
+**Risk escalation rule.** Sensitive data, customer-visible channels, regulated
+or consequential decisions, security response, money movement, high volume,
+high cost, persistent memory, and autonomy can promote scale gates into
+authority gates. An exclusion counts only when runtime scope enforces it.
+
+### Canonical Control IDs
+
+Use names as semantic anchors. IDs are shorthand only after this mapping is
+loaded.
+
+| ID | Control | First load-bearing level |
+| --- | --- | --- |
+| C1 | Data, Context & Memory Governance | L3 |
+| C2 | Threat & Adversarial Resilience | L4 |
+| C3 | Evidence & Assurance | L4 |
+| C4 | Runtime Isolation & Execution Safety | L4 |
+| C5 | Observability & Telemetry | L4 |
+| C6 | Value, Cost & Reliability | L4 |
+| C7 | Delegated Authority & Access | L5 |
+| C8 | Tool & Protocol Safety | L5 |
+| C9 | Incident Response & Recovery | L6 |
+| C10 | Agent Registry & Lifecycle | L7 |
+
+### Activation Matrix
+
 | Level | Active controls |
 | --- | --- |
 | L1 | None |
 | L2 | None |
 | L3 | Data, Context & Memory Governance |
-| L4 | Threat & Adversarial Resilience, Evidence & Assurance, Data, Context & Memory Governance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
-| L5 | Threat & Adversarial Resilience, Evidence & Assurance, Delegated Authority & Access, Data, Context & Memory Governance, Tool & Protocol Safety, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
-| L6 | Threat & Adversarial Resilience, Evidence & Assurance, Delegated Authority & Access, Data, Context & Memory Governance, Tool & Protocol Safety, Incident Response & Recovery, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
-| L7 | Threat & Adversarial Resilience, Agent Registry & Lifecycle, Evidence & Assurance, Delegated Authority & Access, Data, Context & Memory Governance, Tool & Protocol Safety, Incident Response & Recovery, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
-| L8 | Threat & Adversarial Resilience, Agent Registry & Lifecycle, Evidence & Assurance, Delegated Authority & Access, Data, Context & Memory Governance, Tool & Protocol Safety, Incident Response & Recovery, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
-| L9 | Threat & Adversarial Resilience, Agent Registry & Lifecycle, Evidence & Assurance, Delegated Authority & Access, Data, Context & Memory Governance, Tool & Protocol Safety, Incident Response & Recovery, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
-| L10 | Threat & Adversarial Resilience, Agent Registry & Lifecycle, Evidence & Assurance, Delegated Authority & Access, Data, Context & Memory Governance, Tool & Protocol Safety, Incident Response & Recovery, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
+| L4 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability |
+| L5 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability, Delegated Authority & Access, Tool & Protocol Safety |
+| L6 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability, Delegated Authority & Access, Tool & Protocol Safety, Incident Response & Recovery |
+| L7 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability, Delegated Authority & Access, Tool & Protocol Safety, Incident Response & Recovery, Agent Registry & Lifecycle |
+| L8 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability, Delegated Authority & Access, Tool & Protocol Safety, Incident Response & Recovery, Agent Registry & Lifecycle |
+| L9 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability, Delegated Authority & Access, Tool & Protocol Safety, Incident Response & Recovery, Agent Registry & Lifecycle |
+| L10 | Data, Context & Memory Governance, Threat & Adversarial Resilience, Evidence & Assurance, Runtime Isolation & Execution Safety, Observability & Telemetry, Value, Cost & Reliability, Delegated Authority & Access, Tool & Protocol Safety, Incident Response & Recovery, Agent Registry & Lifecycle |
 
 ## Threat & Adversarial Resilience
 
