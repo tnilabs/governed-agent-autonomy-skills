@@ -1,5 +1,5 @@
 ---
-canon_version: 3.1.0
+canon_version: 3.2.0
 last_reviewed: 2026-05-01
 ---
 
@@ -33,9 +33,9 @@ forward.
 
 ### L2-process-as-substrate
 
-- **Functional signature:** human workflow stages, owners, policies, templates, validations, and L1-failure mappings - produces versioned process artifacts - prevents automating undocumented habits
+- **Functional signature:** human workflow stages, owners, policies, templates, validations, and L1-failure mappings, with any AI-generated process suggestions treated as human-reviewed review material - produces versioned process artifacts - prevents automating undocumented habits or treating process drafts as production judgment
 - **Controls activated:** None
-- **Test asserts:** every stage has owner/input/output/handoff/exit criteria, every policy attaches to a stage, and every L1 failure maps to a stage or policy.
+- **Test asserts:** every stage has owner/input/output/handoff/exit criteria, every policy attaches to a stage, every L1 failure maps to a stage or policy, and AI process-review output cannot become source of truth without human review.
 
 ### L2-threat-model-as-substrate
 
@@ -47,7 +47,7 @@ forward.
 
 ### L3-knowledge-coverage-map
 
-- **Functional signature:** coverage links from knowledge documents to work items, failure labels, workflow stages, and policies - produces an evidence-to-process map - prevents broad corpora that do not cover the actual work
+- **Functional signature:** coverage links from knowledge documents to work items, failure labels, workflow stages, and policies - produces an evidence-to-process map for governed retrieval - prevents broad corpora that do not cover the actual work or retrieval that answers disposition questions
 - **Controls activated:** Data, Context & Memory Governance
 - **Test asserts:** every retrievable document maps to at least one work item, failure, stage, or policy using typed IDs.
 
@@ -59,7 +59,7 @@ forward.
 
 ### L3-provenance-attested-source
 
-- **Functional signature:** retrievable documents carry classification, sensitivity, review status, and provenance attestation - produces source metadata that survives retrieval - prevents silently quoting unverified or restricted sources once a model uses retrieval
+- **Functional signature:** retrievable documents carry classification, sensitivity, review status, and provenance attestation - produces source metadata that survives retrieval - prevents silently quoting unverified or restricted sources and keeps source finding separate from production drafting
 - **Controls activated:** Data, Context & Memory Governance
 - **Test asserts:** retrieval results preserve classification, review status, evidence ID, and provenance status for every chunk.
 

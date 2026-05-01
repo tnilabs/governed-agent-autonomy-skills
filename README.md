@@ -20,6 +20,11 @@ The skills sort findings by consequence:
 
 They also check actual authority before accepting a claimed level. Live reads are at least L5, durable side effects at least L6, task ownership at least L7, agent handoffs at least L8, action without routine per-action approval at least L9, and production behavior proposals at least L10.
 
+Levels 2 and 3 are not treated as empty paperwork. L2 can include
+AI-assisted process review, but the output is review material for humans. L3
+can include governed retrieval over approved sources, but it still stops before
+production drafts, recommendations, live reads, or actions.
+
 ## Skills
 
 | Skill | Use For | Output |

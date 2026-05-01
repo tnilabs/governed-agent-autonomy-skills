@@ -1,5 +1,5 @@
 ---
-canon_version: 3.1.0
+canon_version: 3.2.0
 last_reviewed: 2026-05-01
 ---
 
@@ -46,7 +46,9 @@ measurement that later improvement cannot move the denominator.
 
 **Intent.** The human process becomes explicit before automation: workflow
 stages, owners, policies, templates, validation checks, L1-failure mappings,
-and threat-model surfaces.
+and threat-model surfaces. AI may help owners inspect the baseline, draft
+candidate process artifacts, or check policy mappings, but that output is
+review material, not production work.
 
 **Exit criteria.**
 - Workflow stages have owners, inputs, outputs, handoffs, and exit criteria.
@@ -56,16 +58,22 @@ and threat-model surfaces.
   motivations, mitigations, and out-of-scope boundaries.
 - Evidence ownership, minimal artifact versioning, and validation checks are
   present for the process contract.
+- AI-produced process, schema, template, policy, or threat-model suggestions
+  are human-reviewed before they become source of truth.
+- No AI output is used as a production work recommendation, routing decision,
+  or artifact at this level.
 - Humans have run the documented workflow on representative work items.
 
-**Common confusion.** L2 is still not automated. It is the explicit substrate
-that later knowledge, prompts, tools, approvals, and agents inherit.
+**Common confusion.** L2 can use AI, but it is still not a production
+assistant. The boundary is process quality, not work-item judgment.
 
 ## L3 - Grounded Knowledge
 
-**Intent.** L2 process material becomes AI-ready retrieval material. L3 stops
-at retrieval: stable sources, metadata, coverage links, retrieval API, golden
-evals, candidate eval promotion, and provenance attestation.
+**Intent.** L2 process material becomes governed retrieval material. L3 stops
+at finding approved sources: stable sources, metadata, coverage links,
+retrieval API, golden evals, candidate eval promotion, and provenance
+attestation. Retrieval may find, rank, filter, cite, and test approved sources;
+it does not draft or recommend production work.
 
 **Exit criteria.**
 - Every retrievable document has stable evidence ID, owner, source type,
@@ -79,9 +87,13 @@ evals, candidate eval promotion, and provenance attestation.
 - Observed-query signals remain candidate-only until a human eval owner
   promotes them.
 - Retrieval results preserve classification and provenance metadata.
+- Retrieval output is limited to approved source references, snippets,
+  metadata, and coverage signals.
+- No live operational read tool is exposed as part of the workflow.
 
-**Common confusion.** L3 is not a governed assistant and does not answer
-work items. It builds the retrieval contract L4 consumes.
+**Common confusion.** L3 can be useful governed search for humans and later
+assistants. It answers source-selection questions, not work-disposition
+questions.
 
 ## L4 - Reviewed Assistance
 

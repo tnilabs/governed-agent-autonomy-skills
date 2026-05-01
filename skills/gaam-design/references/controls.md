@@ -1,5 +1,5 @@
 ---
-canon_version: 3.1.0
+canon_version: 3.2.0
 last_reviewed: 2026-05-01
 ---
 
@@ -7,8 +7,10 @@ last_reviewed: 2026-05-01
 
 Ten control categories for GAAM workflows. Controls are cumulative: once a
 control activates at GAAM level N, it remains active
-at every higher level. L1 and L2 are preparation levels; they name data,
-process, risk, and ownership before agentic controls become load-bearing.
+at every higher level. L1 and L2 are foundation levels; they name data,
+process, risk, and ownership before agentic controls become load-bearing. L2
+may use AI as human-reviewed process support, while L3 is governed retrieval
+over approved sources rather than production assistance.
 
 Control headings are semantic anchors. Example artifact or record names are
 non-normative context cues, not GAAM requirements. A deployment satisfies a

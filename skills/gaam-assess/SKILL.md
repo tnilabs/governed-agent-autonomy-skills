@@ -27,7 +27,7 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 - No pure exit criterion may be marked absent without a recorded artifact search: artifact sought, aliases checked, locations recorded, and result stated.
 - Load all four bundled refs before classification. Citing a reference as not loaded is invalid output; load it or mark the assessment incomplete.
 - Canonical control names and pattern IDs are trace anchors. Example artifact names are non-normative context cues; GAAM does not require specific record names.
-- L1-L3 are preparation evidence, not reliable runtime maturity detection. Reliable runtime assessment starts at L4, where review boundaries and control surfaces become observable. Report L1-L3 artifacts or gaps.
+- L1-L3 are foundation evidence. L2 may include AI-assisted process review, and L3 may include governed retrieval, but reliable production-assistant runtime assessment starts at L4. Report L1-L3 artifacts, useful capabilities, and gaps.
 - Self-claim, framework name, and vocabulary match are not evidence. Vocabulary mismatch is not absence.
 - A pilot is a narrower claim, not fewer controls. P0-style authority-gate gaps are not waived for production GAAM claims.
 

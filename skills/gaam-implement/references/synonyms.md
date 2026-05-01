@@ -1,5 +1,5 @@
 ---
-canon_version: 3.1.0
+canon_version: 3.2.0
 last_reviewed: 2026-05-01
 ---
 
@@ -146,12 +146,12 @@ mapping is equivalent or not.
 
 ### L2-process-as-substrate
 
-- **Functional signature:** explicit workflow, owners, policies, templates, validation, and L1 failure mappings - produces process substrate - prevents automating undocumented habits.
-- **Alternative names:** human process contract, SOP substrate, workflow map, process controls, policy-stage mapping
+- **Functional signature:** explicit workflow, owners, policies, templates, validation, L1 failure mappings, and human-reviewed AI process suggestions - produces process substrate - prevents automating undocumented habits or treating process-review output as production judgment.
+- **Alternative names:** human process contract, SOP substrate, workflow map, process controls, policy-stage mapping, process review assistant
 - **Detection signals:**
   - Files/dirs: `human_process/`, `workflow.yaml`, `policies.yaml`, `templates/`, `level-01-baseline-to-process`
-  - Context/evidence cues: process reports, policy rule IDs, stage definitions
-  - Code/log shapes: `stage_id`, `owner`, `exit_criteria`, `policy_id`, `baseline_failure_process_links`
+  - Context/evidence cues: process reports, policy rule IDs, stage definitions, human-reviewed process suggestions
+  - Code/log shapes: `stage_id`, `owner`, `exit_criteria`, `policy_id`, `baseline_failure_process_links`, `process_review_suggestion`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L2-threat-model-as-substrate
@@ -166,12 +166,12 @@ mapping is equivalent or not.
 
 ### L3-knowledge-coverage-map
 
-- **Functional signature:** knowledge docs map to work items, failures, stages, and policies - produces coverage evidence - prevents irrelevant or incomplete corpora.
-- **Alternative names:** coverage map, knowledge matrix, evidence coverage, corpus mapping, policy-evidence map
+- **Functional signature:** knowledge docs map to work items, failures, stages, and policies - produces coverage evidence for governed retrieval - prevents irrelevant corpora and retrieval that substitutes for work recommendations.
+- **Alternative names:** coverage map, knowledge matrix, evidence coverage, corpus mapping, policy-evidence map, governed retrieval map
 - **Detection signals:**
   - Files/dirs: `knowledge-coverage`, `knowledge_base/`, `knowledge-index`, `level_03/evals`
-  - Context/evidence cues: coverage fixtures, evidence IDs, retrieval eval definitions
-  - Code/log shapes: `evidence_id`, `case_id`, `failure_label`, `stage_id`, `policy_id`
+  - Context/evidence cues: coverage fixtures, evidence IDs, retrieval eval definitions, source-selection evidence
+  - Code/log shapes: `evidence_id`, `case_id`, `failure_label`, `stage_id`, `policy_id`, `retrieval_only`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L3-golden-retrieval-evals
@@ -186,12 +186,12 @@ mapping is equivalent or not.
 
 ### L3-provenance-attested-source
 
-- **Functional signature:** retrievable sources carry classification, review status, and provenance attestation - produces source trust metadata - prevents silently quoting unverified sources.
-- **Alternative names:** source attestation, provenance metadata, signed source, classified corpus, evidence provenance
+- **Functional signature:** retrievable sources carry classification, review status, and provenance attestation - produces source trust metadata - prevents silently quoting unverified sources and keeps retrieval separate from drafting.
+- **Alternative names:** source attestation, provenance metadata, signed source, classified corpus, evidence provenance, trusted source registry
 - **Detection signals:**
   - Files/dirs: `provenance`, `knowledge-index`, `asset_documents`, `knowledge_indexer`
-  - Context/evidence cues: source provenance, content digest, issuer, signature
-  - Code/log shapes: `verification_status`, `review_status`, `sensitivity`, `source_id`, `content_digest`
+  - Context/evidence cues: source provenance, content digest, issuer, signature, source-only output boundary
+  - Code/log shapes: `verification_status`, `review_status`, `sensitivity`, `source_id`, `content_digest`, `no_draft`
   - Conceptual equivalents: local structures that produce the same evidence, block the same failure mode, and enforce the same runtime boundary even when names, files, or framework primitives differ
 
 ### L4-pending-review-boundary
