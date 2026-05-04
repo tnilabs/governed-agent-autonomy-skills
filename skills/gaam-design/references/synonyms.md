@@ -1,6 +1,6 @@
 ---
-canon_version: 3.2.0
-last_reviewed: 2026-05-01
+canon_version: 3.2.1
+last_reviewed: 2026-05-04
 ---
 
 # Synonyms and Detection Signals

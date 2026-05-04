@@ -1,6 +1,6 @@
 ---
-canon_version: 3.2.0
-last_reviewed: 2026-05-01
+canon_version: 3.2.1
+last_reviewed: 2026-05-04
 ---
 
 # Enterprise Control Categories
@@ -8,7 +8,7 @@ last_reviewed: 2026-05-01
 Ten control categories for GAAM workflows. Controls are cumulative: once a
 control activates at GAAM level N, it remains active
 at every higher level. L1 and L2 are foundation levels; they name data,
-process, risk, and ownership before agentic controls become load-bearing. L2
+process, risk, and ownership before agentic controls become operationally required. L2
 may use AI as human-reviewed process support, while L3 is governed retrieval
 over approved sources rather than production assistance.
 
@@ -45,7 +45,7 @@ authority gates. An exclusion counts only when runtime scope enforces it.
 Use names as semantic anchors. IDs are shorthand only after this mapping is
 loaded.
 
-| ID | Control | First load-bearing level |
+| ID | Control | First operationally required level |
 | --- | --- | --- |
 | C1 | Data, Context & Memory Governance | L3 |
 | C2 | Threat & Adversarial Resilience | L4 |
@@ -79,7 +79,7 @@ loaded.
   poisoned evidence, tampered approvals, signed-card spoofing, memory
   poisoning, and adversarial regressions. L4 starts by labeling hostile
   input before it reaches the model; L9 makes the adversarial corpus
-  load-bearing for autonomy.
+  operationally required for autonomy.
 - **Evidence it produces:**
   - Threat-detection evidence for external input, retrieved evidence, and tool
     output.
@@ -96,7 +96,7 @@ loaded.
 
 - **What it does:** Inventories agents, owners, versions, risk tiers,
   lifecycle state, runtime health, allowed scopes, allowed peers, pause
-  state, revocations, and release lifecycle. It becomes load-bearing when
+  state, revocations, and release lifecycle. It becomes operationally required when
   agents outlive one run and own durable work.
 - **Evidence it produces:**
   - Goal, halt, resolution, and run records with agent identity.
@@ -236,7 +236,7 @@ loaded.
 
 - **What it does:** Tracks cost, latency, outcomes, review load, retry
   pressure, escalation, SLO burn, and before/after value. L4-L6 produce
-  provider/run metadata; L7 makes budget and outcome measures load-bearing.
+  provider/run metadata; L7 makes budget and outcome measures operationally required.
 - **Evidence it produces:**
   - Human-baseline cost and outcome measures.
   - Provider/model identity, read-tool inventory, action lifecycle, budget

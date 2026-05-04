@@ -1,6 +1,6 @@
 ---
-canon_version: 3.2.0
-last_reviewed: 2026-05-01
+canon_version: 3.2.1
+last_reviewed: 2026-05-04
 ---
 
 # Governed Agent Autonomy Model - Levels
@@ -196,7 +196,7 @@ multi-agent coordination, routine unattended autonomy, or self-improvement.
 ## L8 - Verified Agent Coordination
 
 **Intent.** Specialized agents coordinate through deterministic runtime-owned
-routing, signed agent cards, typed handoff envelopes, load-bearing validator
+routing, signed agent cards, typed handoff envelopes, runtime-enforced validator
 veto, and durable orchestration state.
 
 **Exit criteria.**
