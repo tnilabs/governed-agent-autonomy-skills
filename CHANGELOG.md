@@ -2,6 +2,33 @@
 
 All notable changes to `governed-agent-autonomy-skills` are documented here.
 
+## v5.0.0 - 2026-05-05
+
+### BREAKING
+
+- Renamed the plugin manifest `name` (and Claude Code marketplace `name`) from
+  `governed-agent-autonomy-skills` to `gaam` across every tool target
+  (`.claude-plugin/plugin.json`, `.claude-plugin/marketplace.json`,
+  `.cursor-plugin/plugin.json`, `.codex-plugin/plugin.json`,
+  `gemini-extension.json`, `package.json`). The repository slug
+  (`sirmarkz/governed-agent-autonomy-skills`) is unchanged; only the
+  install identifier moved.
+- Existing v4.x installs will not receive `update` commands keyed on the old
+  name. To migrate: uninstall the old plugin, then reinstall using the
+  v5.0.0 commands in `README.md`. The new Claude Code install is
+  `/plugin install gaam@gaam`.
+- OpenCode plugin spec entry changes from
+  `"governed-agent-autonomy-skills@git+…"` to `"gaam@git+…"`.
+- Bumped synchronized manifest versions to `5.0.0`.
+
+### Why
+
+The repeated package name made every install command unsayable in
+conversation (`governed-agent-autonomy-skills@governed-agent-autonomy-skills`).
+The new identifier matches the bundled skill names (`gaam`, `gaam-assess`,
+`gaam-design`, `gaam-implement`, `gaam-review`) and the brand the plugin
+already enforces.
+
 ## v4.5.0 - 2026-05-05
 
 ### Changed

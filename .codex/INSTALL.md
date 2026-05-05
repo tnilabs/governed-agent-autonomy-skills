@@ -1,4 +1,4 @@
-# Installing governed-agent-autonomy-skills for Codex CLI / App
+# Installing the GAAM skills plugin (`gaam`) for Codex CLI / App
 
 Codex CLI and Codex App both discover skills from `$CODEX_HOME/skills` (`~/.codex/skills` by default). Clone this repo and symlink the bundled skill directories.
 

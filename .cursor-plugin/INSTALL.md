@@ -1,4 +1,4 @@
-# Installing governed-agent-autonomy-skills for Cursor
+# Installing the GAAM skills plugin (`gaam`) for Cursor
 
 Cursor's `/add-plugin` requires a published marketplace. For local installs, copy or symlink the cloned repo into Cursor's per-user plugins directory.
 

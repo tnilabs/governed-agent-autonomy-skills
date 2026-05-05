@@ -1,6 +1,6 @@
 # GEMINI.md
 
-`governed-agent-autonomy-skills` is a self-contained skills plugin for cross-tool coding agents. It enforces GAAM-style discipline (assess / design / implement / review) for enterprise agents.
+`gaam` (the cross-tool skills plugin shipped from `sirmarkz/governed-agent-autonomy-skills`) is a self-contained skills plugin for cross-tool coding agents. It enforces GAAM-style discipline (assess / design / implement / review) for enterprise agents.
 
 ## Entrypoint
 

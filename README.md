@@ -106,7 +106,7 @@ required_evidence:
 
 ```text
 /plugin marketplace add sirmarkz/governed-agent-autonomy-skills
-/plugin install governed-agent-autonomy-skills@governed-agent-autonomy-skills
+/plugin install gaam@gaam
 ```
 
 ### Codex CLI / Codex App
@@ -136,12 +136,12 @@ Add this plugin entry to `opencode.json`, then restart OpenCode:
 ```json
 {
   "plugin": [
-    "governed-agent-autonomy-skills@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git"
+    "gaam@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git"
   ]
 }
 ```
 
-Verify with: `use skill tool to load governed-agent-autonomy-skills/gaam`. Full doc: [`.opencode/INSTALL.md`](.opencode/INSTALL.md).
+Verify with: `use skill tool to load gaam/gaam`. Full doc: [`.opencode/INSTALL.md`](.opencode/INSTALL.md).
 
 ### Gemini CLI
 
@@ -153,19 +153,19 @@ gemini extensions install https://github.com/sirmarkz/governed-agent-autonomy-sk
 
 ```bash
 copilot plugin marketplace add sirmarkz/governed-agent-autonomy-skills
-copilot plugin install governed-agent-autonomy-skills@governed-agent-autonomy-skills
+copilot plugin install gaam@gaam
 ```
 
 ## Refresh
 
 | Tool | Update Command |
 | --- | --- |
-| Claude Code | `/plugin marketplace update governed-agent-autonomy-skills` then `/plugin update governed-agent-autonomy-skills` |
+| Claude Code | `/plugin marketplace update gaam` then `/plugin update gaam` |
 | Codex CLI / App | `cd ~/.codex/governed-agent-autonomy-skills && git pull`, then restart Codex |
 | Cursor | `cd ~/.cursor/governed-agent-autonomy-skills-src && git pull`, then reload Cursor |
 | OpenCode | Restart OpenCode, or pin/update the `#vX.Y.Z` suffix in `opencode.json` |
-| Gemini CLI | `gemini extensions update governed-agent-autonomy-skills` |
-| Copilot CLI | `copilot plugin update governed-agent-autonomy-skills@governed-agent-autonomy-skills` |
+| Gemini CLI | `gemini extensions update gaam` |
+| Copilot CLI | `copilot plugin update gaam@gaam` |
 
 ## Contributing
 

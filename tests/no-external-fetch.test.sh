@@ -18,7 +18,7 @@ ALLOWLIST_PATTERNS=(
   'git[[:space:]]+clone[[:space:]]+https://github\.com/sirmarkz/governed-agent-autonomy-skills\.git[[:space:]]+"\$env'
   '^[[:space:]]*cd[[:space:]]+~/\.(codex|cursor)/governed-agent-autonomy-skills(-src)?[[:space:]]*&&[[:space:]]*git[[:space:]]+pull([[:space:]]|$)'
   '^[[:space:]]*gemini[[:space:]]+extensions[[:space:]]+install[[:space:]]+https://github\.com/sirmarkz/governed-agent-autonomy-skills([[:space:]]|$)'
-  '^[[:space:]]*"governed-agent-autonomy-skills@git\+https://github\.com/sirmarkz/governed-agent-autonomy-skills\.git'
+  '^[[:space:]]*"gaam@git\+https://github\.com/sirmarkz/governed-agent-autonomy-skills\.git'
   '^[[:space:]]*https://github\.com/sirmarkz/governed-agent-autonomy-skills([./#v0-9]*)?[[:space:]]*$'
   '\]\(https://github\.com/sirmarkz/governed-agent-autonomy-skills'
   '\]\(https://github\.com/sirmarkz/governed-agent-autonomy\)'
