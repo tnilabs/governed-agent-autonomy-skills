@@ -6,7 +6,7 @@ Those questions usually show up after the risky part has already shipped. These 
 
 Use them when software work involves building an AI agent, or changing agent retrieval, tool use, scoped data access, delegated actions, approval gates, autonomous tasks, agent handoffs, or GAAM claims. The skills can be called directly, but they are more useful when your project instructions tell the coding agent to start with `gaam`, which routes to the right focused skill.
 
-Core model repo: [tnilabs/governed-agent-autonomy](https://github.com/tnilabs/governed-agent-autonomy)
+Core model repo: [sirmarkz/governed-agent-autonomy](https://github.com/sirmarkz/governed-agent-autonomy)
 
 This skills repo is standalone. It ships its own GAAM level, control, pattern, and synonym references. Installed skills do not fetch anything from the core model repo at runtime.
 
@@ -105,14 +105,14 @@ required_evidence:
 ### Claude Code
 
 ```text
-/plugin marketplace add tnilabs/governed-agent-autonomy-skills
+/plugin marketplace add sirmarkz/governed-agent-autonomy-skills
 /plugin install governed-agent-autonomy-skills@governed-agent-autonomy-skills
 ```
 
 ### Codex CLI / Codex App
 
 ```bash
-git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git ~/.codex/governed-agent-autonomy-skills
+git clone https://github.com/sirmarkz/governed-agent-autonomy-skills.git ~/.codex/governed-agent-autonomy-skills
 mkdir -p ~/.codex/skills
 ln -s ~/.codex/governed-agent-autonomy-skills/skills/* ~/.codex/skills/
 ```
@@ -122,7 +122,7 @@ Restart Codex. Codex discovers skills from `$CODEX_HOME/skills` (`~/.codex/skill
 ### Cursor
 
 ```bash
-git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git ~/.cursor/governed-agent-autonomy-skills-src
+git clone https://github.com/sirmarkz/governed-agent-autonomy-skills.git ~/.cursor/governed-agent-autonomy-skills-src
 mkdir -p ~/.cursor/plugins
 ln -s ~/.cursor/governed-agent-autonomy-skills-src ~/.cursor/plugins/governed-agent-autonomy-skills
 ```
@@ -136,7 +136,7 @@ Add this plugin entry to `opencode.json`, then restart OpenCode:
 ```json
 {
   "plugin": [
-    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git"
+    "governed-agent-autonomy-skills@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git"
   ]
 }
 ```
@@ -146,13 +146,13 @@ Verify with: `use skill tool to load governed-agent-autonomy-skills/gaam`. Full 
 ### Gemini CLI
 
 ```bash
-gemini extensions install https://github.com/tnilabs/governed-agent-autonomy-skills
+gemini extensions install https://github.com/sirmarkz/governed-agent-autonomy-skills
 ```
 
 ### Copilot CLI
 
 ```bash
-copilot plugin marketplace add tnilabs/governed-agent-autonomy-skills
+copilot plugin marketplace add sirmarkz/governed-agent-autonomy-skills
 copilot plugin install governed-agent-autonomy-skills@governed-agent-autonomy-skills
 ```
 

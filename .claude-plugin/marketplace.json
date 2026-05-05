@@ -2,7 +2,7 @@
   "name": "governed-agent-autonomy-skills",
   "description": "Marketplace for governed-agent-autonomy-skills.",
   "owner": {
-    "name": "TNI Labs"
+    "name": "sirmarkz"
   },
   "plugins": [
     {
@@ -11,7 +11,7 @@
       "version": "4.4.1",
       "source": "./",
       "author": {
-        "name": "TNI Labs"
+        "name": "sirmarkz"
       }
     }
   ],

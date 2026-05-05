@@ -11,7 +11,7 @@ Add to the `plugin` array in your `opencode.json` (global or project-level):
 ```json
 {
   "plugin": [
-    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git"
+    "governed-agent-autonomy-skills@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git"
   ]
 }
 ```
@@ -25,7 +25,7 @@ Verify with: "Use the skill tool to list skills" — you should see `governed-ag
 ```json
 {
   "plugin": [
-    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git#v2.0.0"
+    "governed-agent-autonomy-skills@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git#v2.0.0"
   ]
 }
 ```
@@ -54,7 +54,7 @@ A small set of OpenCode builds may not honor the plugin `config` hook at startup
 ```json
 {
   "plugin": [
-    "governed-agent-autonomy-skills@git+https://github.com/tnilabs/governed-agent-autonomy-skills.git"
+    "governed-agent-autonomy-skills@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git"
   ],
   "skills": {
     "paths": [

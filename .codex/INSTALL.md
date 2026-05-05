@@ -10,7 +10,7 @@ Codex CLI and Codex App both discover skills from `$CODEX_HOME/skills` (`~/.code
 ## Installation (Linux / macOS)
 
 ```bash
-git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git ~/.codex/governed-agent-autonomy-skills
+git clone https://github.com/sirmarkz/governed-agent-autonomy-skills.git ~/.codex/governed-agent-autonomy-skills
 mkdir -p ~/.codex/skills
 ln -s ~/.codex/governed-agent-autonomy-skills/skills/* ~/.codex/skills/
 ```
@@ -20,7 +20,7 @@ Restart Codex CLI (and Codex App, if installed). Skills are discovered automatic
 ## Installation (Windows PowerShell)
 
 ```powershell
-git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git "$env:USERPROFILE\.codex\governed-agent-autonomy-skills"
+git clone https://github.com/sirmarkz/governed-agent-autonomy-skills.git "$env:USERPROFILE\.codex\governed-agent-autonomy-skills"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.codex\skills"
 Get-ChildItem "$env:USERPROFILE\.codex\governed-agent-autonomy-skills\skills" -Directory | ForEach-Object {
   cmd /c mklink /J "$env:USERPROFILE\.codex\skills\$($_.Name)" "$($_.FullName)"

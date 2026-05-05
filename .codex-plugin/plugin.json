@@ -3,11 +3,11 @@
   "version": "4.4.1",
   "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review. Self-contained.",
   "author": {
-    "name": "TNI Labs",
-    "url": "https://github.com/tnilabs/governed-agent-autonomy-skills"
+    "name": "sirmarkz",
+    "url": "https://github.com/sirmarkz/governed-agent-autonomy-skills"
   },
-  "homepage": "https://github.com/tnilabs/governed-agent-autonomy-skills",
-  "repository": "https://github.com/tnilabs/governed-agent-autonomy-skills",
+  "homepage": "https://github.com/sirmarkz/governed-agent-autonomy-skills",
+  "repository": "https://github.com/sirmarkz/governed-agent-autonomy-skills",
   "license": "Apache-2.0 AND CC-BY-4.0",
   "keywords": [
     "gaam",
@@ -21,7 +21,7 @@
     "displayName": "Governed Agent Autonomy Model Skills",
     "shortDescription": "GAAM-style design / implement / review for enterprise agents",
     "longDescription": "Five skills routing coding agents through assessing GAAM levels, designing enterprise agents, implementing GAAM capability patterns, and reviewing changes for control activation and evidence — with naming-agnostic recognition of existing systems.",
-    "developerName": "TNI Labs",
+    "developerName": "sirmarkz",
     "category": "Coding",
     "capabilities": [
       "Interactive",

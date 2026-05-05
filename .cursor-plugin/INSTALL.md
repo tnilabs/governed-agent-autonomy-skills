@@ -10,7 +10,7 @@ Cursor's `/add-plugin` requires a published marketplace. For local installs, cop
 ## Installation (Linux / macOS)
 
 ```bash
-git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git ~/.cursor/governed-agent-autonomy-skills-src
+git clone https://github.com/sirmarkz/governed-agent-autonomy-skills.git ~/.cursor/governed-agent-autonomy-skills-src
 mkdir -p ~/.cursor/plugins
 ln -s ~/.cursor/governed-agent-autonomy-skills-src ~/.cursor/plugins/governed-agent-autonomy-skills
 ```
@@ -20,7 +20,7 @@ Then in Cursor: Cmd+Shift+P → "Developer: Reload Window" (or quit and relaunch
 ## Installation (Windows PowerShell)
 
 ```powershell
-git clone https://github.com/tnilabs/governed-agent-autonomy-skills.git "$env:USERPROFILE\.cursor\governed-agent-autonomy-skills-src"
+git clone https://github.com/sirmarkz/governed-agent-autonomy-skills.git "$env:USERPROFILE\.cursor\governed-agent-autonomy-skills-src"
 New-Item -ItemType Directory -Force -Path "$env:USERPROFILE\.cursor\plugins"
 cmd /c mklink /J "$env:USERPROFILE\.cursor\plugins\governed-agent-autonomy-skills" "$env:USERPROFILE\.cursor\governed-agent-autonomy-skills-src"
 ```
