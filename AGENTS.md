@@ -218,6 +218,10 @@ installed in the host tool.
   4. Commit, tag (`git tag vX.Y.Z`), push the tag. Version-pinning users
      (notably OpenCode `#vX.Y.Z`) opt in deliberately.
 - Skill or manifest changes without a canon change skip step 1; do 2–4.
+- Before tagging or publishing a release, update `CHANGELOG.md` from an
+  explicit delta scan since the previous release tag. Use `git log`,
+  `git diff --stat`, and changed-file review; do not rely only on memory
+  or the final version bump commit.
 - Bump policy for v1.0+:
   - Major bump (`v2.0.0+`): skill rename/removal, canonical-name
     rename/removal, manifest-shape break, ref-structure break, or other
