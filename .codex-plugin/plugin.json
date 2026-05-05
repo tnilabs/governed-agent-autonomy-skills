@@ -1,6 +1,6 @@
 {
   "name": "governed-agent-autonomy-skills",
-  "version": "4.4.1",
+  "version": "4.5.0",
   "description": "Coding-agent skills for GAAM-style enterprise agent design, implementation, and review. Self-contained.",
   "author": {
     "name": "sirmarkz",
