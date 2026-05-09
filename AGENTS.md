@@ -28,9 +28,9 @@ installed in the host tool.
 | --- | --- |
 | `skills/<skill-name>/SKILL.md` | One skill: frontmatter (`name`, `description`) + body. Five skills total, set is fixed. |
 | `skills/<focused-skill>/references/*.md` | Skill-local copies of GAAM canon for installed-plugin sandboxes; must match root `references/*.md` byte-for-byte. |
-| `references/gaam-levels.md` | Root canon of the 10 GAAM levels (one H2 per level). |
+| `references/gaam-levels.md` | Root canon of the 8 GAAM levels (one H2 per level). |
 | `references/controls.md` | Root canon of the 10 enterprise control categories (canonical spelling enforced by tests). |
-| `references/patterns.md` | Root GAAM capability-pattern index per level (one section per L1–L10; every pattern ID has functional signature, controls activated, and test asserts). |
+| `references/patterns.md` | Root GAAM capability-pattern index per level (one section per L0-L7; every pattern ID has functional signature, controls activated, and test asserts). |
 | `references/synonyms.md` | Root synonym, conceptual-equivalence, and detection-signal guide; one entry per control category and per pattern entry. |
 | `.claude-plugin/plugin.json` + `marketplace.json` | Claude Code (and Copilot CLI) plugin + local-marketplace manifest. |
 | `.codex/INSTALL.md` | Codex CLI manual install (clone + symlink skill dirs into `$CODEX_HOME/skills`). |
@@ -46,7 +46,7 @@ installed in the host tool.
 | `scripts/` | `codex-review.sh` (optional local review helper), `bump-version.sh` (synchronized manifest version bumps). |
 | `tests/manifests.test.sh` | JSON-validates every manifest, asserts required fields, verifies declared paths exist. |
 | `tests/skills.test.sh` | Asserts the exact 5-skill set, frontmatter shape, word budgets, conceptual-equivalence sentinel in assess+review, semantic-anchor sentinel in all focused skills, no external plugin chains. |
-| `tests/refs.test.sh` | Asserts ref content shape: 10 GAAM levels, 10 canonical controls, L1–L10 patterns coverage, synonym/concept cross-check against patterns.md. |
+| `tests/refs.test.sh` | Asserts ref content shape: 8 GAAM levels, 10 canonical controls, L0-L7 patterns coverage, synonym/concept cross-check against patterns.md. |
 | `tests/no-external-fetch.test.sh` | Forbids fetch instructions in skills, refs, scripts, README, host-context files, install docs (allowlist for documented install URLs only). |
 | `tests/smoke/<tool>.sh` | Per-tool artifact-sanity scripts. Skip-with-message when the tool isn't installed. |
 | `internal/` | Gitignored. Design memos, sourcing notes, manual verification checklist, codex-review outputs. Not part of the public surface. |
@@ -99,7 +99,7 @@ installed in the host tool.
 
 - Every reference file's frontmatter has `canon_version:` (semver-like)
   and `last_reviewed:` (ISO date). Tests reject a missing field.
-- `references/gaam-levels.md` has exactly 10 H2 sections, one per L1–L10.
+- `references/gaam-levels.md` has exactly 8 H2 sections, one per L0-L7.
 - `references/controls.md` has exactly 10 H2 sections using the exact
   canonical spelling: `Threat & Adversarial Resilience`,
   `Agent Registry & Lifecycle`, `Evidence & Assurance`,
@@ -107,11 +107,11 @@ installed in the host tool.
   `Tool & Protocol Safety`, `Incident Response & Recovery`,
   `Runtime Isolation & Execution Safety`, `Observability & Telemetry`,
   `Value, Cost & Reliability`. Tests fail on any deviation.
-- `references/patterns.md` has one section per GAAM level L1–L10. Every
+- `references/patterns.md` has one section per GAAM level L0-L7. Every
   GAAM capability pattern ID appears as a `### <pattern-id>` entry with
   `**Functional signature:**`,
-  `**Controls activated:**`, and `**Test asserts:**`. L1 and L2 carry
-  substrate patterns; do not reintroduce `no v0 pattern family`.
+  `**Controls activated:**`, and `**Test asserts:**`. L0 carries substrate
+  patterns; do not reintroduce `no v0 pattern family`.
 - `references/synonyms.md` has `## Conceptual Equivalence Rules`,
   `## Controls`, and `## Patterns` sections.
   It MUST state that canonical GAAM names are semantic anchors and example

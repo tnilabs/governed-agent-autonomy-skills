@@ -1,15 +1,14 @@
 ---
-canon_version: 3.2.1
-last_reviewed: 2026-05-04
+canon_version: 6.0.0
+last_reviewed: 2026-05-08
 ---
 
 # Governed Agent Autonomy Model - Levels
 
-Ten capability levels for production-grade AI agents, aligned to the source
-GAAM implementation. Each level adds one capability boundary and carries
-forward comparable work, fixtures, contracts, controls, and lessons. Level
-claims are made on evidence: artifacts, controls, tests, telemetry, and
-replayable records.
+Eight capability levels for production-grade AI agents. Each level adds one
+public capability boundary and carries forward comparable work, fixtures,
+contracts, controls, and lessons. Level claims are made on evidence:
+artifacts, controls, tests, telemetry, and replayable records.
 
 Level descriptions, exit criteria, and example artifact names are context
 cues, not required strings. GAAM does not require specific record or schema
@@ -24,58 +23,30 @@ higher-risk scope, higher volume, or promotion. Maturity depth is backlog that
 must be reassessed when risk changes. A pilot is a smaller claim, not fewer
 controls.
 
-## L1 - Unmanaged AI Baseline
+## L0 - Foundation
 
-**Intent.** The current manual or unmanaged AI baseline is made visible.
-People may paste work into generic LLMs, but there is no governed assistant,
-tool access, approval, audit, or policy gate.
+**Intent.** The organization makes current work, process, policy, threat
+surfaces, and approved knowledge explicit before production assistance. People
+may use AI to inspect baselines, draft process material, or support retrieval
+coverage work, but AI output remains human-reviewed substrate and never becomes
+production work judgment.
 
 **Exit criteria.**
 - Baseline work items record manual time, sources checked, handoffs, outcomes,
   failures, risks, and unmanaged prompt examples.
 - Failure categories are typed enough for later levels to map, measure, and
   close them.
-- Adversarial-shaped failures are tagged distinctly so L2 can turn them into
-  threat-model surfaces.
-- Nothing is presented as improved; L1 is measurement, not remediation.
-
-**Common confusion.** L1 is not "no AI use." It is unmanaged use with enough
-measurement that later improvement cannot move the denominator.
-
-## L2 - Process & Policy Contract
-
-**Intent.** The human process becomes explicit before automation: workflow
-stages, owners, policies, templates, validation checks, L1-failure mappings,
-and threat-model surfaces. AI may help owners inspect the baseline, draft
-candidate process artifacts, or check policy mappings, but that output is
-review material, not production work.
-
-**Exit criteria.**
+- Adversarial-shaped failures are tagged distinctly so later controls can turn
+  them into threat-model surfaces and eval coverage.
 - Workflow stages have owners, inputs, outputs, handoffs, and exit criteria.
 - Policy rules attach to stages instead of floating as prose.
-- Every L1 failure maps to the stage or policy intended to catch it.
+- Every baseline failure maps to the stage or policy intended to catch it.
 - A typed threat model names later agent attack surfaces, actors,
   motivations, mitigations, and out-of-scope boundaries.
 - Evidence ownership, minimal artifact versioning, and validation checks are
   present for the process contract.
 - AI-produced process, schema, template, policy, or threat-model suggestions
   are human-reviewed before they become source of truth.
-- No AI output is used as a production work recommendation, routing decision,
-  or artifact at this level.
-- Humans have run the documented workflow on representative work items.
-
-**Common confusion.** L2 can use AI, but it is still not a production
-assistant. The boundary is process quality, not work-item judgment.
-
-## L3 - Grounded Knowledge
-
-**Intent.** L2 process material becomes governed retrieval material. L3 stops
-at finding approved sources: stable sources, metadata, coverage links,
-retrieval API, golden evals, candidate eval promotion, and provenance
-attestation. Retrieval may find, rank, filter, cite, and test approved sources;
-it does not draft or recommend production work.
-
-**Exit criteria.**
 - Every retrievable document has stable evidence ID, owner, source type,
   sensitivity label, review status, and provenance status.
 - Coverage links tie evidence IDs back to baseline work items, failure labels,
@@ -89,17 +60,19 @@ it does not draft or recommend production work.
 - Retrieval results preserve classification and provenance metadata.
 - Retrieval output is limited to approved source references, snippets,
   metadata, and coverage signals.
-- No live operational read tool is exposed as part of the workflow.
+- No AI output is used as a production work recommendation, routing decision,
+  customer-facing draft, live operational read, or action.
 
-**Common confusion.** L3 can be useful governed search for humans and later
-assistants. It answers source-selection questions, not work-disposition
-questions.
+**Common confusion.** L0 is not "no AI use." It is foundation work with enough
+measurement, process, threat modeling, and governed source coverage that later
+automation cannot move the denominator.
 
-## L4 - Reviewed Assistance
+## L1 - Reviewed Assistance
 
-**Intent.** The first governed assistant uses L3 retrieval to draft work
-artifacts from cited evidence and stops at human review. No send action,
-side-effecting tool action, approval authority, memory, or autonomous closure is allowed.
+**Intent.** The first governed assistant uses approved foundation sources to
+draft work artifacts from cited evidence and stops at human review. No live
+operational read, send action, side-effecting tool action, approval authority,
+memory write, autonomous closure, or agent handoff is allowed.
 
 **Exit criteria.**
 - Per work item, the assistant produces intake or routing, stakeholder-safe
@@ -108,21 +81,27 @@ side-effecting tool action, approval authority, memory, or autonomous closure is
 - Run records join work item, context, sources, output, reviewer, validation
   results, model/provider or deployment identity, prompt/template version, and
   runtime policy version; provider opacity is recorded as residual risk.
-- Prompt context uses explicit trust frames for system, external input, retrieved
-  evidence, and tool output.
+- Prompt context uses explicit trust frames for system, external input,
+  retrieved evidence, and tool output.
 - External-facing output passes a typed safety/leak check before acceptance.
 - Adversarial input and retrieved-evidence matches produce threat-detection
   evidence and lower-trust framing.
+- Runtime policy bounds workspace, artifact retention, disabled side effects,
+  and permitted network or retrieval surfaces for the assistant claim.
+- Stronger sandboxing, network isolation, parser isolation, tenant isolation,
+  or dedicated execution environments are scale or authority gates when the
+  claim involves untrusted code/content execution, tenant-sensitive data,
+  broad egress, regulated workflows, or higher-risk deployment.
 
-**Common confusion.** L4 is an assistant, not an agent that decides or
+**Common confusion.** L1 is an assistant, not an agent that decides or
 publishes. If external-facing output ships without human review, the system is
-not L4-compliant.
+not L1-compliant.
 
-## L5 - Scoped Read Access
+## L2 - Scoped Read Access
 
 **Intent.** The assistant gains scoped read-only operational context through
 typed tools. It can look but cannot change anything. Tools are audited,
-redacted, sanitized, protocol-conformant, and still feed the L4 review
+redacted, sanitized, protocol-conformant, and still feed the L1 review
 boundary.
 
 **Exit criteria.**
@@ -139,10 +118,10 @@ boundary.
   fails closed on drift.
 - Framework-native tool adapters pass conformance against the shared engine.
 
-**Common confusion.** L5 is not autonomous tool choice and not write access.
+**Common confusion.** L2 is not autonomous tool choice and not write access.
 The runtime refuses write-capable manifests at this level.
 
-## L6 - Approved Action
+## L3 - Approved Action
 
 **Intent.** One specific pre-approved side-effecting action per work item may
 execute. The model recommends; the runtime assembles the executable action,
@@ -164,11 +143,11 @@ records recovery metadata, and blocks unsafe external-facing actions.
 - Replays return the prior action result without mutating state again.
 - External-facing actions run the safety block before approval resolution.
 
-**Common confusion.** L6 does not introduce unattended policy autonomy. The
-gate checks durable approval and exact binding; L9 is where policy replaces
+**Common confusion.** L3 does not introduce unattended policy autonomy. The
+gate checks durable approval and exact binding; L6 is where policy replaces
 routine human approval.
 
-## L7 - Bounded Task Agency
+## L4 - Bounded Task Agency
 
 **Intent.** One producing agent owns end-to-end completion of one eligible
 work package within a signed goal. The model loop proposes next steps; the
@@ -188,16 +167,16 @@ and memory validity.
 - Multi-dimensional retry/budget caps are enforced.
 - Memory writes pass the seven-stage validator; the model reads redacted
   tenant-scoped content only.
-- Side-effecting actions still flow through L6 approval.
+- Side-effecting actions still flow through L3 approval.
 
-**Common confusion.** L7 is the first task-owning agent, but it is not
+**Common confusion.** L4 is the first task-owning agent, but it is not
 multi-agent coordination, routine unattended autonomy, or self-improvement.
 
-## L8 - Verified Agent Coordination
+## L5 - Verified Agent Coordination
 
 **Intent.** Specialized agents coordinate through deterministic runtime-owned
-routing, signed agent cards, typed handoff envelopes, runtime-enforced validator
-veto, and durable orchestration state.
+routing, signed agent cards, typed handoff envelopes, runtime-enforced
+validator veto, and durable orchestration state.
 
 **Exit criteria.**
 - Roles are separated: orchestration, triage, research, resolution,
@@ -214,11 +193,11 @@ veto, and durable orchestration state.
 - Checkpoints persist orchestration state, tool calls, approval state, and
   idempotency so resume does not duplicate side effects.
 
-**Common confusion.** L8 is not "multiple prompts with personas." The runtime
+**Common confusion.** L5 is not "multiple prompts with personas." The runtime
 owns route, peer identity, typed handoffs, validator authority, and durable
 resume.
 
-## L9 - Policy-Gated Autonomy
+## L6 - Policy-Gated Autonomy
 
 **Intent.** Eligible low-risk work can run without routine human approval.
 Deterministic policy, signed eligibility, SLO/cost budgets, dynamic
@@ -237,15 +216,15 @@ bound the autonomy.
 - Dynamic credential revocation is honored before side-effect boundaries.
 - Adversarial corpus freshness and threat-class coverage are startup gates.
 
-**Common confusion.** L9 does not let the agent choose eligibility,
+**Common confusion.** L6 does not let the agent choose eligibility,
 self-unpause, skip side-effect boundary rechecks, or run without typed halts.
 
-## L10 - Governed Improvement Loop
+## L7 - Governed Improvement Loop
 
-**Intent.** Operational signals become governed improvement loops. The system may
-propose changes, but production-impacting changes require signed proposals,
-human review, regression tests, release gates, and adversarial per-class
-robustness checks.
+**Intent.** Operational signals become governed improvement loops. The system
+may propose changes, but production-impacting changes require signed
+proposals, human review, regression tests, release gates, and adversarial
+per-class robustness checks.
 
 **Exit criteria.**
 - Improvement proposals are PR-shaped artifacts with source run IDs, signal
@@ -258,10 +237,6 @@ robustness checks.
   baselines; aggregate gains cannot hide adversarial regressions.
 - Failed gates block release; recovery is revise, withdraw, or typed waiver
   only where the dimension is waivable.
-- High-consequence or autonomous production changes use staged rollout or
-  canary monitoring with defined freeze or rollback triggers.
-- Memory cannot become an ungoverned feedback channel.
 
-**Common confusion.** L10 is not silent self-modification or "we run evals."
-It is governed engineering practice with evidence, signatures, tests, human
-review, and adversarial release gates.
+**Common confusion.** L7 is not silent self-modification or "we run evals."
+It is a signed improvement proposal and release-control loop.

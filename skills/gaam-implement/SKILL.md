@@ -14,7 +14,7 @@ Load this skill's bundled `references/` files: `patterns.md`, `controls.md`, `sy
 ## Process
 
 1. Locate the pattern entry in `references/patterns.md`. Note its functional signature, controls, target workflow context, authority boundary, priority gates, and test assertion.
-2. Check whether the requested change reclassifies the level: live reads L5, writes L6, task ownership L7, handoffs L8, autonomy L9, production-change proposals L10. Surface conflicts before coding.
+2. Check whether the requested change reclassifies the level: production drafts or recommendations for human review imply at least L1; live reads at least L2; durable side effects at least L3; task ownership at least L4; agent handoffs at least L5; action without routine per-action approval at least L6; production behavior proposals at least L7. Surface conflicts before coding.
 3. Survey the user's codebase via `synonyms.md`. Search semantic equivalents, not literal names: local code may satisfy GAAM via different services, schemas, events, workflows, or external stores. Record what you found and where.
 4. If equivalent exists, strengthen it under existing names. If not, add the smallest capability that satisfies the functional signature and authority gates.
 5. Write the functional-signature test first. Run it; it should fail. Implement minimally to pass. Add edge-case tests.

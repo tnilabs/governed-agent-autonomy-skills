@@ -40,7 +40,7 @@ Smoke scripts skip cleanly when a tool is not installed. Do not mask failures wi
 ## Reference Rules
 
 - Every reference file has `canon_version:` and `last_reviewed:` frontmatter.
-- `references/gaam-levels.md` keeps exactly 10 GAAM level sections.
+- `references/gaam-levels.md` keeps exactly 8 GAAM level sections.
 - `references/controls.md` keeps exactly 10 canonical control sections and the activation matrix.
 - `references/patterns.md` keeps one section per GAAM level and one entry per GAAM capability pattern ID.
 - `references/synonyms.md` keeps entries for every control and pattern, with functional signature, alternative names, conceptual-equivalence guidance, semantic-anchor guidance, and detection signals.

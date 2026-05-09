@@ -5,20 +5,20 @@ description: Use when designing a new AI agent, agent workflow, tool-calling wor
 
 # Designing an Enterprise Agent
 
-Turn an idea into a workflow-scoped GAAM design brief. The brief states the target authority, excluded authority, active controls, evidence, and production boundaries.
+Produce a workflow-scoped GAAM design brief covering target/excluded authority, controls, evidence, and production boundaries.
 
 ## Inputs
 
-Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the brief.
+Load bundled `references/` files: `gaam-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the brief.
 
 ## Process
 
-1. Clarify workflow, scope, target GAAM level (L1-L10), allowed/excluded authority, owner, and acceptable risk. If the target level is unstated, ask before writing.
-2. Check actual authority against the reclassification rule: live reads imply at least L5, writes L6, task ownership L7, handoffs L8, autonomy L9, production-change proposals L10. If target and authority conflict, surface it before designing.
-3. From `references/patterns.md`, list every pattern entry introduced at L1 through the target level inclusive (match `### L<n>-` headings).
+1. Clarify workflow, scope, target GAAM level (L0-L7), allowed/excluded authority, owner, and acceptable risk. If the target level is unstated, ask before writing.
+2. Check actual authority against the reclassification rule: production drafts or recommendations for human review imply at least L1; live reads at least L2; durable side effects at least L3; task ownership at least L4; agent handoffs at least L5; action without routine per-action approval at least L6; production behavior proposals at least L7. Surface target/authority conflicts before designing.
+3. From `references/patterns.md`, list every pattern entry introduced at L0 through the target level inclusive (match `### L<n>-` headings).
 4. From `references/controls.md`, list every control whose `Activated at GAAM levels` line includes the target level, separating authority gates, scale gates, and maturity-depth backlog.
 5. Treat level requirements, controls, pattern IDs, and example artifact names as context cues. Design semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, runtime boundary, and prevented failure under the team's vocabulary.
-6. For each control, capture the GAAM anchor plus the user-team's preferred capability/evidence name. The brief speaks the team's language while remaining GAAM-traceable.
+6. For each control, capture the GAAM anchor plus the user-team's preferred capability/evidence name. The brief stays team-native and GAAM-traceable.
 
 ## Hard rules
 
@@ -69,4 +69,4 @@ out_of_scope: [<thing this brief does NOT cover>]
 
 ## Inline scope-clarification
 
-When intent is fuzzy, ask the user one focused question before producing the brief (target level / scenario boundary / acceptable risk). Never ship a brief built on assumptions you didn't surface.
+When intent is fuzzy, ask the user one question before producing the brief (target level / scenario boundary / acceptable risk). Never ship a brief on unsurfaced assumptions.

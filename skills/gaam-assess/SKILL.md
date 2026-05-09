@@ -5,7 +5,7 @@ description: Use when assessing an existing AI agent or agent workflow, asking w
 
 # Assessing GAAM Level
 
-Evidence-first full-spectrum L1-L10 scan. A GAAM level is a workflow-scoped authority claim, not a repository label. The observed level is the highest fully satisfied prefix before the lowest failing boundary; the report still records partial higher-level evidence after that boundary.
+Evidence-first full-spectrum L0-L7 scan. A GAAM level is a workflow-scoped authority claim, not a repository label. The observed level is the highest fully satisfied prefix before the lowest failing boundary; the report still records partial higher-level evidence after that boundary.
 
 ## Inputs
 
@@ -14,8 +14,8 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 ## Process
 
 1. Identify the GAAM claim context: workflow, scope, period, allowed/excluded authority, owner, evidence records, and reassessment triggers. If unstated, infer cautiously and mark gaps.
-2. Determine actual authority first. If the system reads live production systems, prepares durable side effects, owns queue work, coordinates agents, acts without per-action approval, or proposes production changes, record the minimum candidate level before assessing the claim.
-3. For every level L1→L10, read exit criteria, activated controls, patterns, and priority rules. Separate authority gates from scale gates and maturity-depth backlog.
+2. Determine actual authority first. If the system produces production drafts/recommendations, reads live production systems, prepares durable side effects, owns queue work, coordinates agents, acts without per-action approval, or proposes production changes, record the minimum candidate level before assessing the claim.
+3. For every level L0-L7, read exit criteria, activated controls, patterns, and priority rules. Separate authority gates from scale gates and maturity-depth backlog.
 4. Treat level descriptions, requirements, controls, pattern IDs, and example artifact names as context cues. Search semantic equivalents, not literal names: same workflow context, authority boundary, capability, evidence semantics, failure prevented, and runtime boundary.
 5. For each control/pattern, run a recorded conceptual-equivalence search: compare functional signature, context, authority, evidence, failure, boundary, and detection signals.
 6. For pure exit criteria, run artifact search under local names and record locations.
@@ -28,7 +28,7 @@ Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, 
 - No pure exit criterion may be marked absent without a recorded artifact search: artifact sought, aliases checked, locations recorded, and result stated.
 - Load all four bundled refs before classification. Citing a reference as not loaded is invalid output; load it or mark the assessment incomplete.
 - Canonical control names and pattern IDs are trace anchors. Example artifact names are non-normative context cues; GAAM does not require specific record names.
-- L1-L3 are foundation evidence. L2 may include AI-assisted process review, and L3 may include governed retrieval, but reliable production-assistant runtime assessment starts at L4. Report L1-L3 artifacts, useful capabilities, and gaps.
+- L0 is foundation evidence. It may include AI-assisted process review and governed retrieval, but reliable production-assistant runtime assessment starts at L1. Report L0 artifacts, useful capabilities, and gaps.
 - Self-claim, framework name, and vocabulary match are not evidence. Vocabulary mismatch is not absence.
 - A pilot is a narrower claim, not fewer controls. P0-style authority-gate gaps are not waived for production GAAM claims.
 

@@ -5,20 +5,20 @@ description: Use when reviewing an AI-agent change, tool or retrieval workflow, 
 
 # Reviewing an Enterprise Agent
 
-Verify workflow-scoped GAAM claims against artifacts using conceptual-equivalence search for controls/patterns and artifact search for exit criteria.
+Verify workflow-scoped GAAM claims using conceptual-equivalence search for controls/patterns and artifact search for exit criteria.
 
 ## Inputs
 
-Load this skill's bundled `references/` files: `gaam-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the report.
+Load bundled `references/` files: `gaam-levels.md`, `controls.md`, `patterns.md`, `synonyms.md`. Cite their `canon_version` in the report.
 
 ## Process
 
-1. Read the change set and GAAM claim: workflow, scope, period, allowed/excluded authority, controls, evidence, owner, and reassessment triggers.
-2. Determine actual authority first. Live reads imply at least L5; durable side effects at least L6; queue/task ownership at least L7; agent handoffs at least L8; action without routine approval at least L9; production behavior proposals/promotions at least L10.
-3. Build the checklist for L1 through the higher of claimed or reclassified level: exit criteria, activated controls, pattern entries, authority gates, scale gates, and maturity-depth backlog.
+1. Read the change and GAAM claim: workflow, scope, period, allowed/excluded authority, controls, evidence, owner, and reassessment triggers.
+2. Determine actual authority first. Production drafts/recommendations imply at least L1; live reads at least L2; durable side effects at least L3; queue/task ownership at least L4; agent handoffs at least L5; action without routine approval at least L6; production behavior proposals/promotions at least L7.
+3. Build the checklist for L0 through the higher of claimed or reclassified level: exit criteria, activated controls, pattern entries, authority gates, scale gates, and maturity-depth backlog.
 4. For each control AND pattern, run a conceptual-equivalence search via `synonyms.md`: compare functional signature, workflow context, authority boundary, evidence semantics, failure, runtime boundary, and detection signals. Search semantic equivalents, not literal names. Record searches, findings, and rationale.
-5. For pure exit criteria, run artifact search. Verify functional tests, threat model, telemetry, and evidence.
-6. Produce the review report using the **Output template** below.
+5. For pure exit criteria, run artifact search. Verify tests, threat model, telemetry, and evidence.
+6. Produce the report using the **Output template**.
 
 ## Hard rule
 
@@ -66,4 +66,4 @@ Authority-gate gaps fail the claim. Scale-gate gaps block broader rollout or pro
 
 ## Inline review discipline
 
-Do not declare complete until findings have recorded searches, claims are artifact-checked, and consulted canon versions are cited.
+Do not declare complete until findings have recorded searches, claims are artifact-checked, and canon versions are cited.

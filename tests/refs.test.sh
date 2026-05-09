@@ -18,56 +18,56 @@ CONTROL_NAMES=(
   "Value, Cost & Reliability"
 )
 
-# Canonical control-to-GAAM-level activation matrix (v1).
+# Canonical control-to-GAAM-level activation matrix (v6).
 declare -A EXPECTED_ACTIVATIONS=(
-  ["Threat & Adversarial Resilience"]="L4 L5 L6 L7 L8 L9 L10"
-  ["Agent Registry & Lifecycle"]="L7 L8 L9 L10"
-  ["Evidence & Assurance"]="L4 L5 L6 L7 L8 L9 L10"
-  ["Delegated Authority & Access"]="L5 L6 L7 L8 L9 L10"
-  ["Data, Context & Memory Governance"]="L3 L4 L5 L6 L7 L8 L9 L10"
-  ["Tool & Protocol Safety"]="L5 L6 L7 L8 L9 L10"
-  ["Incident Response & Recovery"]="L6 L7 L8 L9 L10"
-  ["Runtime Isolation & Execution Safety"]="L4 L5 L6 L7 L8 L9 L10"
-  ["Observability & Telemetry"]="L4 L5 L6 L7 L8 L9 L10"
-  ["Value, Cost & Reliability"]="L4 L5 L6 L7 L8 L9 L10"
+  ["Threat & Adversarial Resilience"]="L1 L2 L3 L4 L5 L6 L7"
+  ["Agent Registry & Lifecycle"]="L4 L5 L6 L7"
+  ["Evidence & Assurance"]="L1 L2 L3 L4 L5 L6 L7"
+  ["Delegated Authority & Access"]="L2 L3 L4 L5 L6 L7"
+  ["Data, Context & Memory Governance"]="L0 L1 L2 L3 L4 L5 L6 L7"
+  ["Tool & Protocol Safety"]="L2 L3 L4 L5 L6 L7"
+  ["Incident Response & Recovery"]="L3 L4 L5 L6 L7"
+  ["Runtime Isolation & Execution Safety"]="L1 L2 L3 L4 L5 L6 L7"
+  ["Observability & Telemetry"]="L1 L2 L3 L4 L5 L6 L7"
+  ["Value, Cost & Reliability"]="L1 L2 L3 L4 L5 L6 L7"
 )
 
 PATTERN_IDS=(
-  "L1-baseline-failure-cataloguing"
-  "L2-process-as-substrate"
-  "L2-threat-model-as-substrate"
-  "L3-knowledge-coverage-map"
-  "L3-golden-retrieval-evals"
-  "L3-provenance-attested-source"
-  "L4-pending-review-boundary"
-  "L4-provenance-framed-prompt-assembly"
-  "L4-customer-safe-output-check"
-  "L4-adversarial-input-labeling"
-  "L5-typed-tool-manifest-with-scope"
-  "L5-scoped-grant-per-run"
-  "L5-read-tool-audit-redaction"
-  "L5-mcp-conformance-derived-from-manifest"
-  "L5-tool-output-sanitization"
-  "L5-native-tool-conformance"
-  "L6-model-recommends-runtime-assembles"
-  "L6-approval-binding-hash"
-  "L6-one-shot-action-authority"
-  "L6-idempotent-action-replay"
-  "L6-recovery-metadata-on-every-action"
-  "L6-signed-approval-evidence"
-  "L6-customer-safety-block-gate"
-  "L7-signed-goal-with-immutable-scope"
-  "L7-success-criteria-predicate-registry"
-  "L7-task-agent-stop-reasons"
-  "L7-memory-write-validation"
-  "L8-signed-a2a-card"
-  "L8-validator-veto-handoff"
-  "L8-durable-orchestration-state"
-  "L9-policy-eligibility-gate"
-  "L9-global-pause-and-dead-letter"
-  "L9-continuous-adversarial-eval-corpus"
-  "L10-evidence-backed-improvement-proposal"
-  "L10-adversarial-release-gate"
+  "L0-baseline-failure-cataloguing"
+  "L0-process-as-substrate"
+  "L0-threat-model-as-substrate"
+  "L0-knowledge-coverage-map"
+  "L0-golden-retrieval-evals"
+  "L0-provenance-attested-source"
+  "L1-pending-review-boundary"
+  "L1-provenance-framed-prompt-assembly"
+  "L1-customer-safe-output-check"
+  "L1-adversarial-input-labeling"
+  "L2-typed-tool-manifest-with-scope"
+  "L2-scoped-grant-per-run"
+  "L2-read-tool-audit-redaction"
+  "L2-mcp-conformance-derived-from-manifest"
+  "L2-tool-output-sanitization"
+  "L2-native-tool-conformance"
+  "L3-model-recommends-runtime-assembles"
+  "L3-approval-binding-hash"
+  "L3-one-shot-action-authority"
+  "L3-idempotent-action-replay"
+  "L3-recovery-metadata-on-every-action"
+  "L3-signed-approval-evidence"
+  "L3-customer-safety-block-gate"
+  "L4-signed-goal-with-immutable-scope"
+  "L4-success-criteria-predicate-registry"
+  "L4-task-agent-stop-reasons"
+  "L4-memory-write-validation"
+  "L5-signed-a2a-card"
+  "L5-validator-veto-handoff"
+  "L5-durable-orchestration-state"
+  "L6-policy-eligibility-gate"
+  "L6-global-pause-and-dead-letter"
+  "L6-continuous-adversarial-eval-corpus"
+  "L7-evidence-backed-improvement-proposal"
+  "L7-adversarial-release-gate"
 )
 
 # POSIX-safe separator for L<n> headings: whitespace, end-of-line, or dash.
@@ -112,17 +112,27 @@ for skill in gaam-assess gaam-design gaam-implement gaam-review; do
   done
 done
 
-# 3. gaam-levels.md: exactly 10 H2 sections matching ^## L<n>(<sep>|$).
+# 3. gaam-levels.md: exactly 8 H2 sections matching ^## L<n>(<sep>|$).
 if [[ -f references/gaam-levels.md ]]; then
-  count=$(grep -cE "^## L([1-9]|10)${LSEP}" references/gaam-levels.md || true)
-  if [[ "$count" != "10" ]]; then
-    echo "gaam-levels.md has $count H2 'L<n>' sections, expected 10"; fail=1
+  count=$(grep -cE "^## L[0-7]${LSEP}" references/gaam-levels.md || true)
+  if [[ "$count" != "8" ]]; then
+    echo "gaam-levels.md has $count H2 'L<n>' sections, expected 8"; fail=1
   fi
+  for n in 8 9 10; do
+    if grep -qE "^## L${n}${LSEP}" references/gaam-levels.md; then
+      echo "gaam-levels.md contains forbidden obsolete L${n} section"; fail=1
+    fi
+  done
+  for n in 0 1 2 3 4 5 6 7; do
+    if ! grep -qE "^## L${n}${LSEP}" references/gaam-levels.md; then
+      echo "gaam-levels.md missing section for L${n}"; fail=1
+    fi
+  done
 fi
 
 # 4. controls.md: exactly 10 H2 sections, each a canonical control name,
 # and each carrying an `Activated at GAAM levels:` line that matches.
-LEVEL_ORDER="L1 L2 L3 L4 L5 L6 L7 L8 L9 L10"
+LEVEL_ORDER="L0 L1 L2 L3 L4 L5 L6 L7"
 canon_sort() {
   local tokens=" $1 "
   local out=""
@@ -132,7 +142,16 @@ canon_sort() {
   printf '%s' "${out% }"
 }
 
+reject_obsolete_levels() {
+  local label=$1
+  local text=$2
+  if printf '%s' "$text" | grep -Eq '(^|[^A-Za-z0-9_-])L(8|9|10)([^A-Za-z0-9_-]|$)'; then
+    echo "$label contains forbidden obsolete L8-L10 level token"; fail=1
+  fi
+}
+
 if [[ -f references/controls.md ]]; then
+  reject_obsolete_levels "controls.md" "$(cat references/controls.md)"
   for c in "${CONTROL_NAMES[@]}"; do
     if ! grep -qxF "## $c" references/controls.md; then
       echo "controls.md missing canonical heading: '## $c'"; fail=1; continue
@@ -159,17 +178,23 @@ if [[ -f references/controls.md ]]; then
   fi
 fi
 
-# 5. patterns.md: exactly 10 H2 sections, one per L1..L10. Every GAAM
+# 5. patterns.md: exactly 8 H2 sections, one per L0..L7. Every GAAM
 # capability pattern must be represented as a `###` entry with
-# a functional signature, controls activated, and test asserts. L1/L2 are
+# a functional signature, controls activated, and test asserts. L0 carries
 # substrate patterns, not "no pattern" placeholders.
 PATTERN_ENTRY_NAMES=()
 if [[ -f references/patterns.md ]]; then
-  pcount=$(grep -cE "^## L([1-9]|10)${LSEP}" references/patterns.md || true)
-  if [[ "$pcount" != "10" ]]; then
-    echo "patterns.md has $pcount H2 'L<n>' sections, expected exactly 10"; fail=1
+  reject_obsolete_levels "patterns.md" "$(cat references/patterns.md)"
+  pcount=$(grep -cE "^## L[0-7]${LSEP}" references/patterns.md || true)
+  if [[ "$pcount" != "8" ]]; then
+    echo "patterns.md has $pcount H2 'L<n>' sections, expected exactly 8"; fail=1
   fi
-  for n in 1 2 3 4 5 6 7 8 9 10; do
+  for n in 8 9 10; do
+    if grep -qE "^## .*L${n}${LSEP}" references/patterns.md; then
+      echo "patterns.md contains forbidden obsolete L${n} section"; fail=1
+    fi
+  done
+  for n in 0 1 2 3 4 5 6 7; do
     if ! grep -qE "^## .*L${n}${LSEP}" references/patterns.md; then
       echo "patterns.md missing section for L${n}"; fail=1; continue
     fi

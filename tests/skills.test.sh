@@ -79,7 +79,7 @@ for d in skills/*/; do
   fi
 
   if [[ "$name" == "gaam-assess" ]]; then
-    for required in "full-spectrum L1-L10 scan" "partial higher-level evidence" "lowest failing boundary" "$ASSESS_SEMANTIC_SCOPE" "$ASSESS_REF_LOAD_SENTINEL"; do
+    for required in "full-spectrum L0-L7 scan" "partial higher-level evidence" "lowest failing boundary" "$ASSESS_SEMANTIC_SCOPE" "$ASSESS_REF_LOAD_SENTINEL"; do
       if ! grep -qF "$required" "$f"; then
         echo "ASSESS CONTRACT MISSING ('$required') in $f"; fail=1
       fi

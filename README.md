@@ -18,12 +18,12 @@ The skills sort findings by consequence:
 | Scale gate | Missing work blocks broader rollout, higher risk, higher volume, or promotion. |
 | Maturity depth | Useful improvement backlog; reassess when risk or scope changes. |
 
-They also check actual authority before accepting a claimed level. Live reads are at least L5, durable side effects at least L6, task ownership at least L7, agent handoffs at least L8, action without routine per-action approval at least L9, and production behavior proposals at least L10.
+They also check actual authority before accepting a claimed level. Production drafts or recommendations for human review are at least L1, live reads are at least L2, durable side effects at least L3, task ownership at least L4, agent handoffs at least L5, action without routine per-action approval at least L6, and production behavior proposals at least L7.
 
-Levels 2 and 3 are not treated as empty paperwork. L2 can include
-AI-assisted process review, but the output is review material for humans. L3
-can include governed retrieval over approved sources, but it still stops before
-production drafts, recommendations, live reads, or actions.
+L0 is not treated as empty paperwork. It includes baseline measurement,
+process and policy contracts, threat modeling, and governed retrieval over
+approved sources, but it still stops before production drafts,
+recommendations, live reads, or actions.
 
 ## Skills
 
@@ -52,7 +52,7 @@ whether the `gaam` skill applies.
 If it applies, load `gaam` and let it route to `gaam-design`,
 `gaam-implement`, `gaam-assess`, or `gaam-review`.
 
-Automatic use does not assume L10 or any other target level. If the task is
+Automatic use does not assume L7 or any other target level. If the task is
 assessing or reviewing existing work, treat the claim as unstated unless the
 user names one. If the task is designing or implementing new authority, ask for
 the target level or authority boundary before writing code.
@@ -66,9 +66,9 @@ Explicit prompts still work. Keep them short. Name the workflow and the level if
 
 ```text
 Use gaam-assess to assess the support triage workflow.
-Use gaam-design to design an L6 account update agent.
+Use gaam-design to design an L3 account update agent.
 Use gaam-implement to add one-shot approved action authority to the account update workflow.
-Use gaam-review to review this PR for claimed L6.
+Use gaam-review to review this PR for claimed L3.
 ```
 
 ## Example Outputs
@@ -78,18 +78,18 @@ Real output should name evidence, gaps, and next steps.
 ```markdown
 # GAAM Assessment: Support Routing
 
-- Claimed level: L5
-- Authority reclassification: actual authority implies at least L5 because scoped live reads are present.
-- Observed level: L4
+- Claimed level: L2
+- Authority reclassification: actual authority implies at least L2 because scoped live reads are present.
+- Observed level: L1
 - Authority gates blocking the claim: customer lookup uses a shared admin grant, not a workflow-scoped read grant; no per-read audit event.
 - Scale gates blocking rollout/promotion: no unusual-read monitoring.
 - Searched: workflow docs, retrieval tests, runtime tools, audit events.
-- Next step: add a support-routing read grant and audit event before claiming L5.
+- Next step: add a support-routing read grant and audit event before claiming L2.
 ```
 
 ```yaml
 workflow: customer email change
-target: L6 approved action
+target: L3 approved action
 agent_may:
   - execute one approved email update
 agent_must_not:

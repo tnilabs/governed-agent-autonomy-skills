@@ -2,6 +2,19 @@
 
 All notable changes to `governed-agent-autonomy-skills` are documented here.
 
+## v6.0.0 - 2026-05-08
+
+### BREAKING
+
+- Relabeled the public GAAM canon to eight L0-L7 levels with no old-label
+  aliases.
+- Collapsed baseline, process, policy, threat-model, and governed-retrieval
+  substrate into L0 Foundation; mapped reviewed assistance through governed
+  improvement loop to L1-L7.
+- Simplified control activation around the eight-level model, including
+  Data, Context & Memory Governance from L0 and runtime/evidence/telemetry
+  controls from L1.
+
 ## v5.0.0 - 2026-05-05
 
 ### BREAKING

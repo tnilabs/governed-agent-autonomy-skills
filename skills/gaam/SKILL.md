@@ -5,19 +5,19 @@ description: Use when building, changing, reviewing, or assessing AI-agent softw
 
 # Using Governed Agent Autonomy Model Skills
 
-Routes AI-agent and GAAM-relevant work. Pick one sibling and announce ``Using `<sibling-skill>` to <purpose>``.
+Route GAAM work. Announce ``Using `<sibling-skill>` to <purpose>``.
 
 ## Trigger boundary
 
-Use for AI software that retrieves knowledge, reads scoped context, calls tools, drafts or takes actions, uses approvals, coordinates handoffs, or carries an autonomy/governance claim. Skip ordinary non-agent changes.
+Use for AI software that retrieves knowledge, reads scoped context, calls tools, drafts/takes actions, uses approvals, coordinates handoffs, or carries autonomy/governance claims. Skip ordinary non-agent changes.
 
 ## Level rule
 
-Never assume L10 or any target level. For assessment/review, treat an unstated claim as unstated and verify evidence. For design/implementation, ask for target level or authority boundary before writing.
+Never assume L7 or any target level. For assessment/review, treat an unstated claim as unstated and verify evidence. For design/implementation, ask for target level or authority boundary before writing.
 
 ## Routing
 
-Pick the sibling whose trigger best fits the user's intent. Use the bare directory name in the announcement.
+Pick the sibling matching intent. Use its bare directory name.
 
 | User intent | Sibling |
 | --- | --- |

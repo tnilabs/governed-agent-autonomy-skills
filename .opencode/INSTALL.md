@@ -25,7 +25,7 @@ Verify with: "Use the skill tool to list skills" — you should see `gaam/gaam` 
 ```json
 {
   "plugin": [
-    "gaam@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git#v5.0.0"
+    "gaam@git+https://github.com/sirmarkz/governed-agent-autonomy-skills.git#v6.0.0"
   ]
 }
 ```

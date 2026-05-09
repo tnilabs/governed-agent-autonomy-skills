@@ -12,14 +12,14 @@ Do not route ordinary software changes through GAAM when there is no AI or agent
 
 The GAAM/control/pattern/synonym-map source material lives in `references/*.md`. The plugin does not depend on any external repo and does not fetch from the network.
 
-- `references/gaam-levels.md` — the 10 GAAM levels with intent and exit criteria.
+- `references/gaam-levels.md` — the 8 GAAM levels with intent and exit criteria.
 - `references/controls.md` — 10 control categories with the activation matrix.
-- `references/patterns.md` — GAAM capability patterns per level (functional signature + controls activated + test asserts, including L1/L2 substrate patterns).
+- `references/patterns.md` — GAAM capability patterns per level (functional signature + controls activated + test asserts, including L0 substrate patterns).
 - `references/synonyms.md` — synonym, conceptual-equivalence, and detection-signal guide for every control and every pattern entry.
 
-For any target or claimed level, apply levels L1 through that level inclusive. Controls are active when their `Activated at GAAM levels` line contains the target level; patterns are active when introduced in any included level section.
+For any target or claimed level, apply levels L0 through that level inclusive. Controls are active when their `Activated at GAAM levels` line contains the target level; patterns are active when introduced in any included level section.
 
-Before accepting a claimed level, check actual authority: live production reads imply at least L5, durable side effects L6, task ownership L7, agent handoffs L8, action without routine per-action approval L9, and production behavior proposals L10. Report authority gates blocking the claim, scale gates blocking rollout or promotion, and maturity-depth backlog.
+Before accepting a claimed level, check actual authority: production drafts or recommendations for human review imply at least L1, live production reads L2, durable side effects L3, task ownership L4, agent handoffs L5, action without routine per-action approval L6, and production behavior proposals L7. Report authority gates blocking the claim, scale gates blocking rollout or promotion, and maturity-depth backlog.
 
 ## Conceptual-Equivalence Matching
 
